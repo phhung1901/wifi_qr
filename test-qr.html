@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-section {
+            background: #f5f5f5;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        button {
+            background: #007aff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        #qr-result {
+            margin: 20px 0;
+            text-align: center;
+        }
+        canvas {
+            border: 1px solid #ddd;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>QR Code Library Test</h1>
+    
+    <div class="test-section">
+        <h2>Library Status</h2>
+        <p id="library-status">Checking...</p>
+        <button onclick="checkLibrary()">Check QRCode Library</button>
+    </div>
+    
+    <div class="test-section">
+        <h2>Generate Test QR</h2>
+        <button onclick="generateTestQR()">Generate WiFi QR</button>
+        <button onclick="generateSimpleQR()">Generate Simple QR</button>
+        <div id="qr-result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Manual Generator Test</h2>
+        <button onclick="testManualGenerator()">Test Manual Generator</button>
+        <div id="manual-result"></div>
+    </div>
+
+    <!-- QR Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js" onerror="loadFallback()"></script>
+    
+    <script>
+        function loadFallback() {
+            console.log('Loading fallback...');
+            const script = document.createElement('script');
+            script.src = 'https://unpkg.com/qrcode@1.5.4/build/qrcode.min.js';
+            document.head.appendChild(script);
+        }
+        
+        function checkLibrary() {
+            const status = document.getElementById('library-status');
+            if (typeof QRCode !== 'undefined') {
+                status.innerHTML = '✅ QRCode library is loaded and available';
+                status.style.color = 'green';
+            } else {
+                status.innerHTML = '❌ QRCode library is not available';
+                status.style.color = 'red';
+            }
+        }
+        
+        async function generateTestQR() {
+            const result = document.getElementById('qr-result');
+            
+            if (typeof QRCode === 'undefined') {
+                result.innerHTML = '<p style="color: red;">QRCode library not available</p>';
+                return;
+            }
+            
+            try {
+                const canvas = document.createElement('canvas');
+                const wifiString = 'WIFI:T:WPA;S:TestNetwork;P:password123;;';
+                
+                await QRCode.toCanvas(canvas, wifiString, {
+                    width: 200,
+                    margin: 2,
+                    color: {
+                        dark: '#000000',
+                        light: '#ffffff'
+                    }
+                });
+                
+                result.innerHTML = '<h3>WiFi QR Code Generated:</h3>';
+                result.appendChild(canvas);
+                
+            } catch (error) {
+                result.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+            }
+        }
+        
+        async function generateSimpleQR() {
+            const result = document.getElementById('qr-result');
+            
+            if (typeof QRCode === 'undefined') {
+                result.innerHTML = '<p style="color: red;">QRCode library not available</p>';
+                return;
+            }
+            
+            try {
+                const canvas = document.createElement('canvas');
+                
+                await QRCode.toCanvas(canvas, 'Hello World!', {
+                    width: 200,
+                    margin: 2,
+                    color: {
+                        dark: '#000000',
+                        light: '#ffffff'
+                    }
+                });
+                
+                result.innerHTML = '<h3>Simple QR Code Generated:</h3>';
+                result.appendChild(canvas);
+                
+            } catch (error) {
+                result.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+            }
+        }
+        
+        function testManualGenerator() {
+            const result = document.getElementById('manual-result');
+            
+            // Force manual generator
+            window.QRCode = {
+                toCanvas: function(canvas, text, options) {
+                    return new Promise((resolve) => {
+                        const ctx = canvas.getContext('2d');
+                        const size = options.width || 200;
+                        canvas.width = size;
+                        canvas.height = size;
+                        
+                        // Background
+                        ctx.fillStyle = options.color?.light || '#ffffff';
+                        ctx.fillRect(0, 0, size, size);
+                        
+                        // Pattern
+                        ctx.fillStyle = options.color?.dark || '#000000';
+                        const moduleSize = size / 25;
+                        
+                        // Corner squares
+                        ctx.fillRect(0, 0, 7 * moduleSize, 7 * moduleSize);
+                        ctx.fillRect(size - 7 * moduleSize, 0, 7 * moduleSize, 7 * moduleSize);
+                        ctx.fillRect(0, size - 7 * moduleSize, 7 * moduleSize, 7 * moduleSize);
+                        
+                        // Random pattern
+                        for (let i = 8; i < 17; i++) {
+                            for (let j = 8; j < 17; j++) {
+                                if ((i + j) % 3 === 0) {
+                                    ctx.fillRect(i * moduleSize, j * moduleSize, moduleSize, moduleSize);
+                                }
+                            }
+                        }
+                        
+                        resolve();
+                    });
+                }
+            };
+            
+            // Test it
+            const canvas = document.createElement('canvas');
+            QRCode.toCanvas(canvas, 'Manual Test', {
+                width: 200,
+                color: { dark: '#000000', light: '#ffffff' }
+            }).then(() => {
+                result.innerHTML = '<h3>Manual Generator Test:</h3>';
+                result.appendChild(canvas);
+            });
+        }
+        
+        // Auto check on load
+        setTimeout(checkLibrary, 1000);
+    </script>
+</body>
+</html>

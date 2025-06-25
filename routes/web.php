@@ -13,10 +13,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', [App\Http\Controllers\QrCodeController::class, 'index']);
 Route::get('/wifi-qr', [App\Http\Controllers\QrCodeController::class, 'index'])->name('wifi-qr');
-Route::post('/wifi-qr/generate', [App\Http\Controllers\QrCodeController::class, 'generate'])->name('wifi-qr.generate');
-Route::post('/wifi-qr/poster', [App\Http\Controllers\QrCodeController::class, 'generatePoster'])->name('wifi-qr.poster');
