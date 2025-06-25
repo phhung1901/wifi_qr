@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug QR Selectors</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .section { margin: 20px 0; padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
+        button { margin: 5px; padding: 10px 15px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        .log { background: #f8f9fa; padding: 10px; border-radius: 4px; font-family: monospace; white-space: pre-wrap; max-height: 300px; overflow-y: auto; }
+        .found { color: green; font-weight: bold; }
+        .not-found { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Debug QR Selectors</h1>
+    
+    <div class="section">
+        <h2>Check All QR Elements</h2>
+        <button onclick="checkAllSelectors()">Check All Selectors</button>
+        <button onclick="listAllImages()">List All Images</button>
+        <button onclick="listAllElements()">List All Elements</button>
+        <div id="results" class="log"></div>
+    </div>
+    
+    <script>
+        function log(message, className = '') {
+            const results = document.getElementById('results');
+            const div = document.createElement('div');
+            div.textContent = message;
+            if (className) div.className = className;
+            results.appendChild(div);
+            console.log(message);
+        }
+        
+        function checkAllSelectors() {
+            const results = document.getElementById('results');
+            results.innerHTML = '';
+            
+            log('=== CHECKING ALL QR SELECTORS ===');
+            
+            const selectors = [
+                '#qr-preview canvas',
+                '#qr-preview img', 
+                '#qrcode img',
+                '#qrcode canvas',
+                'img[src*="qrserver.com"]',
+                'img[alt="WiFi QR Code"]',
+                'canvas',
+                'img'
+            ];
+            
+            selectors.forEach(selector => {
+                const element = document.querySelector(selector);
+                if (element) {
+                    log(`✅ FOUND: ${selector}`, 'found');
+                    if (element.tagName === 'IMG') {
+                        log(`   - src: ${element.src?.substring(0, 80)}...`);
+                        log(`   - alt: ${element.alt}`);
+                        log(`   - size: ${element.naturalWidth}x${element.naturalHeight}`);
+                        log(`   - complete: ${element.complete}`);
+                    } else if (element.tagName === 'CANVAS') {
+                        log(`   - size: ${element.width}x${element.height}`);
+                    }
+                } else {
+                    log(`❌ NOT FOUND: ${selector}`, 'not-found');
+                }
+            });
+            
+            log('\n=== CHECKING CONTAINERS ===');
+            const containers = ['#qr-preview', '#qrcode', '#qrcode-container'];
+            containers.forEach(selector => {
+                const element = document.querySelector(selector);
+                if (element) {
+                    log(`✅ CONTAINER: ${selector} - children: ${element.children.length}`, 'found');
+                    Array.from(element.children).forEach((child, i) => {
+                        log(`   - child ${i}: ${child.tagName} ${child.className || ''}`);
+                    });
+                } else {
+                    log(`❌ CONTAINER NOT FOUND: ${selector}`, 'not-found');
+                }
+            });
+        }
+        
+        function listAllImages() {
+            const results = document.getElementById('results');
+            results.innerHTML = '';
+            
+            log('=== ALL IMAGES ON PAGE ===');
+            
+            const images = document.querySelectorAll('img');
+            log(`Found ${images.length} images:`);
+            
+            images.forEach((img, i) => {
+                log(`${i + 1}. ${img.tagName}`);
+                log(`   - src: ${img.src?.substring(0, 80)}...`);
+                log(`   - alt: ${img.alt || 'no alt'}`);
+                log(`   - id: ${img.id || 'no id'}`);
+                log(`   - class: ${img.className || 'no class'}`);
+                log(`   - parent: ${img.parentElement?.tagName} ${img.parentElement?.id || ''}`);
+                log(`   - size: ${img.naturalWidth}x${img.naturalHeight}`);
+                log(`   - complete: ${img.complete}`);
+                log('');
+            });
+        }
+        
+        function listAllElements() {
+            const results = document.getElementById('results');
+            results.innerHTML = '';
+            
+            log('=== ALL CANVAS AND IMG ELEMENTS ===');
+            
+            const elements = document.querySelectorAll('canvas, img');
+            log(`Found ${elements.length} canvas/img elements:`);
+            
+            elements.forEach((el, i) => {
+                log(`${i + 1}. ${el.tagName}`);
+                log(`   - id: ${el.id || 'no id'}`);
+                log(`   - class: ${el.className || 'no class'}`);
+                log(`   - parent: ${el.parentElement?.tagName} #${el.parentElement?.id || 'no-id'}`);
+                
+                if (el.tagName === 'IMG') {
+                    log(`   - src: ${el.src?.substring(0, 60)}...`);
+                    log(`   - alt: ${el.alt || 'no alt'}`);
+                    log(`   - complete: ${el.complete}`);
+                } else if (el.tagName === 'CANVAS') {
+                    log(`   - size: ${el.width}x${el.height}`);
+                }
+                log('');
+            });
+        }
+        
+        // Auto-run on load
+        setTimeout(() => {
+            log('Page loaded, ready for debugging');
+            log('Run checkAllSelectors() to see what QR elements exist');
+        }, 100);
+    </script>
+</body>
+</html>

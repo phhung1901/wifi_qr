@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug QR Canvas</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .section { margin: 20px 0; padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
+        canvas, img { border: 2px solid #007bff; margin: 10px; max-width: 200px; }
+        button { margin: 5px; padding: 10px 15px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        .log { background: #f8f9fa; padding: 10px; border-radius: 4px; font-family: monospace; white-space: pre-wrap; max-height: 200px; overflow-y: auto; }
+    </style>
+</head>
+<body>
+    <h1>Debug QR Canvas Conversion</h1>
+    
+    <div class="section">
+        <h2>Step 1: Create QR Image (like main app)</h2>
+        <button onclick="createQRImage()">Create QR Image</button>
+        <div id="qr-image-container"></div>
+    </div>
+    
+    <div class="section">
+        <h2>Step 2: Convert Image to Canvas</h2>
+        <button onclick="convertToCanvas()">Convert to Canvas</button>
+        <div id="canvas-container"></div>
+    </div>
+    
+    <div class="section">
+        <h2>Step 3: Test Poster with Canvas</h2>
+        <button onclick="testPosterWithCanvas()">Test Poster</button>
+        <div id="poster-container"></div>
+    </div>
+    
+    <div class="section">
+        <h2>Debug Log</h2>
+        <div id="debug-log" class="log"></div>
+    </div>
+    
+    <script>
+        function log(message) {
+            const logDiv = document.getElementById('debug-log');
+            const timestamp = new Date().toLocaleTimeString();
+            logDiv.textContent += `[${timestamp}] ${message}\n`;
+            logDiv.scrollTop = logDiv.scrollHeight;
+            console.log(message);
+        }
+        
+        let qrImage = null;
+        let qrCanvas = null;
+        
+        function createQRImage() {
+            log('Creating QR image using API...');
+            
+            const wifiString = "WIFI:T:WPA;S:TestCafe;P:password123;;";
+            const encodedData = encodeURIComponent(wifiString);
+            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=${encodedData}`;
+            
+            qrImage = document.createElement('img');
+            qrImage.src = qrUrl;
+            qrImage.alt = 'WiFi QR Code';
+            qrImage.style.maxWidth = '200px';
+            
+            qrImage.onload = function() {
+                const container = document.getElementById('qr-image-container');
+                container.innerHTML = '';
+                container.appendChild(qrImage);
+                log(`QR image loaded: ${qrImage.naturalWidth}x${qrImage.naturalHeight}`);
+            };
+            
+            qrImage.onerror = function() {
+                log('Error loading QR image');
+            };
+        }
+        
+        function convertToCanvas() {
+            if (!qrImage) {
+                log('No QR image to convert. Create QR image first.');
+                return;
+            }
+            
+            log('Converting QR image to canvas...');
+            
+            qrCanvas = document.createElement('canvas');
+            qrCanvas.width = 256;
+            qrCanvas.height = 256;
+            qrCanvas.style.border = '2px solid #28a745';
+            
+            const ctx = qrCanvas.getContext('2d');
+            
+            // Wait for image to be fully loaded
+            if (qrImage.complete && qrImage.naturalHeight !== 0) {
+                ctx.drawImage(qrImage, 0, 0, 256, 256);
+                
+                const container = document.getElementById('canvas-container');
+                container.innerHTML = '';
+                container.appendChild(qrCanvas);
+                
+                log(`Canvas created: ${qrCanvas.width}x${qrCanvas.height}`);
+                
+                // Test canvas data
+                const imageData = ctx.getImageData(0, 0, 10, 10);
+                log(`Canvas data sample: ${imageData.data.slice(0, 12)}`);
+            } else {
+                log('Image not fully loaded yet');
+            }
+        }
+        
+        function testPosterWithCanvas() {
+            if (!qrCanvas) {
+                log('No QR canvas available. Convert image first.');
+                return;
+            }
+            
+            log('Testing poster generation with QR canvas...');
+            
+            // Create poster canvas
+            const posterCanvas = document.createElement('canvas');
+            posterCanvas.width = 400;
+            posterCanvas.height = 600;
+            posterCanvas.style.border = '2px solid #dc3545';
+            posterCanvas.style.maxWidth = '200px';
+            
+            const ctx = posterCanvas.getContext('2d');
+            
+            // Background
+            const gradient = ctx.createLinearGradient(0, 0, posterCanvas.width, posterCanvas.height);
+            gradient.addColorStop(0, '#667eea');
+            gradient.addColorStop(1, '#764ba2');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, posterCanvas.width, posterCanvas.height);
+            
+            // Title
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 32px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('WiFi miễn phí', posterCanvas.width/2, 80);
+            
+            // QR Code
+            const qrSize = 150;
+            const qrX = posterCanvas.width/2 - qrSize/2;
+            const qrY = 200;
+            
+            // White background for QR
+            ctx.fillStyle = 'white';
+            ctx.fillRect(qrX - 5, qrY - 5, qrSize + 10, qrSize + 10);
+            
+            // Draw QR canvas
+            ctx.drawImage(qrCanvas, qrX, qrY, qrSize, qrSize);
+            log(`QR drawn at position: ${qrX}, ${qrY}, size: ${qrSize}`);
+            
+            // Instructions
+            ctx.fillStyle = '#f0f2ff';
+            ctx.font = '20px Arial';
+            ctx.fillText('Quét mã để kết nối', posterCanvas.width/2, 400);
+            
+            // WiFi info
+            ctx.font = '16px Arial';
+            ctx.fillText('Mạng: TestCafe', posterCanvas.width/2, 440);
+            
+            const container = document.getElementById('poster-container');
+            container.innerHTML = '';
+            container.appendChild(posterCanvas);
+            
+            log('Poster with QR canvas created successfully');
+        }
+        
+        // Auto-start
+        log('Debug page loaded');
+    </script>
+</body>
+</html>

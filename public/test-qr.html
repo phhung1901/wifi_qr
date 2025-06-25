@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test QR</title>
+    <script src="https://unpkg.com/qrcode@1.5.4/build/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+</head>
+<body>
+    <h1>Test QR Code Generation</h1>
+    <div id="qr-container"></div>
+    <div id="qr-container-fallback"></div>
+
+    <script>
+        console.log('Modern QRCode library:', typeof QRCode);
+        console.log('Fallback qrcode library:', typeof qrcode);
+
+        const wifiString = "WIFI:T:WPA;S:TestWiFi;P:password123;;";
+        const container = document.getElementById('qr-container');
+        const containerFallback = document.getElementById('qr-container-fallback');
+
+        // Test modern library
+        if (typeof QRCode !== 'undefined' && QRCode.toCanvas) {
+            const canvas = document.createElement('canvas');
+            QRCode.toCanvas(canvas, wifiString, {
+                width: 256,
+                margin: 4,
+                color: {
+                    dark: '#000000',
+                    light: '#ffffff'
+                }
+            }, function (error) {
+                if (error) {
+                    console.error('Modern library error:', error);
+                    container.innerHTML = '<p style="color: red;">Modern Error: ' + error.message + '</p>';
+                } else {
+                    console.log('Modern library success!');
+                    container.innerHTML = '<h3>Modern Library:</h3>';
+                    container.appendChild(canvas);
+                }
+            });
+        } else {
+            container.innerHTML = '<p style="color: red;">Modern QRCode library not loaded</p>';
+        }
+
+        // Test fallback library
+        if (typeof qrcode !== 'undefined') {
+            try {
+                const qr = qrcode(0, 'M');
+                qr.addData(wifiString);
+                qr.make();
+
+                containerFallback.innerHTML = '<h3>Fallback Library:</h3>' + qr.createImgTag(5);
+                console.log('Fallback library success!');
+            } catch (error) {
+                console.error('Fallback library error:', error);
+                containerFallback.innerHTML = '<p style="color: red;">Fallback Error: ' + error.message + '</p>';
+            }
+        } else {
+            containerFallback.innerHTML = '<p style="color: red;">Fallback qrcode library not loaded</p>';
+        }
+    </script>
+</body>
+</html>
