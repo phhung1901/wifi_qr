@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Size & Corner Radius</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .controls {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        input[type="range"] {
+            width: 100%;
+            margin: 10px 0;
+        }
+        .value-display {
+            font-weight: bold;
+            color: #007aff;
+            margin-left: 10px;
+        }
+        #qr-display {
+            text-align: center;
+            margin: 30px 0;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #ddd;
+            border-radius: 12px;
+        }
+        canvas {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        button {
+            background: #007aff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        button:hover {
+            background: #0056cc;
+        }
+        .log {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 10px 0;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Test Size & Corner Radius</h1>
+        
+        <div class="controls">
+            <h3>QR Code Controls</h3>
+            
+            <label>Size: <span id="size-value" class="value-display">300px</span></label>
+            <input type="range" id="qr-size" min="200" max="400" value="300">
+            
+            <label>Corner Radius: <span id="radius-value" class="value-display">0px</span></label>
+            <input type="range" id="corner-radius" min="0" max="20" value="0">
+            
+            <label>Foreground Color:</label>
+            <input type="color" id="fg-color" value="#000000">
+            
+            <label>Background Color:</label>
+            <input type="color" id="bg-color" value="#ffffff">
+            
+            <button onclick="generateTestQR()">Generate Test QR</button>
+            <button onclick="clearLog()">Clear Log</button>
+        </div>
+        
+        <div id="qr-display">
+            <p>Click "Generate Test QR" to start</p>
+        </div>
+        
+        <div class="log" id="debug-log"></div>
+    </div>
+
+    <!-- QR Library -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
+
+    <script>
+        let currentQRData = 'WIFI:T:WPA;S:TestNetwork;P:password123;;';
+        let updateTimeout = null;
+
+        // Elements
+        const qrSizeInput = document.getElementById('qr-size');
+        const cornerRadiusInput = document.getElementById('corner-radius');
+        const fgColorInput = document.getElementById('fg-color');
+        const bgColorInput = document.getElementById('bg-color');
+        const qrDisplay = document.getElementById('qr-display');
+        const debugLog = document.getElementById('debug-log');
+
+        function log(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            debugLog.innerHTML += `[${timestamp}] ${message}<br>`;
+            debugLog.scrollTop = debugLog.scrollHeight;
+            console.log(message);
+        }
+
+        function clearLog() {
+            debugLog.innerHTML = '';
+        }
+
+        // Event listeners
+        qrSizeInput.addEventListener('input', function() {
+            document.getElementById('size-value').textContent = this.value + 'px';
+            log(`Size changed to: ${this.value}px`);
+            debounceUpdate();
+        });
+
+        cornerRadiusInput.addEventListener('input', function() {
+            document.getElementById('radius-value').textContent = this.value + 'px';
+            log(`Corner radius changed to: ${this.value}px`);
+            debounceUpdate();
+        });
+
+        fgColorInput.addEventListener('input', function() {
+            log(`Foreground color changed to: ${this.value}`);
+            debounceUpdate();
+        });
+
+        bgColorInput.addEventListener('input', function() {
+            log(`Background color changed to: ${this.value}`);
+            debounceUpdate();
+        });
+
+        function debounceUpdate() {
+            log('Debounce update triggered');
+            if (updateTimeout) {
+                clearTimeout(updateTimeout);
+            }
+            
+            updateTimeout = setTimeout(() => {
+                log('Executing debounced update');
+                generateTestQR();
+            }, 300);
+        }
+
+        async function generateTestQR() {
+            try {
+                log('Starting QR generation...');
+                
+                const canvas = document.createElement('canvas');
+                const size = parseInt(qrSizeInput.value);
+                
+                log(`Canvas size: ${size}x${size}`);
+                
+                if (typeof QRCode !== 'undefined') {
+                    const options = {
+                        width: size,
+                        height: size,
+                        margin: 4,
+                        color: {
+                            dark: fgColorInput.value,
+                            light: bgColorInput.value
+                        },
+                        errorCorrectionLevel: 'M'
+                    };
+                    
+                    log(`QR options: ${JSON.stringify(options)}`);
+                    
+                    await QRCode.toCanvas(canvas, currentQRData, options);
+                    log('QR generated with library');
+                } else {
+                    log('QRCode library not available');
+                    return;
+                }
+                
+                // Apply corner radius
+                const radius = parseInt(cornerRadiusInput.value);
+                log(`Applying corner radius: ${radius}px`);
+                
+                if (radius > 0) {
+                    applyCornerRadius(canvas, radius);
+                    log('Corner radius applied');
+                }
+                
+                // Style canvas
+                canvas.style.width = Math.min(size, 350) + 'px';
+                canvas.style.height = Math.min(size, 350) + 'px';
+                canvas.style.maxWidth = '100%';
+                canvas.style.display = 'block';
+                canvas.style.margin = '0 auto';
+                
+                log(`Canvas styled: ${canvas.style.width} x ${canvas.style.height}`);
+                
+                // Display
+                qrDisplay.innerHTML = '';
+                qrDisplay.appendChild(canvas);
+                
+                log('QR displayed successfully');
+                
+            } catch (error) {
+                log(`Error: ${error.message}`);
+                console.error('QR generation error:', error);
+            }
+        }
+
+        function applyCornerRadius(canvas, radius) {
+            log(`Applying corner radius: ${radius}px to canvas ${canvas.width}x${canvas.height}`);
+            
+            const ctx = canvas.getContext('2d');
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            
+            // Create new canvas with rounded corners
+            const roundedCanvas = document.createElement('canvas');
+            roundedCanvas.width = canvas.width;
+            roundedCanvas.height = canvas.height;
+            const roundedCtx = roundedCanvas.getContext('2d');
+            
+            // Create rounded rectangle path
+            roundedCtx.beginPath();
+            drawRoundedRect(roundedCtx, 0, 0, canvas.width, canvas.height, radius);
+            roundedCtx.clip();
+            
+            // Draw original image
+            roundedCtx.putImageData(imageData, 0, 0);
+            
+            // Replace original canvas content
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(roundedCanvas, 0, 0);
+            
+            log('Corner radius processing completed');
+        }
+
+        function drawRoundedRect(ctx, x, y, width, height, radius) {
+            ctx.moveTo(x + radius, y);
+            ctx.lineTo(x + width - radius, y);
+            ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+            ctx.lineTo(x + width, y + height - radius);
+            ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+            ctx.lineTo(x + radius, y + height);
+            ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+            ctx.lineTo(x, y + radius);
+            ctx.quadraticCurveTo(x, y, x + radius, y);
+            ctx.closePath();
+        }
+
+        // Auto-generate on load
+        setTimeout(() => {
+            if (typeof QRCode !== 'undefined') {
+                log('QRCode library loaded, generating initial QR');
+                generateTestQR();
+            } else {
+                log('QRCode library not loaded');
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

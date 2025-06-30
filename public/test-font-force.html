@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Force Font Loading Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .controls {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin: 15px 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        select, input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        button {
+            background: #007aff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0056cc;
+        }
+        .preview {
+            text-align: center;
+            margin: 30px 0;
+        }
+        canvas {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .log {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 10px 0;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .font-preload {
+            position: absolute;
+            left: -9999px;
+            top: -9999px;
+            font-size: 1px;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hidden elements to force font loading -->
+    <div class="font-preload">
+        <div style="font-family: 'Times New Roman';">Force load Times New Roman</div>
+        <div style="font-family: 'Comic Sans MS';">Force load Comic Sans MS</div>
+        <div style="font-family: 'Impact';">Force load Impact</div>
+        <div style="font-family: 'Georgia';">Force load Georgia</div>
+        <div style="font-family: 'Courier New';">Force load Courier New</div>
+        <div style="font-family: 'Verdana';">Force load Verdana</div>
+        <div style="font-family: 'Trebuchet MS';">Force load Trebuchet MS</div>
+    </div>
+
+    <div class="container">
+        <h1>🔧 Force Font Loading Test</h1>
+        <p>Test font loading with preloading mechanism</p>
+        
+        <div class="controls">
+            <div class="form-group">
+                <label>Font Family:</label>
+                <select id="font-family">
+                    <option value="Arial">Arial</option>
+                    <option value="Times New Roman">Times New Roman</option>
+                    <option value="Comic Sans MS">Comic Sans MS</option>
+                    <option value="Impact">Impact</option>
+                    <option value="Georgia">Georgia</option>
+                    <option value="Courier New">Courier New</option>
+                    <option value="Verdana">Verdana</option>
+                    <option value="Trebuchet MS">Trebuchet MS</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Brand Name:</label>
+                <input type="text" id="brand-name" value="Coffee Shop">
+            </div>
+            
+            <div class="form-group">
+                <label>WiFi Network:</label>
+                <input type="text" id="wifi-name" value="CoffeeShop_WiFi">
+            </div>
+            
+            <button onclick="testWithPreload()">Test with Font Preload</button>
+            <button onclick="testWithoutPreload()">Test without Preload</button>
+            <button onclick="clearLog()">Clear Log</button>
+        </div>
+        
+        <div class="preview">
+            <h3>Canvas Test</h3>
+            <canvas id="test-canvas" width="400" height="300"></canvas>
+            <br>
+            <button onclick="downloadTest()">Download Test</button>
+        </div>
+        
+        <div class="log" id="debug-log"></div>
+    </div>
+
+    <script>
+        const debugLog = document.getElementById('debug-log');
+
+        function log(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            debugLog.innerHTML += `[${timestamp}] ${message}<br>`;
+            debugLog.scrollTop = debugLog.scrollHeight;
+            console.log(message);
+        }
+
+        function clearLog() {
+            debugLog.innerHTML = '';
+        }
+
+        async function loadFont(fontFamily) {
+            try {
+                log(`Attempting to load font: ${fontFamily}`);
+                
+                // Method 1: Use document.fonts.load if available
+                if (document.fonts && document.fonts.load) {
+                    await document.fonts.load(`16px "${fontFamily}"`);
+                    log(`✓ Font loaded via document.fonts.load: ${fontFamily}`);
+                    return true;
+                }
+                
+                // Method 2: Create hidden element to force font load
+                const testElement = document.createElement('div');
+                testElement.style.fontFamily = `"${fontFamily}", Arial, sans-serif`;
+                testElement.style.position = 'absolute';
+                testElement.style.left = '-9999px';
+                testElement.style.fontSize = '16px';
+                testElement.textContent = 'Font loading test';
+                document.body.appendChild(testElement);
+                
+                // Wait a bit for font to load
+                await new Promise(resolve => setTimeout(resolve, 100));
+                
+                document.body.removeChild(testElement);
+                log(`✓ Font loaded via hidden element: ${fontFamily}`);
+                return true;
+                
+            } catch (error) {
+                log(`✗ Failed to load font: ${fontFamily} - ${error.message}`);
+                return false;
+            }
+        }
+
+        async function testWithPreload() {
+            const selectedFont = document.getElementById('font-family').value;
+            log(`=== Testing WITH font preload ===`);
+            
+            // Preload font first
+            await loadFont(selectedFont);
+            
+            // Then generate canvas
+            generateCanvas(selectedFont);
+        }
+
+        function testWithoutPreload() {
+            const selectedFont = document.getElementById('font-family').value;
+            log(`=== Testing WITHOUT font preload ===`);
+            
+            // Generate canvas directly
+            generateCanvas(selectedFont);
+        }
+
+        function generateCanvas(selectedFont) {
+            const canvas = document.getElementById('test-canvas');
+            const ctx = canvas.getContext('2d');
+            const brandName = document.getElementById('brand-name').value;
+            const wifiName = document.getElementById('wifi-name').value;
+            
+            log(`Generating canvas with font: ${selectedFont}`);
+            
+            // Clear canvas
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Add border
+            ctx.strokeStyle = '#e5e5e7';
+            ctx.lineWidth = 1;
+            ctx.strokeRect(0, 0, canvas.width, canvas.height);
+            
+            let currentY = 60;
+            
+            // Test brand name with multiple font formats
+            ctx.fillStyle = '#1d1d1f';
+            ctx.textAlign = 'center';
+            
+            const fontFormats = [
+                `bold 28px "${selectedFont}", Arial, sans-serif`,
+                `bold 28px ${selectedFont}, Arial, sans-serif`,
+                `bold 28px Arial, sans-serif`
+            ];
+            
+            let fontApplied = false;
+            for (const fontString of fontFormats) {
+                ctx.font = fontString;
+                log(`Trying font: ${fontString}`);
+                log(`Applied font: ${ctx.font}`);
+                
+                // Test if font was actually applied
+                const testWidth = ctx.measureText('Test').width;
+                log(`Test width: ${testWidth}`);
+                
+                if (testWidth > 0) {
+                    fontApplied = true;
+                    log(`✓ Font successfully applied: ${fontString}`);
+                    break;
+                } else {
+                    log(`✗ Font failed to apply: ${fontString}`);
+                }
+            }
+            
+            // Draw brand name
+            ctx.fillText(brandName, canvas.width / 2, currentY);
+            currentY += 50;
+            
+            // Draw WiFi name
+            ctx.fillStyle = '#666';
+            ctx.font = `20px "${selectedFont}", Arial, sans-serif`;
+            log(`WiFi font: ${ctx.font}`);
+            ctx.fillText(wifiName, canvas.width / 2, currentY);
+            currentY += 40;
+            
+            // Draw font info
+            ctx.fillStyle = '#999';
+            ctx.font = '14px Arial, sans-serif';
+            ctx.fillText(`Font: ${selectedFont}`, canvas.width / 2, currentY);
+            ctx.fillText(`Applied: ${fontApplied ? 'Yes' : 'No'}`, canvas.width / 2, currentY + 20);
+            
+            log(`Canvas generation completed`);
+        }
+
+        function downloadTest() {
+            const canvas = document.getElementById('test-canvas');
+            const selectedFont = document.getElementById('font-family').value;
+            const link = document.createElement('a');
+            link.download = `font-force-test-${selectedFont.replace(/\s+/g, '-')}.png`;
+            link.href = canvas.toDataURL();
+            link.click();
+            log(`Downloaded test with font: ${selectedFont}`);
+        }
+
+        // Auto-test on font change
+        document.getElementById('font-family').addEventListener('change', testWithPreload);
+        document.getElementById('brand-name').addEventListener('input', () => {
+            if (document.getElementById('font-family').value) {
+                testWithPreload();
+            }
+        });
+        document.getElementById('wifi-name').addEventListener('input', () => {
+            if (document.getElementById('font-family').value) {
+                testWithPreload();
+            }
+        });
+
+        // Initial test
+        setTimeout(() => {
+            log('Page loaded, starting initial test...');
+            testWithPreload();
+        }, 1000);
+    </script>
+</body>
+</html>

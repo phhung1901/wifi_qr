@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WiFi QR Generator</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <style>
         * {
             margin: 0;
@@ -19,42 +19,46 @@
         }
 
         body {
-            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: #fbfbfd;
             color: #1d1d1f;
-            line-height: 1.6;
+            line-height: 1.47059;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-weight: 400;
+            letter-spacing: -0.022em;
         }
 
         .container {
-            max-width: 980px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 22px;
         }
 
         /* Header */
         .header {
-            padding: 60px 0 40px;
+            padding: 88px 0 108px;
             text-align: center;
-            border-bottom: 1px solid #f5f5f7;
+            background: #fbfbfd;
         }
 
         .header h1 {
             font-size: 56px;
-            font-weight: 700;
-            letter-spacing: -0.025em;
-            margin-bottom: 16px;
-            background: linear-gradient(135deg, #1d1d1f 0%, #86868b 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            line-height: 1.07143;
+            font-weight: 600;
+            letter-spacing: -0.005em;
+            margin-bottom: 6px;
+            color: #1d1d1f;
         }
 
         .header p {
-            font-size: 21px;
-            color: #86868b;
+            font-size: 28px;
+            line-height: 1.14286;
             font-weight: 400;
-            max-width: 600px;
+            letter-spacing: 0.007em;
+            color: #86868b;
+            max-width: 980px;
             margin: 0 auto;
         }
 
@@ -64,16 +68,18 @@
         }
 
         .form-section {
-            background: #fbfbfd;
+            background: #ffffff;
             border-radius: 18px;
             padding: 48px;
             margin-bottom: 40px;
-            border: 1px solid #f5f5f7;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
             transition: all 0.3s ease;
         }
 
         .form-section:hover {
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
         }
 
         .form-group {
@@ -100,18 +106,107 @@
         }
 
         .form-input:focus {
-            border-color: #007aff;
-            box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.1);
+            border-color: #0071e3;
+            box-shadow: 0 0 0 4px rgba(0, 125, 250, 0.6);
+        }
+
+        .form-input:hover {
+            border-color: #86868b;
         }
 
         .form-input::placeholder {
             color: #86868b;
         }
 
+        .form-input select,
+        select.form-input {
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            background-size: 16px;
+            padding-right: 48px;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+
         .checkbox-group {
             display: flex;
             align-items: center;
             margin-top: 16px;
+        }
+
+        .custom-group .checkbox-group {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #f5f5f7;
+        }
+
+        /* Password Input Container */
+        .password-input-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .password-input-container .form-input {
+            padding-right: 50px;
+            flex: 1;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 12px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 6px;
+            transition: background-color 0.2s ease;
+            z-index: 1;
+        }
+
+        .password-toggle:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .password-toggle-icon {
+            font-size: 16px;
+            user-select: none;
+        }
+
+        /* Password Requirements */
+        .password-requirements {
+            margin-top: 8px;
+            padding: 12px;
+            background: rgba(0, 122, 255, 0.05);
+            border-radius: 8px;
+            border-left: 3px solid #007aff;
+        }
+
+        .requirement {
+            color: #86868b;
+            font-size: 13px;
+            transition: color 0.2s ease;
+        }
+
+        .requirement.valid {
+            color: #34c759;
+        }
+
+        .requirement.invalid {
+            color: #ff3b30;
+        }
+
+        /* Input validation states */
+        .form-input.valid {
+            border-color: #34c759;
+            box-shadow: 0 0 0 3px rgba(52, 199, 89, 0.1);
+        }
+
+        .form-input.invalid {
+            border-color: #ff3b30;
+            box-shadow: 0 0 0 3px rgba(255, 59, 48, 0.1);
         }
 
         .checkbox {
@@ -128,37 +223,53 @@
         }
 
         .btn-primary {
-            background: #007aff;
-            color: white;
+            background: #0071e3;
+            color: #ffffff;
             border: none;
             padding: 16px 32px;
-            border-radius: 12px;
+            border-radius: 980px;
             font-size: 17px;
-            font-weight: 600;
+            line-height: 1.23536;
+            font-weight: 400;
+            letter-spacing: -0.022em;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.15s ease-in-out;
             width: 100%;
             margin-top: 24px;
+            min-height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .btn-primary:hover {
-            background: #0056cc;
+            background: #0077ed;
             transform: translateY(-1px);
+            box-shadow: 0 4px 20px rgba(0, 125, 250, 0.4);
         }
 
         .btn-primary:active {
+            background: #006edb;
             transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(0, 125, 250, 0.3);
         }
 
         /* QR Section */
         .qr-section {
             display: none;
             text-align: center;
-            background: #fbfbfd;
+            background: #ffffff;
             border-radius: 18px;
             padding: 48px;
-            border: 1px solid #f5f5f7;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
             margin-bottom: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .qr-section:hover {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
         }
 
         .qr-container {
@@ -202,11 +313,18 @@
         /* Customization Panel */
         .customization-panel {
             display: none;
-            background: #fbfbfd;
+            background: #ffffff;
             border-radius: 18px;
             padding: 48px;
-            border: 1px solid #f5f5f7;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
             margin-bottom: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .customization-panel:hover {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
         }
 
         .panel-title {
@@ -219,8 +337,15 @@
 
         .customization-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 32px;
+        }
+
+        @media (max-width: 1024px) {
+            .customization-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
         }
 
         .custom-group {
@@ -321,29 +446,37 @@
 
         .btn-download {
             background: #1d1d1f;
-            color: white;
+            color: #ffffff;
             border: none;
             padding: 16px 24px;
-            border-radius: 12px;
-            font-size: 15px;
-            font-weight: 600;
+            border-radius: 980px;
+            font-size: 17px;
+            line-height: 1.23536;
+            font-weight: 400;
+            letter-spacing: -0.022em;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.15s ease-in-out;
+            min-height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .btn-download:hover {
             background: #424245;
             transform: translateY(-1px);
+            box-shadow: 0 4px 20px rgba(29, 29, 31, 0.4);
         }
 
         .btn-download.secondary {
-            background: white;
+            background: #ffffff;
             color: #1d1d1f;
-            border: 2px solid #d2d2d7;
+            border: 1px solid #d2d2d7;
         }
 
         .btn-download.secondary:hover {
-            border-color: #1d1d1f;
+            border-color: #86868b;
+            background: #f5f5f7;
         }
 
         /* Grid Layout */
@@ -495,7 +628,7 @@
         <!-- Header -->
         <header class="header">
             <h1>WiFi QR Generator</h1>
-            <p>Create beautiful QR codes for instant WiFi connection. Simple, fast, and elegant.</p>
+            <p>Create beautiful QR codes for your WiFi network. Customizable designs. Instant sharing.</p>
         </header>
 
         <!-- Main Content -->
@@ -514,10 +647,21 @@
 
                             <div class="form-group">
                                 <label for="password" class="form-label">Password</label>
-                                <input type="password" id="password" class="form-input" placeholder="Enter your WiFi password">
+                                <div class="password-input-container">
+                                    <input type="password" id="password" class="form-input" placeholder="Enter your WiFi password (min 8 characters)" minlength="8">
+                                    <button type="button" id="toggle-password" class="password-toggle" aria-label="Toggle password visibility">
+                                        <span class="password-toggle-icon">👁️</span>
+                                    </button>
+                                </div>
+                                <div class="password-requirements" id="password-requirements" style="display: none;">
+                                    <small>
+                                        <span id="length-check" class="requirement">✓ At least 8 characters</span><br>
+                                        <span id="char-check" class="requirement">✓ Valid WiFi password characters</span>
+                                    </small>
+                                </div>
                                 <div class="checkbox-group">
                                     <input type="checkbox" id="no-password" class="checkbox">
-                                    <label for="no-password" class="checkbox-label">This network has no password</label>
+                                    <label for="no-password" class="checkbox-label">This network has no password (Open network)</label>
                                 </div>
                             </div>
 
@@ -555,24 +699,15 @@
                 <p style="text-align: center; color: #86868b; margin-bottom: 32px;">Changes apply instantly to the preview above</p>
 
                 <div class="customization-grid">
-                    <!-- Colors -->
+                    <!-- Colors & Style -->
                     <div class="custom-group">
-                        <h3>Colors</h3>
+                        <h3>Colors & Style</h3>
                         <div class="form-group">
                             <label class="form-label">Foreground Color</label>
                             <input type="color" id="fg-color" class="color-input" value="#000000">
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Background Color</label>
-                            <input type="color" id="bg-color" class="color-input" value="#ffffff">
-                        </div>
-                    </div>
-
-                    <!-- Size & Style -->
-                    <div class="custom-group">
-                        <h3>Size & Style</h3>
-                        <div class="form-group">
-                            <label class="form-label">Size</label>
+                            <label class="form-label">QR Code Size</label>
                             <input type="range" id="qr-size" class="range-input" min="200" max="400" value="300">
                             <div class="range-value" id="size-value">300px</div>
                         </div>
@@ -582,6 +717,8 @@
                             <div class="range-value" id="radius-value">0px</div>
                         </div>
                     </div>
+
+
 
                     <!-- Logo Upload -->
                     <div class="custom-group">
@@ -595,8 +732,16 @@
                         </div>
                         <div class="form-group" style="margin-top: 16px;">
                             <label class="form-label">Logo Size</label>
-                            <input type="range" id="logo-size" class="range-input" min="10" max="30" value="20">
-                            <div class="range-value" id="logo-size-value">20%</div>
+                            <input type="range" id="logo-size" class="range-input" min="5" max="15" value="10">
+                            <div class="range-value" id="logo-size-value">10%</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Logo Style</label>
+                            <select id="logo-style" class="form-input">
+                                <option value="circular">Circular (Recommended)</option>
+                                <option value="rounded">Rounded Square</option>
+                                <option value="square">Square</option>
+                            </select>
                         </div>
                     </div>
 
@@ -611,6 +756,30 @@
                             <label class="form-label">Description</label>
                             <input type="text" id="description" class="form-input" placeholder="Additional description">
                         </div>
+                        <div class="form-group">
+                            <label class="form-label">Font Family</label>
+                            <select id="font-family" class="form-input">
+                                <option value="SF Pro Display">SF Pro Display (Default)</option>
+                                <option value="Arial">Arial</option>
+                                <option value="Helvetica">Helvetica</option>
+                                <option value="Times New Roman">Times New Roman</option>
+                                <option value="Georgia">Georgia</option>
+                                <option value="Verdana">Verdana</option>
+                                <option value="Trebuchet MS">Trebuchet MS</option>
+                                <option value="Impact">Impact</option>
+                                <option value="Comic Sans MS">Comic Sans MS</option>
+                                <option value="Courier New">Courier New</option>
+                                <option value="Roboto">Roboto</option>
+                                <option value="Open Sans">Open Sans</option>
+                                <option value="Lato">Lato</option>
+                                <option value="Montserrat">Montserrat</option>
+                                <option value="Poppins">Poppins</option>
+                            </select>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="show-password-card" class="checkbox">
+                            <label for="show-password-card" class="checkbox-label">Show password on card</label>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -622,7 +791,6 @@
 
                 <div class="download-grid">
                     <button id="download-png" class="btn-download">Download PNG</button>
-                    <button id="download-svg" class="btn-download secondary">Download SVG</button>
                     <button id="download-pdf" class="btn-download secondary">Download PDF</button>
                     <button id="download-card" class="btn-download">Download Card</button>
                 </div>
@@ -659,7 +827,6 @@
 
         // Customization elements
         const fgColorInput = document.getElementById('fg-color');
-        const bgColorInput = document.getElementById('bg-color');
         const qrSizeInput = document.getElementById('qr-size');
         const cornerRadiusInput = document.getElementById('corner-radius');
         const logoUpload = document.getElementById('logo-upload');
@@ -726,23 +893,70 @@
             ssidInput.addEventListener('input', handleWiFiInputChange);
             passwordInput.addEventListener('input', handleWiFiInputChange);
 
+            // Password toggle functionality
+            document.getElementById('toggle-password').addEventListener('click', function() {
+                const passwordInput = document.getElementById('password');
+                const toggleIcon = this.querySelector('.password-toggle-icon');
+
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    toggleIcon.textContent = '🙈';
+                } else {
+                    passwordInput.type = 'password';
+                    toggleIcon.textContent = '👁️';
+                }
+            });
+
+            // Password validation
+            passwordInput.addEventListener('input', function() {
+                if (!noPasswordCheckbox.checked) {
+                    validatePassword(this.value);
+                }
+                handleWiFiInputChange();
+            });
+
+            passwordInput.addEventListener('focus', function() {
+                if (!noPasswordCheckbox.checked) {
+                    document.getElementById('password-requirements').style.display = 'block';
+                }
+            });
+
+            passwordInput.addEventListener('blur', function() {
+                setTimeout(() => {
+                    document.getElementById('password-requirements').style.display = 'none';
+                }, 200);
+            });
+
             // No password checkbox
             noPasswordCheckbox.addEventListener('change', function() {
+                const passwordContainer = document.querySelector('.password-input-container');
+                const passwordRequirements = document.getElementById('password-requirements');
+
                 passwordInput.disabled = this.checked;
                 passwordInput.value = this.checked ? '' : passwordInput.value;
-                passwordInput.style.opacity = this.checked ? '0.5' : '1';
+                passwordContainer.style.opacity = this.checked ? '0.5' : '1';
+                passwordRequirements.style.display = 'none';
+
+                if (this.checked) {
+                    passwordInput.classList.remove('valid', 'invalid');
+                }
+
                 handleWiFiInputChange();
             });
 
             // Range inputs with real-time preview
             qrSizeInput.addEventListener('input', function() {
                 document.getElementById('size-value').textContent = this.value + 'px';
-                if (currentQRData) debounceUpdateQR();
+                if (currentQRData) {
+                    debounceUpdateQR();
+                }
             });
 
             cornerRadiusInput.addEventListener('input', function() {
                 document.getElementById('radius-value').textContent = this.value + 'px';
-                if (currentQRData) debounceUpdateQR();
+                if (currentQRData) {
+                    debounceUpdateQR();
+                }
             });
 
             logoSizeInput.addEventListener('input', function() {
@@ -750,12 +964,13 @@
                 if (currentQRData && currentLogo) debounceUpdateQR();
             });
 
-            // Color inputs with real-time preview
-            fgColorInput.addEventListener('input', function() {
-                if (currentQRData) debounceUpdateQR();
+            // Logo style selector
+            document.getElementById('logo-style').addEventListener('change', function() {
+                if (currentQRData && currentLogo) debounceUpdateQR();
             });
 
-            bgColorInput.addEventListener('input', function() {
+            // Color inputs with real-time preview
+            fgColorInput.addEventListener('input', function() {
                 if (currentQRData) debounceUpdateQR();
             });
 
@@ -768,13 +983,18 @@
                 // These don't affect QR code directly
             });
 
+            // Font family selector
+            document.getElementById('font-family').addEventListener('change', function() {
+                // Font changes only affect card downloads, not QR preview
+                console.log('Font changed to:', this.value);
+            });
+
             // Logo upload
             logoUpload.addEventListener('click', () => logoFile.click());
             logoFile.addEventListener('change', handleLogoUpload);
 
             // Download buttons
             document.getElementById('download-png').addEventListener('click', () => downloadQR('png'));
-            document.getElementById('download-svg').addEventListener('click', () => downloadQR('svg'));
             document.getElementById('download-pdf').addEventListener('click', () => downloadQR('pdf'));
             document.getElementById('download-card').addEventListener('click', () => downloadCard());
         }
@@ -786,6 +1006,15 @@
             if (ssid) {
                 const password = noPasswordCheckbox.checked ? '' : passwordInput.value;
                 const encryption = noPasswordCheckbox.checked ? 'nopass' : 'WPA';
+
+                // Validate password if not open network
+                if (!noPasswordCheckbox.checked && password) {
+                    const isPasswordValid = validatePassword(password);
+                    if (!isPasswordValid) {
+                        // Still generate QR but show warning
+                        console.warn('Password may not meet WiFi standards');
+                    }
+                }
 
                 // Create WiFi QR string
                 currentQRData = `WIFI:T:${encryption};S:${ssid};P:${password};;`;
@@ -875,28 +1104,25 @@
             }
 
             try {
+                // Always create a fresh canvas
                 const canvas = document.createElement('canvas');
                 const size = parseInt(qrSizeInput.value);
 
                 // Check if QRCode library is available
                 if (typeof QRCode !== 'undefined' && QRCode.toCanvas) {
-                    console.log('Using QRCode library');
-
                     const options = {
                         width: size,
                         height: size,
                         margin: 4,
                         color: {
                             dark: fgColorInput.value,
-                            light: bgColorInput.value
+                            light: '#ffffff'
                         },
                         errorCorrectionLevel: 'M'
                     };
 
                     await QRCode.toCanvas(canvas, currentQRData, options);
-                    console.log('QR generated successfully with library');
                 } else {
-                    console.log('Using manual QR generator');
                     // Use manual generator
                     canvas.width = size;
                     canvas.height = size;
@@ -904,7 +1130,7 @@
                         width: size,
                         color: {
                             dark: fgColorInput.value,
-                            light: bgColorInput.value
+                            light: '#ffffff'
                         }
                     });
                 }
@@ -915,12 +1141,21 @@
                     applyCornerRadius(canvas, radius);
                 }
 
-                // Add logo if uploaded
+                // Add logo if uploaded (with size limit)
                 if (currentLogo) {
                     addLogoToCanvas(canvas);
                 }
 
                 qrCanvas = canvas;
+
+                // Apply responsive styling to canvas for display
+                const displaySize = Math.min(size, 350);
+                canvas.style.width = displaySize + 'px';
+                canvas.style.height = displaySize + 'px';
+                canvas.style.maxWidth = '100%';
+                canvas.style.display = 'block';
+                canvas.style.margin = '0 auto';
+                canvas.style.borderRadius = radius > 0 ? radius + 'px' : '0';
 
                 // Clear container and add new QR
                 qrCodeContainer.innerHTML = '';
@@ -931,8 +1166,6 @@
                     downloadSection.style.display = 'block';
                     downloadSection.classList.add('fade-in');
                 }
-
-                console.log('QR code generation completed');
 
             } catch (error) {
                 console.error('Error in generateQRCode:', error);
@@ -1098,18 +1331,229 @@
         }
 
         function addLogoToCanvas(canvas) {
+            const logoStyle = document.getElementById('logo-style').value;
+            addLogoToCanvasWithStyle(canvas, logoStyle);
+        }
+
+        function addLogoToCanvasWithStyle(canvas, logoStyle) {
             const ctx = canvas.getContext('2d');
             const logoSizePercent = parseInt(logoSizeInput.value) / 100;
-            const logoSize = canvas.width * logoSizePercent;
-            const x = (canvas.width - logoSize) / 2;
-            const y = (canvas.height - logoSize) / 2;
+            const logoSize = Math.min(canvas.width * logoSizePercent, canvas.width * 0.15); // Max 15% of canvas
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
 
-            // Add white background for logo
-            ctx.fillStyle = bgColorInput.value;
-            ctx.fillRect(x - 8, y - 8, logoSize + 16, logoSize + 16);
+            // Save current state
+            ctx.save();
+
+            if (logoStyle === 'circular') {
+                addCircularLogo(ctx, centerX, centerY, logoSize);
+            } else if (logoStyle === 'rounded') {
+                addRoundedSquareLogo(ctx, centerX, centerY, logoSize);
+            } else {
+                addSquareLogo(ctx, centerX, centerY, logoSize);
+            }
+
+            // Restore state
+            ctx.restore();
+        }
+
+        function addCircularLogo(ctx, centerX, centerY, logoSize) {
+            const backgroundRadius = logoSize * 0.7;
+            const logoRadius = logoSize * 0.5;
+
+            // Create circular background with gradient
+            const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, backgroundRadius);
+            gradient.addColorStop(0, '#ffffff');
+            gradient.addColorStop(1, adjustBrightness('#ffffff', -10));
+
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, backgroundRadius, 0, 2 * Math.PI);
+            ctx.fillStyle = gradient;
+            ctx.fill();
+
+            // Add shadow
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
+            ctx.shadowBlur = 6;
+            ctx.shadowOffsetX = 2;
+            ctx.shadowOffsetY = 2;
+            ctx.fill();
+
+            // Reset shadow
+            ctx.shadowColor = 'transparent';
+            ctx.shadowBlur = 0;
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 0;
+
+            // Add elegant border
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, backgroundRadius, 0, 2 * Math.PI);
+            ctx.strokeStyle = fgColorInput.value;
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Create circular clipping path for logo
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, logoRadius, 0, 2 * Math.PI);
+            ctx.clip();
 
             // Draw logo
-            ctx.drawImage(currentLogo, x, y, logoSize, logoSize);
+            const logoX = centerX - logoRadius;
+            const logoY = centerY - logoRadius;
+            ctx.drawImage(currentLogo, logoX, logoY, logoRadius * 2, logoRadius * 2);
+        }
+
+        function addRoundedSquareLogo(ctx, centerX, centerY, logoSize) {
+            const backgroundSize = logoSize * 0.9;
+            const logoSizeActual = logoSize * 0.7;
+            const cornerRadius = backgroundSize * 0.2;
+
+            // Create rounded square background
+            const x = centerX - backgroundSize / 2;
+            const y = centerY - backgroundSize / 2;
+
+            // Background with gradient
+            const gradient = ctx.createLinearGradient(x, y, x + backgroundSize, y + backgroundSize);
+            gradient.addColorStop(0, '#ffffff');
+            gradient.addColorStop(1, adjustBrightness('#ffffff', -15));
+
+            ctx.fillStyle = gradient;
+            drawRoundedRect(ctx, x, y, backgroundSize, backgroundSize, cornerRadius);
+            ctx.fill();
+
+            // Add shadow
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.25)';
+            ctx.shadowBlur = 8;
+            ctx.shadowOffsetX = 2;
+            ctx.shadowOffsetY = 2;
+            ctx.fill();
+
+            // Reset shadow
+            ctx.shadowColor = 'transparent';
+            ctx.shadowBlur = 0;
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 0;
+
+            // Add border
+            ctx.strokeStyle = fgColorInput.value;
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Clip logo to rounded square
+            drawRoundedRect(ctx, x + 4, y + 4, backgroundSize - 8, backgroundSize - 8, cornerRadius - 2);
+            ctx.clip();
+
+            // Draw logo
+            const logoX = centerX - logoSizeActual / 2;
+            const logoY = centerY - logoSizeActual / 2;
+            ctx.drawImage(currentLogo, logoX, logoY, logoSizeActual, logoSizeActual);
+        }
+
+        function addSquareLogo(ctx, centerX, centerY, logoSize) {
+            const backgroundSize = logoSize * 0.9;
+            const logoSizeActual = logoSize * 0.8;
+            const padding = backgroundSize * 0.1;
+
+            // Create square background
+            const x = centerX - backgroundSize / 2;
+            const y = centerY - backgroundSize / 2;
+
+            // Background
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(x, y, backgroundSize, backgroundSize);
+
+            // Add shadow
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.2)';
+            ctx.shadowBlur = 6;
+            ctx.shadowOffsetX = 2;
+            ctx.shadowOffsetY = 2;
+            ctx.fillRect(x, y, backgroundSize, backgroundSize);
+
+            // Reset shadow
+            ctx.shadowColor = 'transparent';
+            ctx.shadowBlur = 0;
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 0;
+
+            // Add border
+            ctx.strokeStyle = fgColorInput.value;
+            ctx.lineWidth = 2;
+            ctx.strokeRect(x, y, backgroundSize, backgroundSize);
+
+            // Draw logo
+            const logoX = centerX - logoSizeActual / 2;
+            const logoY = centerY - logoSizeActual / 2;
+            ctx.drawImage(currentLogo, logoX, logoY, logoSizeActual, logoSizeActual);
+        }
+
+        // Helper function to adjust color brightness
+        function adjustBrightness(color, amount) {
+            const usePound = color[0] === '#';
+            const col = usePound ? color.slice(1) : color;
+            const num = parseInt(col, 16);
+            let r = (num >> 16) + amount;
+            let g = (num >> 8 & 0x00FF) + amount;
+            let b = (num & 0x0000FF) + amount;
+            r = r > 255 ? 255 : r < 0 ? 0 : r;
+            g = g > 255 ? 255 : g < 0 ? 0 : g;
+            b = b > 255 ? 255 : b < 0 ? 0 : b;
+            return (usePound ? '#' : '') + (r << 16 | g << 8 | b).toString(16).padStart(6, '0');
+        }
+
+        // Helper function to wrap text for canvas
+        function wrapText(ctx, text, maxWidth) {
+            const words = text.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                const word = words[i];
+                const width = ctx.measureText(currentLine + ' ' + word).width;
+
+                if (width < maxWidth) {
+                    currentLine += ' ' + word;
+                } else {
+                    lines.push(currentLine);
+                    currentLine = word;
+                }
+            }
+
+            lines.push(currentLine);
+            return lines;
+        }
+
+        // Password validation function
+        function validatePassword(password) {
+            const lengthCheck = document.getElementById('length-check');
+            const charCheck = document.getElementById('char-check');
+            const passwordInput = document.getElementById('password');
+
+            // Check length (minimum 8 characters for WPA/WPA2)
+            const isLengthValid = password.length >= 8;
+            lengthCheck.className = `requirement ${isLengthValid ? 'valid' : 'invalid'}`;
+            lengthCheck.textContent = isLengthValid ? '✓ At least 8 characters' : '✗ At least 8 characters required';
+
+            // Check valid WiFi password characters
+            // WiFi passwords can contain most printable ASCII characters
+            // Avoid problematic characters: quotes, backslashes, some special chars
+            const validCharsRegex = /^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{}|;:,.<>?~`\s]*$/;
+            const isCharsValid = validCharsRegex.test(password);
+            charCheck.className = `requirement ${isCharsValid ? 'valid' : 'invalid'}`;
+            charCheck.textContent = isCharsValid ? '✓ Valid WiFi password characters' : '✗ Contains invalid characters';
+
+            // Overall validation
+            const isValid = isLengthValid && isCharsValid && password.length > 0;
+
+            if (password.length === 0) {
+                passwordInput.classList.remove('valid', 'invalid');
+            } else if (isValid) {
+                passwordInput.classList.remove('invalid');
+                passwordInput.classList.add('valid');
+            } else {
+                passwordInput.classList.remove('valid');
+                passwordInput.classList.add('invalid');
+            }
+
+            return isValid;
         }
 
         function handleLogoUpload(e) {
@@ -1151,6 +1595,61 @@
             reader.readAsDataURL(file);
         }
 
+        // Generate high-quality QR for download
+        async function generateHighQualityQR(targetSize = null) {
+            const downloadSize = targetSize || parseInt(qrSizeInput.value);
+            const canvas = document.createElement('canvas');
+
+            try {
+                // Generate QR with current settings but at specified size
+                if (typeof QRCode !== 'undefined' && QRCode.toCanvas) {
+                    const options = {
+                        width: downloadSize,
+                        height: downloadSize,
+                        margin: 4,
+                        color: {
+                            dark: fgColorInput.value,
+                            light: '#ffffff'
+                        },
+                        errorCorrectionLevel: 'M'
+                    };
+
+                    await QRCode.toCanvas(canvas, currentQRData, options);
+                } else {
+                    canvas.width = downloadSize;
+                    canvas.height = downloadSize;
+                    await generateManualQR(canvas, currentQRData, {
+                        width: downloadSize,
+                        color: {
+                            dark: fgColorInput.value,
+                            light: '#ffffff'
+                        }
+                    });
+                }
+
+                // Apply corner radius if specified
+                const radius = parseInt(cornerRadiusInput.value);
+                if (radius > 0) {
+                    // Scale radius proportionally for different download sizes
+                    const currentPreviewSize = parseInt(qrSizeInput.value);
+                    const scaledRadius = Math.round(radius * (downloadSize / currentPreviewSize));
+                    applyCornerRadius(canvas, scaledRadius);
+                }
+
+                // Add logo if uploaded
+                if (currentLogo) {
+                    const logoStyle = document.getElementById('logo-style').value;
+                    addLogoToCanvasWithStyle(canvas, logoStyle);
+                }
+
+                return canvas;
+
+            } catch (error) {
+                console.error('Error generating high-quality QR:', error);
+                return qrCanvas; // Fallback to current canvas
+            }
+        }
+
         function downloadQR(format) {
             if (!qrCanvas) {
                 showErrorMessage('Please generate a QR code first');
@@ -1158,48 +1657,37 @@
             }
 
             try {
+                const ssid = ssidInput.value.trim() || 'wifi';
+                const filename = `wifi-qr-${ssid}`;
 
-            const ssid = ssidInput.value.trim() || 'wifi';
-            const filename = `wifi-qr-${ssid}`;
+                if (format === 'png') {
+                    // Generate high-quality version for download
+                    generateHighQualityQR(512).then(highQualityCanvas => {
+                        const link = document.createElement('a');
+                        link.download = `${filename}.png`;
+                        link.href = highQualityCanvas.toDataURL('image/png');
+                        link.click();
+                        showSuccessMessage('PNG downloaded successfully!');
+                    });
+                } else if (format === 'pdf') {
+                    // Generate high-quality version for PDF
+                    generateHighQualityQR(400).then(highQualityCanvas => {
+                        const { jsPDF } = window.jspdf;
+                        const pdf = new jsPDF();
 
-            if (format === 'png') {
-                const link = document.createElement('a');
-                link.download = `${filename}.png`;
-                link.href = qrCanvas.toDataURL();
-                link.click();
-            } else if (format === 'svg') {
-                // For SVG, we'll regenerate using QRCode library
-                QRCode.toString(currentQRData, {
-                    type: 'svg',
-                    width: parseInt(qrSizeInput.value),
-                    color: {
-                        dark: fgColorInput.value,
-                        light: bgColorInput.value
-                    }
-                }, function(err, svg) {
-                    if (err) throw err;
+                        const imgData = highQualityCanvas.toDataURL('image/png');
+                        const size = parseInt(qrSizeInput.value);
 
-                    const blob = new Blob([svg], { type: 'image/svg+xml' });
-                    const link = document.createElement('a');
-                    link.download = `${filename}.svg`;
-                    link.href = URL.createObjectURL(blob);
-                    link.click();
-                });
-            } else if (format === 'pdf') {
-                const { jsPDF } = window.jspdf;
-                const pdf = new jsPDF();
+                        // Scale for PDF (convert px to mm, 1px ≈ 0.264583mm)
+                        const pdfSize = Math.min(size * 0.264583, 150); // Max 150mm
+                        const x = (pdf.internal.pageSize.getWidth() - pdfSize) / 2;
+                        const y = 50;
 
-                const imgData = qrCanvas.toDataURL('image/png');
-                const imgWidth = 100;
-                const imgHeight = 100;
-                const x = (pdf.internal.pageSize.getWidth() - imgWidth) / 2;
-                const y = 50;
-
-                pdf.addImage(imgData, 'PNG', x, y, imgWidth, imgHeight);
-                pdf.save(`${filename}.pdf`);
-            }
-
-            showSuccessMessage(`${format.toUpperCase()} downloaded successfully!`);
+                        pdf.addImage(imgData, 'PNG', x, y, pdfSize, pdfSize);
+                        pdf.save(`${filename}.pdf`);
+                        showSuccessMessage('PDF downloaded successfully!');
+                    });
+                }
 
             } catch (error) {
                 console.error('Download error:', error);
@@ -1207,77 +1695,266 @@
             }
         }
 
-        function downloadCard() {
+        // Function to load fonts before generating card
+        async function loadFont(fontFamily) {
+            try {
+                // Check if font is available
+                if (document.fonts && document.fonts.load) {
+                    await document.fonts.load(`16px "${fontFamily}"`);
+                    console.log(`Font loaded: ${fontFamily}`);
+                    return true;
+                }
+            } catch (error) {
+                console.warn(`Failed to load font: ${fontFamily}`, error);
+            }
+            return false;
+        }
+
+        async function downloadCard() {
             if (!qrCanvas) {
                 showErrorMessage('Please generate a QR code first');
                 return;
             }
 
-            try {
+            // Get selected font and try to load it
+            const fontSelector = document.getElementById('font-family');
+            const selectedFont = fontSelector ? fontSelector.value : 'SF Pro Display';
 
-            // Create card canvas
-            const cardCanvas = document.createElement('canvas');
-            cardCanvas.width = 600;
-            cardCanvas.height = 400;
-            const ctx = cardCanvas.getContext('2d');
+            console.log('Attempting to download card with font:', selectedFont);
 
-            // Card background
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(0, 0, cardCanvas.width, cardCanvas.height);
+            // Try to load the font first
+            await loadFont(selectedFont);
 
-            // Add border
-            ctx.strokeStyle = '#f0f0f0';
-            ctx.lineWidth = 2;
-            ctx.strokeRect(0, 0, cardCanvas.width, cardCanvas.height);
+            // Generate high-quality QR for card
+            generateHighQualityQR(300).then(highQualityQR => {
+                try {
+                // Create vertical card canvas
+                const cardCanvas = document.createElement('canvas');
+                cardCanvas.width = 400;
+                cardCanvas.height = 600;
+                const ctx = cardCanvas.getContext('2d');
 
-            // Add QR code
-            const qrSize = 200;
-            const qrX = 50;
-            const qrY = (cardCanvas.height - qrSize) / 2;
-            ctx.drawImage(qrCanvas, qrX, qrY, qrSize, qrSize);
+                // Card background
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(0, 0, cardCanvas.width, cardCanvas.height);
 
-            // Add text
-            ctx.fillStyle = '#1d1d1f';
-            ctx.font = 'bold 32px SF Pro Display, sans-serif';
-            ctx.fillText('WiFi Access', 300, 120);
+                // Add subtle border
+                ctx.strokeStyle = '#e5e5e7';
+                ctx.lineWidth = 1;
+                ctx.strokeRect(0, 0, cardCanvas.width, cardCanvas.height);
 
-            ctx.font = '24px SF Pro Display, sans-serif';
-            ctx.fillText(`Network: ${ssidInput.value}`, 300, 160);
+                let currentY = 40; // Start higher to save space
+                const availableHeight = cardCanvas.height - 80; // Reserve space for bottom content
 
-            const security = noPasswordCheckbox.checked ? 'Open' : 'WPA/WPA2';
-            ctx.fillText(`Security: ${security}`, 300, 190);
+                // Get selected font family (already loaded above)
+                console.log('Applying font to card elements:', selectedFont);
 
-            // Add brand name if provided
-            const brandName = brandNameInput.value.trim();
-            if (brandName) {
-                ctx.font = 'bold 20px SF Pro Display, sans-serif';
-                ctx.fillText(brandName, 300, 240);
-            }
+                // Add brand name at top if provided (with adaptive font size)
+                const brandName = brandNameInput.value.trim();
+                if (brandName) {
+                    ctx.fillStyle = '#1d1d1f';
+                    ctx.textAlign = 'center';
 
-            // Add description if provided
-            const description = descriptionInput.value.trim();
-            if (description) {
-                ctx.font = '16px SF Pro Display, sans-serif';
-                ctx.fillStyle = '#86868b';
-                ctx.fillText(description, 300, 270);
-            }
+                    // Adaptive font size based on text length
+                    let fontSize = brandName.length > 30 ? 20 : brandName.length > 20 ? 24 : 28;
 
-            ctx.font = '14px SF Pro Display, sans-serif';
-            ctx.fillText('Scan to connect instantly', 300, 320);
+                    // Try multiple font formats for better compatibility
+                    const fontFormats = [
+                        `bold ${fontSize}px "${selectedFont}", Arial, sans-serif`,
+                        `bold ${fontSize}px ${selectedFont}, Arial, sans-serif`,
+                        `bold ${fontSize}px Arial, sans-serif`
+                    ];
 
-            // Download card
-            const link = document.createElement('a');
-            const ssid = ssidInput.value.trim() || 'wifi';
-            link.download = `wifi-card-${ssid}.png`;
-            link.href = cardCanvas.toDataURL();
-            link.click();
+                    let fontApplied = false;
+                    for (const fontString of fontFormats) {
+                        ctx.font = fontString;
+                        console.log('Trying brand font:', fontString, '-> Applied:', ctx.font);
 
-            showSuccessMessage('WiFi card downloaded successfully!');
+                        // Test if font was actually applied by measuring text
+                        const testWidth = ctx.measureText('Test').width;
+                        if (testWidth > 0) {
+                            fontApplied = true;
+                            break;
+                        }
+                    }
 
-            } catch (error) {
-                console.error('Card download error:', error);
-                showErrorMessage('Failed to download WiFi card. Please try again.');
-            }
+                    // Wrap brand name if too long
+                    const maxWidth = cardCanvas.width - 40;
+                    const lines = wrapText(ctx, brandName, maxWidth);
+
+                    // Limit to 2 lines for brand name
+                    const displayLines = lines.slice(0, 2);
+                    const lineHeight = fontSize + 7;
+
+                    displayLines.forEach((line, index) => {
+                        ctx.fillText(line, cardCanvas.width / 2, currentY + (index * lineHeight));
+                    });
+
+                    currentY += (displayLines.length * lineHeight) + 10;
+                }
+
+                // Add description if provided (with adaptive font size and height limit)
+                const description = descriptionInput.value.trim();
+                if (description) {
+                    ctx.fillStyle = '#86868b';
+                    ctx.textAlign = 'center';
+
+                    // Adaptive font size based on text length
+                    let fontSize = description.length > 150 ? 14 : description.length > 100 ? 16 : 18;
+
+                    // Apply font with fallbacks
+                    const fontFormats = [
+                        `${fontSize}px "${selectedFont}", Arial, sans-serif`,
+                        `${fontSize}px ${selectedFont}, Arial, sans-serif`,
+                        `${fontSize}px Arial, sans-serif`
+                    ];
+
+                    for (const fontString of fontFormats) {
+                        ctx.font = fontString;
+                        console.log('Trying description font:', fontString, '-> Applied:', ctx.font);
+                        if (ctx.measureText('Test').width > 0) break;
+                    }
+
+                    // Wrap text if too long
+                    const maxWidth = cardCanvas.width - 60;
+                    const lines = wrapText(ctx, description, maxWidth);
+
+                    // Limit to 4 lines maximum to prevent layout issues
+                    const maxLines = 4;
+                    const displayLines = lines.slice(0, maxLines);
+                    const lineHeight = fontSize + 5;
+
+                    // Calculate max height for description area
+                    const maxDescriptionHeight = 100; // Reserve space for QR and other content
+                    const actualHeight = displayLines.length * lineHeight;
+
+                    if (actualHeight <= maxDescriptionHeight) {
+                        displayLines.forEach((line, index) => {
+                            ctx.fillText(line, cardCanvas.width / 2, currentY + (index * lineHeight));
+                        });
+                        currentY += actualHeight + 10;
+                    } else {
+                        // If still too long, truncate and add ellipsis
+                        const truncatedLines = displayLines.slice(0, 3);
+                        truncatedLines.forEach((line, index) => {
+                            if (index === 2) {
+                                // Add ellipsis to last line
+                                line = line.substring(0, line.length - 3) + '...';
+                            }
+                            ctx.fillText(line, cardCanvas.width / 2, currentY + (index * lineHeight));
+                        });
+                        currentY += (3 * lineHeight) + 10;
+                    }
+                }
+
+                // Calculate remaining space for QR and bottom content
+                const remainingHeight = cardCanvas.height - currentY - 120; // Reserve 120px for bottom content
+                const qrSize = Math.min(250, remainingHeight - 40); // Adaptive QR size
+                const qrX = (cardCanvas.width - qrSize) / 2;
+                const qrY = currentY + 15;
+
+                // Apply corner radius to QR in card if specified
+                const radius = parseInt(cornerRadiusInput.value);
+                if (radius > 0) {
+                    // Create a clipping path with rounded corners
+                    ctx.save();
+                    ctx.beginPath();
+                    drawRoundedRect(ctx, qrX, qrY, qrSize, qrSize, radius);
+                    ctx.clip();
+
+                    // Draw the QR canvas
+                    ctx.drawImage(highQualityQR, qrX, qrY, qrSize, qrSize);
+                    ctx.restore();
+                } else {
+                    // Draw normally without corner radius
+                    ctx.drawImage(highQualityQR, qrX, qrY, qrSize, qrSize);
+                }
+
+                currentY = qrY + qrSize + 25;
+
+                // Ensure we have enough space for bottom content
+                const remainingSpace = cardCanvas.height - currentY - 20; // 20px bottom margin
+
+                // Add WiFi network name (with adaptive font size)
+                ctx.fillStyle = '#1d1d1f';
+                ctx.textAlign = 'center';
+
+                // Adaptive font size for network name
+                const networkName = ssidInput.value;
+                let networkFontSize = networkName.length > 25 ? 18 : networkName.length > 15 ? 20 : 22;
+
+                // Apply font with fallbacks
+                const networkFontFormats = [
+                    `bold ${networkFontSize}px "${selectedFont}", Arial, sans-serif`,
+                    `bold ${networkFontSize}px ${selectedFont}, Arial, sans-serif`,
+                    `bold ${networkFontSize}px Arial, sans-serif`
+                ];
+
+                for (const fontString of networkFontFormats) {
+                    ctx.font = fontString;
+                    console.log('Trying network font:', fontString, '-> Applied:', ctx.font);
+                    if (ctx.measureText('Test').width > 0) break;
+                }
+
+                // Wrap network name if too long (max 2 lines)
+                const maxWidth = cardCanvas.width - 40;
+                const networkLines = wrapText(ctx, networkName, maxWidth).slice(0, 2);
+                const networkLineHeight = networkFontSize + 5;
+
+                networkLines.forEach((line, index) => {
+                    ctx.fillText(line, cardCanvas.width / 2, currentY + (index * networkLineHeight));
+                });
+
+                currentY += (networkLines.length * networkLineHeight) + 15;
+
+                // Add password if checkbox is checked and password exists (only if space available)
+                const showPassword = document.getElementById('show-password-card');
+                if (showPassword && showPassword.checked && !noPasswordCheckbox.checked && passwordInput.value) {
+                    const passwordSpace = cardCanvas.height - currentY - 10;
+                    if (passwordSpace > 25) { // Only show if enough space
+                        ctx.fillStyle = '#86868b';
+
+                        // Apply font with fallbacks
+                        const passwordFontFormats = [
+                            `16px "${selectedFont}", Arial, sans-serif`,
+                            `16px ${selectedFont}, Arial, sans-serif`,
+                            `16px Arial, sans-serif`
+                        ];
+
+                        for (const fontString of passwordFontFormats) {
+                            ctx.font = fontString;
+                            console.log('Trying password font:', fontString, '-> Applied:', ctx.font);
+                            if (ctx.measureText('Test').width > 0) break;
+                        }
+
+                        // Truncate password if too long
+                        let passwordText = `Password: ${passwordInput.value}`;
+                        const maxPasswordWidth = cardCanvas.width - 40;
+                        while (ctx.measureText(passwordText).width > maxPasswordWidth && passwordText.length > 15) {
+                            passwordText = passwordText.substring(0, passwordText.length - 4) + '...';
+                        }
+
+                        ctx.fillText(passwordText, cardCanvas.width / 2, currentY);
+                    }
+                }
+
+                // Download card
+                const link = document.createElement('a');
+                const ssid = ssidInput.value.trim() || 'wifi';
+                link.download = `wifi-card-${ssid}.png`;
+                link.href = cardCanvas.toDataURL();
+                link.click();
+
+                showSuccessMessage('WiFi card downloaded successfully!');
+
+                } catch (error) {
+                    console.error('Card download error:', error);
+                    showErrorMessage('Failed to download WiFi card. Please try again.');
+                }
+            }).catch(error => {
+                console.error('High-quality QR generation failed:', error);
+                showErrorMessage('Failed to generate high-quality QR for card.');
+            });
         }
     </script>
 </body>

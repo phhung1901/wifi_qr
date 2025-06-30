@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Logo Styles</title>
+    <style>
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+        .demo-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .demo-item h3 {
+            margin-bottom: 20px;
+            color: white;
+        }
+        .qr-container {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        canvas {
+            display: block;
+        }
+        .controls {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+        }
+        .control-group {
+            margin: 15px 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: white;
+            font-weight: 500;
+        }
+        input[type="range"] {
+            width: 100%;
+            margin: 10px 0;
+        }
+        input[type="color"] {
+            width: 60px;
+            height: 40px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        input[type="file"] {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            color: white;
+            width: 100%;
+        }
+        .value-display {
+            color: #4facfe;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        button {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            margin: 5px;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(79, 172, 254, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Logo Styles Demo</h1>
+        <p>Test different logo styles and see how they integrate with QR codes</p>
+        
+        <div class="controls">
+            <h3>Controls</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                <div class="control-group">
+                    <label>Logo Size: <span id="size-value" class="value-display">10%</span></label>
+                    <input type="range" id="logo-size" min="5" max="15" value="10">
+                </div>
+                <div class="control-group">
+                    <label>QR Foreground:</label>
+                    <input type="color" id="fg-color" value="#000000">
+                </div>
+                <div class="control-group">
+                    <label>QR Background:</label>
+                    <input type="color" id="bg-color" value="#ffffff">
+                </div>
+            </div>
+            <div class="control-group">
+                <label>Upload Logo:</label>
+                <input type="file" id="logo-upload" accept="image/*">
+            </div>
+            <button onclick="generateAllStyles()">Generate All Styles</button>
+        </div>
+        
+        <div class="demo-grid">
+            <div class="demo-item">
+                <h3>🔵 Circular Style</h3>
+                <div class="qr-container">
+                    <canvas id="circular-canvas" width="250" height="250"></canvas>
+                </div>
+                <p>Elegant circular design with gradient background and shadow</p>
+            </div>
+            
+            <div class="demo-item">
+                <h3>⬜ Rounded Square</h3>
+                <div class="qr-container">
+                    <canvas id="rounded-canvas" width="250" height="250"></canvas>
+                </div>
+                <p>Modern rounded square with subtle gradient</p>
+            </div>
+            
+            <div class="demo-item">
+                <h3>⬛ Square Style</h3>
+                <div class="qr-container">
+                    <canvas id="square-canvas" width="250" height="250"></canvas>
+                </div>
+                <p>Classic square design with clean borders</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- QR Library -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
+
+    <script>
+        let currentLogo = null;
+        const wifiData = 'WIFI:T:WPA;S:TestNetwork;P:password123;;';
+
+        // Elements
+        const logoSizeInput = document.getElementById('logo-size');
+        const fgColorInput = document.getElementById('fg-color');
+        const bgColorInput = document.getElementById('bg-color');
+        const logoUpload = document.getElementById('logo-upload');
+
+        // Event listeners
+        logoSizeInput.addEventListener('input', function() {
+            document.getElementById('size-value').textContent = this.value + '%';
+            if (currentLogo) generateAllStyles();
+        });
+
+        fgColorInput.addEventListener('input', function() {
+            generateAllStyles();
+        });
+
+        bgColorInput.addEventListener('input', function() {
+            generateAllStyles();
+        });
+
+        logoUpload.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.onload = function() {
+                        currentLogo = img;
+                        generateAllStyles();
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        async function generateAllStyles() {
+            if (!currentLogo) {
+                // Create a default logo
+                const canvas = document.createElement('canvas');
+                canvas.width = 100;
+                canvas.height = 100;
+                const ctx = canvas.getContext('2d');
+                
+                // Draw a simple logo
+                ctx.fillStyle = '#007aff';
+                ctx.fillRect(0, 0, 100, 100);
+                ctx.fillStyle = 'white';
+                ctx.font = 'bold 40px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('L', 50, 50);
+                
+                currentLogo = new Image();
+                currentLogo.src = canvas.toDataURL();
+                await new Promise(resolve => currentLogo.onload = resolve);
+            }
+
+            await generateQRWithLogo('circular-canvas', 'circular');
+            await generateQRWithLogo('rounded-canvas', 'rounded');
+            await generateQRWithLogo('square-canvas', 'square');
+        }
+
+        async function generateQRWithLogo(canvasId, style) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            
+            // Generate base QR
+            await QRCode.toCanvas(canvas, wifiData, {
+                width: 250,
+                height: 250,
+                margin: 4,
+                color: {
+                    dark: fgColorInput.value,
+                    light: bgColorInput.value
+                }
+            });
+            
+            // Add logo with specified style
+            if (currentLogo) {
+                addLogoToCanvas(canvas, style);
+            }
+        }
+
+        function addLogoToCanvas(canvas, style) {
+            const ctx = canvas.getContext('2d');
+            const logoSizePercent = parseInt(logoSizeInput.value) / 100;
+            const logoSize = canvas.width * logoSizePercent;
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            
+            ctx.save();
+            
+            if (style === 'circular') {
+                addCircularLogo(ctx, centerX, centerY, logoSize);
+            } else if (style === 'rounded') {
+                addRoundedSquareLogo(ctx, centerX, centerY, logoSize);
+            } else {
+                addSquareLogo(ctx, centerX, centerY, logoSize);
+            }
+            
+            ctx.restore();
+        }
+
+        // Copy the logo functions from main file
+        function addCircularLogo(ctx, centerX, centerY, logoSize) {
+            const backgroundRadius = logoSize * 0.7;
+            const logoRadius = logoSize * 0.5;
+            
+            // Create circular background with gradient
+            const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, backgroundRadius);
+            gradient.addColorStop(0, bgColorInput.value);
+            gradient.addColorStop(1, adjustBrightness(bgColorInput.value, -10));
+            
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, backgroundRadius, 0, 2 * Math.PI);
+            ctx.fillStyle = gradient;
+            ctx.fill();
+            
+            // Add shadow
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
+            ctx.shadowBlur = 6;
+            ctx.shadowOffsetX = 2;
+            ctx.shadowOffsetY = 2;
+            ctx.fill();
+            
+            // Reset shadow
+            ctx.shadowColor = 'transparent';
+            ctx.shadowBlur = 0;
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 0;
+            
+            // Add border
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, backgroundRadius, 0, 2 * Math.PI);
+            ctx.strokeStyle = fgColorInput.value;
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            
+            // Clip and draw logo
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, logoRadius, 0, 2 * Math.PI);
+            ctx.clip();
+            
+            const logoX = centerX - logoRadius;
+            const logoY = centerY - logoRadius;
+            ctx.drawImage(currentLogo, logoX, logoY, logoRadius * 2, logoRadius * 2);
+        }
+
+        function addRoundedSquareLogo(ctx, centerX, centerY, logoSize) {
+            const backgroundSize = logoSize * 0.9;
+            const logoSizeActual = logoSize * 0.7;
+            const cornerRadius = backgroundSize * 0.2;
+            
+            const x = centerX - backgroundSize / 2;
+            const y = centerY - backgroundSize / 2;
+            
+            // Background with gradient
+            const gradient = ctx.createLinearGradient(x, y, x + backgroundSize, y + backgroundSize);
+            gradient.addColorStop(0, bgColorInput.value);
+            gradient.addColorStop(1, adjustBrightness(bgColorInput.value, -15));
+            
+            ctx.fillStyle = gradient;
+            drawRoundedRect(ctx, x, y, backgroundSize, backgroundSize, cornerRadius);
+            ctx.fill();
+            
+            // Add shadow
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.25)';
+            ctx.shadowBlur = 8;
+            ctx.shadowOffsetX = 2;
+            ctx.shadowOffsetY = 2;
+            ctx.fill();
+            
+            // Reset shadow and add border
+            ctx.shadowColor = 'transparent';
+            ctx.shadowBlur = 0;
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 0;
+            
+            ctx.strokeStyle = fgColorInput.value;
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            
+            // Clip and draw logo
+            drawRoundedRect(ctx, x + 4, y + 4, backgroundSize - 8, backgroundSize - 8, cornerRadius - 2);
+            ctx.clip();
+            
+            const logoX = centerX - logoSizeActual / 2;
+            const logoY = centerY - logoSizeActual / 2;
+            ctx.drawImage(currentLogo, logoX, logoY, logoSizeActual, logoSizeActual);
+        }
+
+        function addSquareLogo(ctx, centerX, centerY, logoSize) {
+            const backgroundSize = logoSize * 0.9;
+            const logoSizeActual = logoSize * 0.8;
+            
+            const x = centerX - backgroundSize / 2;
+            const y = centerY - backgroundSize / 2;
+            
+            // Background
+            ctx.fillStyle = bgColorInput.value;
+            ctx.fillRect(x, y, backgroundSize, backgroundSize);
+            
+            // Add shadow
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.2)';
+            ctx.shadowBlur = 6;
+            ctx.shadowOffsetX = 2;
+            ctx.shadowOffsetY = 2;
+            ctx.fillRect(x, y, backgroundSize, backgroundSize);
+            
+            // Reset shadow and add border
+            ctx.shadowColor = 'transparent';
+            ctx.shadowBlur = 0;
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 0;
+            
+            ctx.strokeStyle = fgColorInput.value;
+            ctx.lineWidth = 2;
+            ctx.strokeRect(x, y, backgroundSize, backgroundSize);
+            
+            // Draw logo
+            const logoX = centerX - logoSizeActual / 2;
+            const logoY = centerY - logoSizeActual / 2;
+            ctx.drawImage(currentLogo, logoX, logoY, logoSizeActual, logoSizeActual);
+        }
+
+        function drawRoundedRect(ctx, x, y, width, height, radius) {
+            ctx.beginPath();
+            ctx.moveTo(x + radius, y);
+            ctx.lineTo(x + width - radius, y);
+            ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+            ctx.lineTo(x + width, y + height - radius);
+            ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+            ctx.lineTo(x + radius, y + height);
+            ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+            ctx.lineTo(x, y + radius);
+            ctx.quadraticCurveTo(x, y, x + radius, y);
+            ctx.closePath();
+        }
+
+        function adjustBrightness(color, amount) {
+            const usePound = color[0] === '#';
+            const col = usePound ? color.slice(1) : color;
+            const num = parseInt(col, 16);
+            let r = (num >> 16) + amount;
+            let g = (num >> 8 & 0x00FF) + amount;
+            let b = (num & 0x0000FF) + amount;
+            r = r > 255 ? 255 : r < 0 ? 0 : r;
+            g = g > 255 ? 255 : g < 0 ? 0 : g;
+            b = b > 255 ? 255 : b < 0 ? 0 : b;
+            return (usePound ? '#' : '') + (r << 16 | g << 8 | b).toString(16).padStart(6, '0');
+        }
+
+        // Auto-generate with default logo
+        setTimeout(generateAllStyles, 1000);
+    </script>
+</body>
+</html>
