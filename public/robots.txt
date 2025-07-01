@@ -1,21 +1,48 @@
 # WiFi QR Generator - Free Online Tool
 # Create beautiful WiFi QR codes with custom logos and colors
+# The world's most customizable WiFi QR code generator
 # Visit: http://wifiqr.local
 
 User-agent: *
 Allow: /
 
-# Sitemap location
+# Sitemap locations
 Sitemap: http://wifiqr.local/sitemap.xml
+Sitemap: http://wifiqr.local/sitemap-images.xml
 
-# Allow all important content
+# Allow all important content and SEO pages
 Allow: /
 Allow: /wifi-qr
+Allow: /blog
+Allow: /guide
+Allow: /free-wifi-qr-code-generator
+Allow: /qr-code-for-wifi
+Allow: /wifi-qr-generator
+Allow: /custom-wifi-qr-code
+Allow: /wifi-qr-code-with-logo
+Allow: /restaurant-wifi-qr
+Allow: /hotel-wifi-qr
+Allow: /office-wifi-qr
+Allow: /wifi-password-qr-code
+Allow: /wifi-qr-code-maker
+Allow: /generate-wifi-qr-code
 Allow: /images/
 Allow: /css/
 Allow: /js/
 Allow: /favicon.ico
 Allow: /site.webmanifest
+
+# Allow language-specific pages
+Allow: /en/
+Allow: /es/
+Allow: /fr/
+Allow: /de/
+Allow: /zh/
+Allow: /ja/
+Allow: /ko/
+Allow: /vi/
+Allow: /hi/
+Allow: /id/
 
 # Disallow sensitive areas and backend files
 Disallow: /storage/
@@ -34,15 +61,40 @@ Disallow: /package-lock.json
 Disallow: /artisan
 Disallow: /phpunit.xml
 
-# Allow specific bots with faster crawl rates
+# Allow specific bots with optimized crawl rates for better indexing
 User-agent: Googlebot
-Crawl-delay: 0.5
+Crawl-delay: 0.2
+Allow: /
 
 User-agent: Bingbot
-Crawl-delay: 1
+Crawl-delay: 0.5
+Allow: /
 
 User-agent: Slurp
+Crawl-delay: 0.5
+Allow: /
+
+User-agent: DuckDuckBot
 Crawl-delay: 1
+Allow: /
+
+User-agent: Baiduspider
+Crawl-delay: 1
+Allow: /
+
+User-agent: YandexBot
+Crawl-delay: 1
+Allow: /
+
+# Social media bots
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
 
 # Default crawl delay for other bots
 User-agent: *
@@ -50,3 +102,7 @@ Crawl-delay: 2
 
 # Host directive (helps with canonicalization)
 Host: wifiqr.local
+
+# Additional SEO directives
+# Request-rate: 1/10s (1 request every 10 seconds)
+# Visit-time: 0400-0800 (Visit between 4-8 AM UTC for optimal server performance)

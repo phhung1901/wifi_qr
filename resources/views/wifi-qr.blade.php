@@ -1,29 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ $currentLocale ?? 'en' }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- SEO Meta Tags -->
-    <title>{{ $title ?? 'Free WiFi QR Code Generator - Create Custom QR Codes with Logo | WiFi QR Generator' }}</title>
-    <meta name="description" content="{{ $description ?? 'Create beautiful WiFi QR codes instantly! Free generator with custom logos, colors, and real-time preview. No signup required. Download PNG/PDF formats for restaurants, hotels, offices.' }}">
+    <title>{{ $title ?? __('app.site_title') }}</title>
+    <meta name="description" content="{{ $description ?? __('app.site_description') }}">
     <meta name="keywords" content="{{ $keywords ?? 'wifi qr code generator, free wifi qr code, qr code for wifi, wifi password qr code, custom wifi qr, wifi qr generator, qr code wifi password, wifi qr code maker, generate wifi qr code, wifi qr code with logo, instant wifi connection, wifi sharing qr, restaurant wifi qr, hotel wifi qr, office wifi qr' }}">
-    <meta name="author" content="WiFi QR Generator">
+    <meta name="author" content="{{ __('app.meta_author') }}">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     <link rel="canonical" href="http://wifiqr.local">
 
+    <!-- Multilingual Hreflang Tags -->
+    <link rel="alternate" hreflang="en" href="http://wifiqr.local/" />
+    <link rel="alternate" hreflang="es" href="http://wifiqr.local/es/" />
+    <link rel="alternate" hreflang="fr" href="http://wifiqr.local/fr/" />
+    <link rel="alternate" hreflang="de" href="http://wifiqr.local/de/" />
+    <link rel="alternate" hreflang="zh" href="http://wifiqr.local/zh/" />
+    <link rel="alternate" hreflang="ja" href="http://wifiqr.local/ja/" />
+    <link rel="alternate" hreflang="ko" href="http://wifiqr.local/ko/" />
+    <link rel="alternate" hreflang="vi" href="http://wifiqr.local/vi/" />
+    <link rel="alternate" hreflang="hi" href="http://wifiqr.local/hi/" />
+    <link rel="alternate" hreflang="id" href="http://wifiqr.local/id/" />
+    <link rel="alternate" hreflang="x-default" href="http://wifiqr.local/" />
+
     <!-- Additional SEO Meta Tags -->
-    <meta name="geo.region" content="US">
-    <meta name="geo.placename" content="United States">
-    <meta name="language" content="en">
-    <meta name="distribution" content="global">
-    <meta name="rating" content="general">
+    <meta name="geo.region" content="{{ __('app.meta_geo_region') }}">
+    <meta name="geo.placename" content="{{ __('app.meta_geo_placename') }}">
+    <meta name="language" content="{{ $currentLocale ?? 'en' }}">
+    <meta name="distribution" content="{{ __('app.meta_distribution') }}">
+    <meta name="rating" content="{{ __('app.meta_rating') }}">
     <meta name="revisit-after" content="7 days">
-    <meta name="classification" content="Tools, Utilities, QR Code, WiFi">
-    <meta name="category" content="Technology">
-    <meta name="coverage" content="Worldwide">
-    <meta name="target" content="all">
+    <meta name="classification" content="{{ __('app.meta_classification') }}">
+    <meta name="category" content="{{ __('app.meta_category') }}">
+    <meta name="coverage" content="{{ __('app.meta_coverage') }}">
+    <meta name="target" content="{{ __('app.meta_target') }}">
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -35,25 +48,25 @@
     {
         "@context": "https://schema.org",
         "@type": "WebApplication",
-        "name": "WiFi QR Code Generator",
-        "alternateName": "Free WiFi QR Generator",
-        "description": "Create beautiful WiFi QR codes instantly with custom logos, colors, and real-time preview. Free online tool for restaurants, hotels, and offices.",
+        "name": "{{ __('app.schema_app_name') }}",
+        "alternateName": "{{ __('app.schema_app_alt_name') }}",
+        "description": "{{ __('app.schema_app_description') }}",
         "url": "http://wifiqr.local",
-        "applicationCategory": "UtilitiesApplication",
-        "operatingSystem": "Any",
-        "permissions": "No permissions required",
+        "applicationCategory": "{{ __('app.schema_app_category') }}",
+        "operatingSystem": "{{ __('app.schema_operating_system') }}",
+        "permissions": "{{ __('app.schema_permissions') }}",
         "offers": {
             "@type": "Offer",
             "price": "0",
             "priceCurrency": "USD"
         },
         "featureList": [
-            "Custom WiFi QR code generation",
-            "Logo integration",
-            "Real-time preview",
-            "Multiple download formats",
-            "No registration required",
-            "Mobile responsive design"
+            "{{ __('app.schema_feature_1') }}",
+            "{{ __('app.schema_feature_2') }}",
+            "{{ __('app.schema_feature_3') }}",
+            "{{ __('app.schema_feature_4') }}",
+            "{{ __('app.schema_feature_5') }}",
+            "{{ __('app.schema_feature_6') }}"
         ],
         "screenshot": "http://wifiqr.local/images/og-image.svg",
         "softwareVersion": "1.0",
@@ -61,11 +74,11 @@
         "dateModified": "2024-12-19",
         "author": {
             "@type": "Organization",
-            "name": "WiFi QR Generator"
+            "name": "{{ __('app.schema_app_name') }}"
         },
         "publisher": {
             "@type": "Organization",
-            "name": "WiFi QR Generator",
+            "name": "{{ __('app.schema_app_name') }}",
             "logo": {
                 "@type": "ImageObject",
                 "url": "http://wifiqr.local/images/logo.svg"
@@ -75,29 +88,29 @@
     </script>
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="{{ __('app.og_type') }}">
     <meta property="og:url" content="http://wifiqr.local">
-    <meta property="og:title" content="Free WiFi QR Code Generator - Create Custom QR Codes with Logo">
-    <meta property="og:description" content="Create beautiful WiFi QR codes instantly! Free generator with custom logos, colors, and real-time preview. Perfect for restaurants, hotels, and offices. No signup required.">
+    <meta property="og:title" content="{{ $title ?? __('app.site_title') }}">
+    <meta property="og:description" content="{{ $description ?? __('app.site_description') }}">
     <meta property="og:image" content="http://wifiqr.local/images/og-image.svg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="WiFi QR Code Generator - Free online tool">
-    <meta property="og:site_name" content="WiFi QR Generator">
-    <meta property="og:locale" content="en_US">
-    <meta property="article:author" content="WiFi QR Generator">
-    <meta property="article:section" content="Technology">
-    <meta property="article:tag" content="WiFi, QR Code, Generator, Free, Custom, Logo">
+    <meta property="og:image:alt" content="{{ __('app.og_image_alt') }}">
+    <meta property="og:site_name" content="{{ __('app.og_site_name') }}">
+    <meta property="og:locale" content="{{ __('app.og_locale') }}">
+    <meta property="article:author" content="{{ __('app.og_article_author') }}">
+    <meta property="article:section" content="{{ __('app.og_article_section') }}">
+    <meta property="article:tag" content="{{ __('app.og_article_tag') }}">
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:card" content="{{ __('app.twitter_card') }}">
     <meta property="twitter:url" content="http://wifiqr.local">
-    <meta property="twitter:title" content="Free WiFi QR Code Generator - Create Custom QR Codes with Logo">
-    <meta property="twitter:description" content="Create beautiful WiFi QR codes instantly! Free generator with custom logos, colors, and real-time preview. Perfect for restaurants, hotels, and offices.">
+    <meta property="twitter:title" content="{{ $title ?? __('app.site_title') }}">
+    <meta property="twitter:description" content="{{ $description ?? __('app.site_description') }}">
     <meta property="twitter:image" content="http://wifiqr.local/images/og-image.svg">
-    <meta property="twitter:image:alt" content="WiFi QR Code Generator - Free online tool">
-    <meta property="twitter:site" content="@wifiqrgenerator">
-    <meta property="twitter:creator" content="@wifiqrgenerator">
+    <meta property="twitter:image:alt" content="{{ __('app.twitter_image_alt') }}">
+    <meta property="twitter:site" content="{{ __('app.twitter_site') }}">
+    <meta property="twitter:creator" content="{{ __('app.twitter_creator') }}">
 
     <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
@@ -744,10 +757,22 @@
         <!-- Header -->
         <header class="header" role="banner">
             <div class="logo-container">
-                <img src="/images/logo-text.svg" alt="Free WiFi QR Code Generator - Create Custom QR Codes with Logo" class="header-logo">
+                <img src="/images/logo-text.svg" alt="{{ __('app.site_title') }}" class="header-logo">
             </div>
-            <h1>Free WiFi QR Code Generator</h1>
-            <p>Create beautiful, customizable WiFi QR codes with logos instantly. Perfect for restaurants, hotels, offices, and homes. No signup required - completely free!</p>
+
+            <!-- Language Selector -->
+            <div class="language-selector" style="position: absolute; top: 20px; right: 20px;">
+                <select id="language-select" style="padding: 8px 12px; border: 1px solid #d2d2d7; border-radius: 8px; background: white; font-size: 14px;">
+                    @foreach($supportedLanguages as $code => $info)
+                        <option value="{{ $code }}" {{ $currentLocale === $code ? 'selected' : '' }}>
+                            {{ $info['name'] }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <h1>{{ __('app.header_title') }}</h1>
+            <p>{{ __('app.header_subtitle') }}</p>
         </header>
 
         <!-- Main Content -->
@@ -758,35 +783,35 @@
                 <div class="col-lg-6">
                     <!-- WiFi Form -->
                     <section class="form-section" aria-labelledby="wifi-form-title">
-                        <h2 id="wifi-form-title" style="font-size: 24px; font-weight: 600; margin-bottom: 24px; color: #1d1d1f;">Enter WiFi Details</h2>
+                        <h2 id="wifi-form-title" style="font-size: 24px; font-weight: 600; margin-bottom: 24px; color: #1d1d1f;">{{ __('app.wifi_details_title') }}</h2>
                         <form id="wifi-form" role="form" aria-label="WiFi QR Code Generator Form">
                             <div class="form-group">
-                                <label for="ssid" class="form-label">Network Name (SSID)</label>
-                                <input type="text" id="ssid" class="form-input" placeholder="Enter your WiFi network name" required aria-describedby="ssid-help">
-                                <small id="ssid-help" style="color: #86868b; font-size: 13px;">The name of your WiFi network that appears in device lists</small>
+                                <label for="ssid" class="form-label">{{ __('app.network_name_label') }}</label>
+                                <input type="text" id="ssid" class="form-input" placeholder="{{ __('app.network_name_placeholder') }}" required aria-describedby="ssid-help">
+                                <small id="ssid-help" style="color: #86868b; font-size: 13px;">{{ __('app.network_name_help') }}</small>
                             </div>
 
                             <div class="form-group">
-                                <label for="password" class="form-label">Password</label>
+                                <label for="password" class="form-label">{{ __('app.password_label') }}</label>
                                 <div class="password-input-container">
-                                    <input type="password" id="password" class="form-input" placeholder="Enter your WiFi password (min 8 characters)" minlength="8">
-                                    <button type="button" id="toggle-password" class="password-toggle" aria-label="Toggle password visibility">
+                                    <input type="password" id="password" class="form-input" placeholder="{{ __('app.password_placeholder') }}" minlength="8">
+                                    <button type="button" id="toggle-password" class="password-toggle" aria-label="{{ __('app.password_toggle_aria') }}">
                                         <span class="password-toggle-icon">👁️</span>
                                     </button>
                                 </div>
                                 <div class="password-requirements" id="password-requirements" style="display: none;">
                                     <small>
-                                        <span id="length-check" class="requirement">✓ At least 8 characters</span><br>
-                                        <span id="char-check" class="requirement">✓ Valid WiFi password characters</span>
+                                        <span id="length-check" class="requirement">{{ __('app.password_length_check') }}</span><br>
+                                        <span id="char-check" class="requirement">{{ __('app.password_char_check') }}</span>
                                     </small>
                                 </div>
                                 <div class="checkbox-group">
                                     <input type="checkbox" id="no-password" class="checkbox">
-                                    <label for="no-password" class="checkbox-label">This network has no password (Open network)</label>
+                                    <label for="no-password" class="checkbox-label">{{ __('app.no_password_label') }}</label>
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn-primary">Generate QR Code</button>
+                            <button type="submit" class="btn-primary">{{ __('app.generate_button') }}</button>
                         </form>
                     </section>
                 </div>
@@ -794,21 +819,21 @@
                 <!-- Right Column: QR Preview -->
                 <div class="col-lg-6">
                     <section id="qr-section" class="qr-section" style="display: block;">
-                        <h2 class="qr-title">Your WiFi QR Code</h2>
-                        <p class="qr-subtitle">Live preview - changes update instantly</p>
+                        <h2 class="qr-title">{{ __('app.qr_title') }}</h2>
+                        <p class="qr-subtitle">{{ __('app.qr_subtitle') }}</p>
 
                         <div class="qr-container">
                             <div id="qr-code">
                                 <div style="display: flex; align-items: center; justify-content: center; height: 200px; color: #86868b; flex-direction: column;">
                                     <div style="font-size: 48px; margin-bottom: 16px;">📱</div>
-                                    <div>Enter WiFi details to generate QR</div>
+                                    <div>{{ __('app.qr_placeholder') }}</div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="wifi-info" id="wifi-info" style="display: none;">
-                            <p><strong>Network:</strong> <span id="display-ssid"></span></p>
-                            <p><strong>Security:</strong> <span id="display-security"></span></p>
+                            <p><strong>{{ __('app.network_label') }}</strong> <span id="display-ssid"></span></p>
+                            <p><strong>{{ __('app.security_label') }}</strong> <span id="display-security"></span></p>
                         </div>
                     </section>
                 </div>
@@ -816,24 +841,24 @@
 
             <!-- Customization Panel - Below the grid -->
             <section id="customization-panel" class="customization-panel" style="display: block;">
-                <h2 class="panel-title">Customize Your QR Code</h2>
-                <p style="text-align: center; color: #86868b; margin-bottom: 32px;">Changes apply instantly to the preview above</p>
+                <h2 class="panel-title">{{ __('app.customize_title') }}</h2>
+                <p style="text-align: center; color: #86868b; margin-bottom: 32px;">{{ __('app.customize_subtitle') }}</p>
 
                 <div class="customization-grid">
                     <!-- Colors & Style -->
                     <div class="custom-group">
-                        <h3>Colors & Style</h3>
+                        <h3>{{ __('app.colors_style_title') }}</h3>
                         <div class="form-group">
-                            <label class="form-label">Foreground Color</label>
+                            <label class="form-label">{{ __('app.foreground_color_label') }}</label>
                             <input type="color" id="fg-color" class="color-input" value="#000000">
                         </div>
                         <div class="form-group">
-                            <label class="form-label">QR Code Size</label>
+                            <label class="form-label">{{ __('app.qr_size_label') }}</label>
                             <input type="range" id="qr-size" class="range-input" min="200" max="400" value="300">
                             <div class="range-value" id="size-value">300px</div>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Corner Radius</label>
+                            <label class="form-label">{{ __('app.corner_radius_label') }}</label>
                             <input type="range" id="corner-radius" class="range-input" min="0" max="20" value="0">
                             <div class="range-value" id="radius-value">0px</div>
                         </div>
@@ -843,44 +868,44 @@
 
                     <!-- Logo Upload -->
                     <div class="custom-group">
-                        <h3>Logo</h3>
+                        <h3>{{ __('app.logo_title') }}</h3>
                         <div id="logo-upload" class="logo-upload">
                             <div id="logo-content">
-                                <div class="upload-text">Click to upload logo</div>
-                                <div class="upload-hint">PNG, JPG up to 2MB</div>
+                                <div class="upload-text">{{ __('app.logo_upload_text') }}</div>
+                                <div class="upload-hint">{{ __('app.logo_upload_hint') }}</div>
                             </div>
                             <input type="file" id="logo-file" accept="image/*" style="display: none;">
                         </div>
                         <div class="form-group" style="margin-top: 16px;">
-                            <label class="form-label">Logo Size</label>
+                            <label class="form-label">{{ __('app.logo_size_label') }}</label>
                             <input type="range" id="logo-size" class="range-input" min="5" max="15" value="10">
                             <div class="range-value" id="logo-size-value">10%</div>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Logo Style</label>
+                            <label class="form-label">{{ __('app.logo_style_label') }}</label>
                             <select id="logo-style" class="form-input">
-                                <option value="circular">Circular (Recommended)</option>
-                                <option value="rounded">Rounded Square</option>
-                                <option value="square">Square</option>
+                                <option value="circular">{{ __('app.logo_style_circular') }}</option>
+                                <option value="rounded">{{ __('app.logo_style_rounded') }}</option>
+                                <option value="square">{{ __('app.logo_style_square') }}</option>
                             </select>
                         </div>
                     </div>
 
                     <!-- Branding -->
                     <div class="custom-group">
-                        <h3>Branding</h3>
+                        <h3>{{ __('app.branding_title') }}</h3>
                         <div class="form-group">
-                            <label class="form-label">Brand Name</label>
-                            <input type="text" id="brand-name" class="form-input" placeholder="Your brand name">
+                            <label class="form-label">{{ __('app.brand_name_label') }}</label>
+                            <input type="text" id="brand-name" class="form-input" placeholder="{{ __('app.brand_name_placeholder') }}">
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Description</label>
-                            <input type="text" id="description" class="form-input" placeholder="Additional description">
+                            <label class="form-label">{{ __('app.description_label') }}</label>
+                            <input type="text" id="description" class="form-input" placeholder="{{ __('app.description_placeholder') }}">
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Font Family</label>
+                            <label class="form-label">{{ __('app.font_family_label') }}</label>
                             <select id="font-family" class="form-input">
-                                <option value="SF Pro Display">SF Pro Display (Default)</option>
+                                <option value="SF Pro Display">{{ __('app.font_sf_pro') }}</option>
                                 <option value="Arial">Arial</option>
                                 <option value="Helvetica">Helvetica</option>
                                 <option value="Times New Roman">Times New Roman</option>
@@ -899,7 +924,7 @@
                         </div>
                         <div class="checkbox-group">
                             <input type="checkbox" id="show-password-card" class="checkbox">
-                            <label for="show-password-card" class="checkbox-label">Show password on card</label>
+                            <label for="show-password-card" class="checkbox-label">{{ __('app.show_password_card_label') }}</label>
                         </div>
                     </div>
                 </div>
@@ -907,13 +932,13 @@
 
             <!-- Download Section -->
             <section id="download-section" class="download-section">
-                <h2 class="panel-title">Download Your QR Code</h2>
-                <p class="qr-subtitle">Choose your preferred format and download</p>
+                <h2 class="panel-title">{{ __('app.download_title') }}</h2>
+                <p class="qr-subtitle">{{ __('app.download_subtitle') }}</p>
 
                 <div class="download-grid">
-                    <button id="download-png" class="btn-download">Download PNG</button>
-                    <button id="download-pdf" class="btn-download secondary">Download PDF</button>
-                    <button id="download-card" class="btn-download">Download Card</button>
+                    <button id="download-png" class="btn-download">{{ __('app.download_png') }}</button>
+                    <button id="download-pdf" class="btn-download secondary">{{ __('app.download_pdf') }}</button>
+                    <button id="download-card" class="btn-download">{{ __('app.download_card') }}</button>
                 </div>
             </section>
         </main>
@@ -923,39 +948,39 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6">
-                        <h2 style="font-size: 32px; font-weight: 600; margin-bottom: 24px; color: #1d1d1f;">Why Use Our WiFi QR Code Generator?</h2>
+                        <h2 style="font-size: 32px; font-weight: 600; margin-bottom: 24px; color: #1d1d1f;">{{ __('app.why_use_title') }}</h2>
                         <div style="color: #86868b; font-size: 17px; line-height: 1.6;">
-                            <p style="margin-bottom: 16px;">Our free WiFi QR code generator is the perfect solution for businesses and individuals who want to share WiFi access effortlessly. Whether you're running a restaurant, hotel, office, or just want to share your home WiFi with guests, our tool makes it simple.</p>
+                            <p style="margin-bottom: 16px;">{{ __('app.why_use_description') }}</p>
 
-                            <h3 style="font-size: 24px; font-weight: 600; margin: 32px 0 16px; color: #1d1d1f;">Key Features:</h3>
+                            <h3 style="font-size: 24px; font-weight: 600; margin: 32px 0 16px; color: #1d1d1f;">{{ __('app.key_features_title') }}</h3>
                             <ul style="margin-left: 20px; margin-bottom: 24px;">
-                                <li style="margin-bottom: 8px;"><strong>Completely Free:</strong> No registration, no hidden fees, no watermarks</li>
-                                <li style="margin-bottom: 8px;"><strong>Custom Logos:</strong> Add your brand logo to QR codes for professional appearance</li>
-                                <li style="margin-bottom: 8px;"><strong>Real-time Preview:</strong> See changes instantly as you customize</li>
-                                <li style="margin-bottom: 8px;"><strong>Multiple Formats:</strong> Download as PNG, PDF, or printable cards</li>
-                                <li style="margin-bottom: 8px;"><strong>Mobile Optimized:</strong> Works perfectly on all devices</li>
-                                <li style="margin-bottom: 8px;"><strong>Secure:</strong> All processing happens in your browser - no data stored</li>
+                                <li style="margin-bottom: 8px;"><strong>{{ __('app.feature_free') }}</strong></li>
+                                <li style="margin-bottom: 8px;"><strong>{{ __('app.feature_logos') }}</strong></li>
+                                <li style="margin-bottom: 8px;"><strong>{{ __('app.feature_preview') }}</strong></li>
+                                <li style="margin-bottom: 8px;"><strong>{{ __('app.feature_formats') }}</strong></li>
+                                <li style="margin-bottom: 8px;"><strong>{{ __('app.feature_mobile') }}</strong></li>
+                                <li style="margin-bottom: 8px;"><strong>{{ __('app.feature_secure') }}</strong></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <h3 style="font-size: 24px; font-weight: 600; margin-bottom: 24px; color: #1d1d1f;">Perfect For:</h3>
+                        <h3 style="font-size: 24px; font-weight: 600; margin-bottom: 24px; color: #1d1d1f;">{{ __('app.perfect_for_title') }}</h3>
                         <div style="color: #86868b; font-size: 17px; line-height: 1.6;">
                             <div style="background: white; padding: 24px; border-radius: 12px; margin-bottom: 16px; border: 1px solid #f0f0f0;">
-                                <h4 style="color: #1d1d1f; font-weight: 600; margin-bottom: 8px;">🍽️ Restaurants & Cafes</h4>
-                                <p style="margin: 0;">Place QR codes on tables for instant guest WiFi access</p>
+                                <h4 style="color: #1d1d1f; font-weight: 600; margin-bottom: 8px;">{{ __('app.perfect_restaurants') }}</h4>
+                                <p style="margin: 0;">{{ __('app.perfect_restaurants_desc') }}</p>
                             </div>
                             <div style="background: white; padding: 24px; border-radius: 12px; margin-bottom: 16px; border: 1px solid #f0f0f0;">
-                                <h4 style="color: #1d1d1f; font-weight: 600; margin-bottom: 8px;">🏨 Hotels & Accommodations</h4>
-                                <p style="margin: 0;">Provide seamless WiFi access in rooms and common areas</p>
+                                <h4 style="color: #1d1d1f; font-weight: 600; margin-bottom: 8px;">{{ __('app.perfect_hotels') }}</h4>
+                                <p style="margin: 0;">{{ __('app.perfect_hotels_desc') }}</p>
                             </div>
                             <div style="background: white; padding: 24px; border-radius: 12px; margin-bottom: 16px; border: 1px solid #f0f0f0;">
-                                <h4 style="color: #1d1d1f; font-weight: 600; margin-bottom: 8px;">🏢 Offices & Coworking</h4>
-                                <p style="margin: 0;">Share guest WiFi with visitors and clients easily</p>
+                                <h4 style="color: #1d1d1f; font-weight: 600; margin-bottom: 8px;">{{ __('app.perfect_offices') }}</h4>
+                                <p style="margin: 0;">{{ __('app.perfect_offices_desc') }}</p>
                             </div>
                             <div style="background: white; padding: 24px; border-radius: 12px; margin-bottom: 16px; border: 1px solid #f0f0f0;">
-                                <h4 style="color: #1d1d1f; font-weight: 600; margin-bottom: 8px;">🏠 Home Use</h4>
-                                <p style="margin: 0;">Share your home WiFi with friends and family</p>
+                                <h4 style="color: #1d1d1f; font-weight: 600; margin-bottom: 8px;">{{ __('app.perfect_home') }}</h4>
+                                <p style="margin: 0;">{{ __('app.perfect_home_desc') }}</p>
                             </div>
                         </div>
                     </div>
@@ -966,34 +991,34 @@
         <!-- FAQ Section -->
         <section class="faq-section" style="padding: 80px 0;">
             <div class="container">
-                <h2 style="font-size: 32px; font-weight: 600; margin-bottom: 48px; color: #1d1d1f; text-align: center;">Frequently Asked Questions</h2>
+                <h2 style="font-size: 32px; font-weight: 600; margin-bottom: 48px; color: #1d1d1f; text-align: center;">{{ __('app.faq_title') }}</h2>
                 <div class="row">
                     <div class="col-lg-6">
                         <div style="margin-bottom: 32px;">
-                            <h3 style="font-size: 20px; font-weight: 600; margin-bottom: 12px; color: #1d1d1f;">How do WiFi QR codes work?</h3>
-                            <p style="color: #86868b; line-height: 1.6;">WiFi QR codes contain your network credentials in a special format. When scanned with a smartphone camera, the device automatically connects to the WiFi network without manually entering the password.</p>
+                            <h3 style="font-size: 20px; font-weight: 600; margin-bottom: 12px; color: #1d1d1f;">{{ __('app.faq_how_work_q') }}</h3>
+                            <p style="color: #86868b; line-height: 1.6;">{{ __('app.faq_how_work_a') }}</p>
                         </div>
                         <div style="margin-bottom: 32px;">
-                            <h3 style="font-size: 20px; font-weight: 600; margin-bottom: 12px; color: #1d1d1f;">Are the QR codes secure?</h3>
-                            <p style="color: #86868b; line-height: 1.6;">Yes! All QR code generation happens in your browser. We don't store your WiFi passwords or any personal information on our servers. Your data stays private and secure.</p>
+                            <h3 style="font-size: 20px; font-weight: 600; margin-bottom: 12px; color: #1d1d1f;">{{ __('app.faq_secure_q') }}</h3>
+                            <p style="color: #86868b; line-height: 1.6;">{{ __('app.faq_secure_a') }}</p>
                         </div>
                         <div style="margin-bottom: 32px;">
-                            <h3 style="font-size: 20px; font-weight: 600; margin-bottom: 12px; color: #1d1d1f;">Can I customize the QR code design?</h3>
-                            <p style="color: #86868b; line-height: 1.6;">Absolutely! You can change colors, add your logo, adjust the size, and even add rounded corners. Our real-time preview shows changes instantly.</p>
+                            <h3 style="font-size: 20px; font-weight: 600; margin-bottom: 12px; color: #1d1d1f;">{{ __('app.faq_customize_q') }}</h3>
+                            <p style="color: #86868b; line-height: 1.6;">{{ __('app.faq_customize_a') }}</p>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div style="margin-bottom: 32px;">
-                            <h3 style="font-size: 20px; font-weight: 600; margin-bottom: 12px; color: #1d1d1f;">What devices can scan WiFi QR codes?</h3>
-                            <p style="color: #86868b; line-height: 1.6;">Most modern smartphones (iPhone iOS 11+, Android 10+) can scan WiFi QR codes directly with their camera app. Older devices may need a QR code scanner app.</p>
+                            <h3 style="font-size: 20px; font-weight: 600; margin-bottom: 12px; color: #1d1d1f;">{{ __('app.faq_devices_q') }}</h3>
+                            <p style="color: #86868b; line-height: 1.6;">{{ __('app.faq_devices_a') }}</p>
                         </div>
                         <div style="margin-bottom: 32px;">
-                            <h3 style="font-size: 20px; font-weight: 600; margin-bottom: 12px; color: #1d1d1f;">Is this service really free?</h3>
-                            <p style="color: #86868b; line-height: 1.6;">Yes, completely free! No registration required, no hidden fees, no watermarks on your QR codes. Generate as many WiFi QR codes as you need.</p>
+                            <h3 style="font-size: 20px; font-weight: 600; margin-bottom: 12px; color: #1d1d1f;">{{ __('app.faq_free_q') }}</h3>
+                            <p style="color: #86868b; line-height: 1.6;">{{ __('app.faq_free_a') }}</p>
                         </div>
                         <div style="margin-bottom: 32px;">
-                            <h3 style="font-size: 20px; font-weight: 600; margin-bottom: 12px; color: #1d1d1f;">What formats can I download?</h3>
-                            <p style="color: #86868b; line-height: 1.6;">You can download your QR codes as high-quality PNG images, PDF files, or printable cards with your branding. All formats are optimized for both digital and print use.</p>
+                            <h3 style="font-size: 20px; font-weight: 600; margin-bottom: 12px; color: #1d1d1f;">{{ __('app.faq_formats_q') }}</h3>
+                            <p style="color: #86868b; line-height: 1.6;">{{ __('app.faq_formats_a') }}</p>
                         </div>
                     </div>
                 </div>
@@ -1006,10 +1031,10 @@
                 <div style="margin-bottom: 24px;">
                     <img src="/images/logo-text.svg" alt="WiFi QR Generator" style="height: 40px; filter: invert(1);">
                 </div>
-                <p style="margin-bottom: 16px; font-size: 17px;">Free WiFi QR Code Generator - Create beautiful, customizable QR codes instantly</p>
-                <p style="color: #86868b; font-size: 15px; margin-bottom: 24px;">Perfect for restaurants, hotels, offices, and homes. No registration required.</p>
+                <p style="margin-bottom: 16px; font-size: 17px;">{{ __('app.footer_description') }}</p>
+                <p style="color: #86868b; font-size: 15px; margin-bottom: 24px;">{{ __('app.footer_tagline') }}</p>
                 <div style="border-top: 1px solid #424245; padding-top: 24px; margin-top: 24px;">
-                    <p style="color: #86868b; font-size: 13px; margin: 0;">© 2024 WiFi QR Generator. All rights reserved. | Privacy-focused, secure, and completely free.</p>
+                    <p style="color: #86868b; font-size: 13px; margin: 0;">{{ __('app.footer_copyright') }}</p>
                 </div>
             </div>
         </footer>
@@ -1082,7 +1107,7 @@
             console.log('Loading manual QR generator...');
 
             // Show info message to user
-            showInfoMessage('Using online QR service. QR codes will work perfectly!');
+            showInfoMessage('qrServiceInfo');
 
             window.QRCode = {
                 toCanvas: function(canvas, text, options) {
@@ -1094,8 +1119,8 @@
                     const svg = `<svg width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">
                         <rect width="100%" height="100%" fill="${options.color?.light || '#ffffff'}"/>
                         <text x="50%" y="30%" text-anchor="middle" font-family="monospace" font-size="12" fill="${options.color?.dark || '#000000'}">QR Code</text>
-                        <text x="50%" y="50%" text-anchor="middle" font-family="monospace" font-size="8" fill="${options.color?.dark || '#000000'}">Scan to connect</text>
-                        <text x="50%" y="70%" text-anchor="middle" font-family="monospace" font-size="6" fill="${options.color?.dark || '#000000'}">WiFi Network</text>
+                        <text x="50%" y="50%" text-anchor="middle" font-family="monospace" font-size="8" fill="${options.color?.dark || '#000000'}">{{ __('app.card_scan_instruction') }}</text>
+                        <text x="50%" y="70%" text-anchor="middle" font-family="monospace" font-size="6" fill="${options.color?.dark || '#000000'}">{{ __('app.card_wifi_network') }}</text>
                     </svg>`;
                     callback(null, svg);
                 }
@@ -1203,7 +1228,7 @@
             // Font family selector
             document.getElementById('font-family').addEventListener('change', function() {
                 // Font changes only affect card downloads, not QR preview
-                console.log('Font changed to:', this.value);
+                console.log('{{ __("app.js_font_changed") }}', this.value);
             });
 
             // Logo upload
@@ -1238,7 +1263,7 @@
 
                 // Update display info
                 document.getElementById('display-ssid').textContent = ssid;
-                document.getElementById('display-security').textContent = encryption === 'nopass' ? 'Open' : 'WPA/WPA2';
+                document.getElementById('display-security').textContent = encryption === 'nopass' ? messages.securityOpen : messages.securityWpa;
                 document.getElementById('wifi-info').style.display = 'block';
 
                 // Generate QR with debounce
@@ -1249,7 +1274,7 @@
                 qrCodeContainer.innerHTML = `
                     <div style="display: flex; align-items: center; justify-content: center; height: 200px; color: #86868b; flex-direction: column;">
                         <div style="font-size: 48px; margin-bottom: 16px;">📱</div>
-                        <div>Enter WiFi details to generate QR</div>
+                        <div>${messages.qrPlaceholder}</div>
                     </div>
                 `;
                 document.getElementById('wifi-info').style.display = 'none';
@@ -1262,7 +1287,7 @@
             handleWiFiInputChange();
 
             if (currentQRData) {
-                showSuccessMessage('QR code generated successfully!');
+                showSuccessMessage('qrGenerated');
             }
         }
 
@@ -1386,7 +1411,7 @@
 
             } catch (error) {
                 console.error('Error in generateQRCode:', error);
-                showErrorMessage('Failed to generate QR code: ' + error.message);
+                showErrorMessage('{{ __("app.js_error_generate_qr") }}' + error.message);
             }
         }
 
@@ -1747,7 +1772,7 @@
             // Check length (minimum 8 characters for WPA/WPA2)
             const isLengthValid = password.length >= 8;
             lengthCheck.className = `requirement ${isLengthValid ? 'valid' : 'invalid'}`;
-            lengthCheck.textContent = isLengthValid ? '✓ At least 8 characters' : '✗ At least 8 characters required';
+            lengthCheck.textContent = isLengthValid ? '{{ __("app.js_length_valid") }}' : '{{ __("app.js_length_invalid") }}';
 
             // Check valid WiFi password characters
             // WiFi passwords can contain most printable ASCII characters
@@ -1755,7 +1780,7 @@
             const validCharsRegex = /^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{}|;:,.<>?~`\s]*$/;
             const isCharsValid = validCharsRegex.test(password);
             charCheck.className = `requirement ${isCharsValid ? 'valid' : 'invalid'}`;
-            charCheck.textContent = isCharsValid ? '✓ Valid WiFi password characters' : '✗ Contains invalid characters';
+            charCheck.textContent = isCharsValid ? '{{ __("app.js_chars_valid") }}' : '{{ __("app.js_chars_invalid") }}';
 
             // Overall validation
             const isValid = isLengthValid && isCharsValid && password.length > 0;
@@ -1797,8 +1822,8 @@
                     const logoContent = document.getElementById('logo-content');
                     logoContent.innerHTML = `
                         <img src="${e.target.result}" class="logo-preview" alt="Logo preview">
-                        <div class="upload-text">Logo uploaded</div>
-                        <div class="upload-hint">Click to change</div>
+                        <div class="upload-text">{{ __("app.js_logo_uploaded") }}</div>
+                        <div class="upload-hint">{{ __("app.js_click_to_change") }}</div>
                     `;
                     logoUpload.classList.add('has-logo');
 
@@ -1869,7 +1894,7 @@
 
         function downloadQR(format) {
             if (!qrCanvas) {
-                showErrorMessage('Please generate a QR code first');
+                showErrorMessage('{{ __("app.js_generate_qr_first") }}');
                 return;
             }
 
@@ -1884,7 +1909,7 @@
                         link.download = `${filename}.png`;
                         link.href = highQualityCanvas.toDataURL('image/png');
                         link.click();
-                        showSuccessMessage('PNG downloaded successfully!');
+                        showSuccessMessage('pngDownloaded');
                     });
                 } else if (format === 'pdf') {
                     // Generate high-quality version for PDF
@@ -1902,7 +1927,7 @@
 
                         pdf.addImage(imgData, 'PNG', x, y, pdfSize, pdfSize);
                         pdf.save(`${filename}.pdf`);
-                        showSuccessMessage('PDF downloaded successfully!');
+                        showSuccessMessage('pdfDownloaded');
                     });
                 }
 
@@ -2145,7 +2170,7 @@
                         }
 
                         // Truncate password if too long
-                        let passwordText = `Password: ${passwordInput.value}`;
+                        let passwordText = `{{ __('app.card_password_label') }} ${passwordInput.value}`;
                         const maxPasswordWidth = cardCanvas.width - 40;
                         while (ctx.measureText(passwordText).width > maxPasswordWidth && passwordText.length > 15) {
                             passwordText = passwordText.substring(0, passwordText.length - 4) + '...';
@@ -2162,7 +2187,7 @@
                 link.href = cardCanvas.toDataURL();
                 link.click();
 
-                showSuccessMessage('WiFi card downloaded successfully!');
+                showSuccessMessage('cardDownloaded');
 
                 } catch (error) {
                     console.error('Card download error:', error);
@@ -2172,6 +2197,84 @@
                 console.error('High-quality QR generation failed:', error);
                 showErrorMessage('Failed to generate high-quality QR for card.');
             });
+        }
+
+        // Language switching functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const languageSelect = document.getElementById('language-select');
+
+            if (languageSelect) {
+                languageSelect.addEventListener('change', function() {
+                    const selectedLocale = this.value;
+
+                    // Send AJAX request to change language
+                    fetch('/set-language', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                        },
+                        body: JSON.stringify({
+                            locale: selectedLocale
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Reload the page to apply new language
+                            window.location.reload();
+                        } else {
+                            console.error('Failed to change language:', data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Language change error:', error);
+                    });
+                });
+            }
+        });
+
+        // Localized messages
+        const messages = {
+            qrGenerated: '{{ __("app.qr_generated_success") }}',
+            pngDownloaded: '{{ __("app.png_downloaded_success") }}',
+            pdfDownloaded: '{{ __("app.pdf_downloaded_success") }}',
+            cardDownloaded: '{{ __("app.card_downloaded_success") }}',
+            passwordWeak: '{{ __("app.password_weak_warning") }}',
+            qrServiceInfo: '{{ __("app.qr_service_info") }}',
+            securityOpen: '{{ __("app.security_open") }}',
+            securityWpa: '{{ __("app.security_wpa") }}',
+            qrPlaceholder: '{{ __("app.qr_placeholder") }}'
+        };
+
+        // Update showSuccessMessage to use localized messages
+        function showSuccessMessage(messageKey) {
+            const message = messages[messageKey] || messageKey;
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'success-message';
+            messageDiv.textContent = message;
+
+            const container = document.querySelector('.container');
+            container.insertBefore(messageDiv, container.firstChild);
+
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 3000);
+        }
+
+        // Update showInfoMessage to use localized messages
+        function showInfoMessage(messageKey) {
+            const message = messages[messageKey] || messageKey;
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'info-message';
+            messageDiv.textContent = message;
+
+            const container = document.querySelector('.container');
+            container.insertBefore(messageDiv, container.firstChild);
+
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 3000);
         }
     </script>
 </body>

@@ -3,16 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Services\LanguageDetectionService;
 
 class QrCodeController extends Controller
 {
+    protected $languageService;
+
+    public function __construct(LanguageDetectionService $languageService)
+    {
+        $this->languageService = $languageService;
+    }
+
     public function index()
     {
         return view('wifi-qr', [
             'pageType' => 'general',
-            'title' => 'Free WiFi QR Code Generator - Create Custom QR Codes with Logo',
-            'description' => 'Create beautiful WiFi QR codes instantly! Free generator with custom logos, colors, and real-time preview. Perfect for restaurants, hotels, and offices.',
-            'keywords' => 'wifi qr code generator, free wifi qr code, qr code for wifi, wifi password qr code, custom wifi qr'
+            'title' => __('app.site_title'),
+            'description' => __('app.site_description'),
+            'keywords' => 'wifi qr code generator, free wifi qr code, qr code for wifi, wifi password qr code, custom wifi qr',
+            'currentLocale' => $this->languageService->getCurrentLocale(),
+            'supportedLanguages' => $this->languageService->getSupportedLanguages(),
         ]);
     }
 
@@ -20,9 +30,11 @@ class QrCodeController extends Controller
     {
         return view('wifi-qr', [
             'pageType' => 'restaurant',
-            'title' => 'Restaurant WiFi QR Code Generator - Free Custom QR Codes for Restaurants',
-            'description' => 'Create professional WiFi QR codes for your restaurant. Add your logo, customize colors, and provide instant WiFi access to customers. Free and easy to use.',
-            'keywords' => 'restaurant wifi qr code, cafe wifi qr, restaurant qr code generator, dining wifi access, table wifi qr'
+            'title' => __('app.site_title') . ' - Restaurant',
+            'description' => __('app.site_description'),
+            'keywords' => 'restaurant wifi qr code, cafe wifi qr, restaurant qr code generator, dining wifi access, table wifi qr',
+            'currentLocale' => $this->languageService->getCurrentLocale(),
+            'supportedLanguages' => $this->languageService->getSupportedLanguages(),
         ]);
     }
 
@@ -30,9 +42,11 @@ class QrCodeController extends Controller
     {
         return view('wifi-qr', [
             'pageType' => 'hotel',
-            'title' => 'Hotel WiFi QR Code Generator - Guest WiFi Access Made Easy',
-            'description' => 'Generate professional WiFi QR codes for hotels and accommodations. Provide seamless WiFi access to guests with custom branded QR codes.',
-            'keywords' => 'hotel wifi qr code, guest wifi qr, accommodation wifi access, hotel qr generator, hospitality wifi'
+            'title' => __('app.site_title') . ' - Hotel',
+            'description' => __('app.site_description'),
+            'keywords' => 'hotel wifi qr code, guest wifi qr, accommodation wifi access, hotel qr generator, hospitality wifi',
+            'currentLocale' => $this->languageService->getCurrentLocale(),
+            'supportedLanguages' => $this->languageService->getSupportedLanguages(),
         ]);
     }
 
@@ -40,14 +54,39 @@ class QrCodeController extends Controller
     {
         return view('wifi-qr', [
             'pageType' => 'office',
-            'title' => 'Office WiFi QR Code Generator - Professional Guest WiFi Access',
-            'description' => 'Create secure WiFi QR codes for offices and coworking spaces. Professional guest WiFi access with custom branding and easy setup.',
-            'keywords' => 'office wifi qr code, business wifi qr, coworking wifi access, professional wifi qr, guest wifi office'
+            'title' => __('app.site_title') . ' - Office',
+            'description' => __('app.site_description'),
+            'keywords' => 'office wifi qr code, business wifi qr, coworking wifi access, professional wifi qr, guest wifi office',
+            'currentLocale' => $this->languageService->getCurrentLocale(),
+            'supportedLanguages' => $this->languageService->getSupportedLanguages(),
         ]);
     }
 
     public function blog()
     {
-        return view('blog');
+        return view('blog', [
+            'title' => __('app.blog_title'),
+            'description' => __('app.blog_description'),
+            'currentLocale' => $this->languageService->getCurrentLocale(),
+            'supportedLanguages' => $this->languageService->getSupportedLanguages(),
+        ]);
+    }
+
+    public function setLanguage(Request $request)
+    {
+        $locale = $request->input('locale');
+
+        if ($this->languageService->setLanguage($locale)) {
+            return response()->json([
+                'success' => true,
+                'locale' => $locale,
+                'message' => 'Language changed successfully'
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Invalid language'
+        ], 400);
     }
 }

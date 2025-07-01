@@ -63,15 +63,25 @@
         "availability": "https://schema.org/InStock"
       },
       "featureList": [
-        "Custom WiFi QR code generation",
-        "Logo integration",
-        "Real-time preview",
+        "Custom WiFi QR code generation with logo support",
+        "Real-time preview and customization",
         "Multiple download formats (PNG, PDF, Card)",
-        "No registration required",
+        "No registration or signup required",
         "Mobile responsive design",
         "Secure browser-based processing",
-        "Professional branding options"
+        "Professional branding options",
+        "Support for WPA/WPA2/WPA3 security protocols",
+        "Multilingual interface (10 languages)",
+        "Industry-specific templates for restaurants, hotels, offices",
+        "High-resolution output for printing",
+        "Instant WiFi connection capability",
+        "Privacy-focused - no data stored on servers"
       ],
+      "keywords": "wifi qr code generator, free wifi qr code, qr code for wifi, wifi password qr code, custom wifi qr code, wifi qr code with logo, restaurant wifi qr, hotel wifi qr, office wifi qr, wifi qr code maker, generate wifi qr code",
+      "audience": {
+        "@type": "Audience",
+        "audienceType": ["Business owners", "Restaurant managers", "Hotel staff", "Office administrators", "Event organizers", "Home users", "IT professionals", "Marketing professionals"]
+      },
       "screenshot": "http://wifiqr.local/images/og-image.svg",
       "softwareVersion": "1.0",
       "datePublished": "2024-12-19",

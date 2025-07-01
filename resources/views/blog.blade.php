@@ -1,30 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ $currentLocale ?? 'en' }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- SEO Meta Tags -->
-    <title>WiFi QR Code Guide - How to Create and Use WiFi QR Codes | WiFi QR Generator</title>
-    <meta name="description" content="Complete guide to WiFi QR codes: how to create, customize, and use them for restaurants, hotels, and offices. Free tutorials and best practices.">
-    <meta name="keywords" content="wifi qr code guide, how to create wifi qr code, wifi qr code tutorial, qr code best practices, restaurant wifi setup, hotel wifi access">
-    <meta name="author" content="WiFi QR Generator">
+    <title>{{ $title ?? __('app.blog_title') }}</title>
+    <meta name="description" content="{{ $description ?? __('app.blog_description') }}">
+    <meta name="keywords" content="{{ __('app.blog_keywords') }}">
+    <meta name="author" content="{{ __('app.meta_author') }}">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="http://wifiqr.local/blog">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="http://wifiqr.local/blog">
-    <meta property="og:title" content="WiFi QR Code Guide - Complete Tutorial and Best Practices">
-    <meta property="og:description" content="Learn how to create and use WiFi QR codes effectively for your business. Complete guide with examples and best practices.">
+    <meta property="og:title" content="{{ __('app.blog_og_title') }}">
+    <meta property="og:description" content="{{ __('app.blog_og_description') }}">
     <meta property="og:image" content="http://wifiqr.local/images/og-image.svg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="http://wifiqr.local/blog">
-    <meta property="twitter:title" content="WiFi QR Code Guide - Complete Tutorial">
-    <meta property="twitter:description" content="Learn how to create and use WiFi QR codes effectively for your business.">
+    <meta property="twitter:title" content="{{ __('app.blog_twitter_title') }}">
+    <meta property="twitter:description" content="{{ __('app.blog_twitter_description') }}">
     <meta property="twitter:image" content="http://wifiqr.local/images/og-image.svg">
 
     <!-- Favicons -->
@@ -196,11 +196,11 @@
             .header h1 {
                 font-size: 32px;
             }
-            
+
             .article {
                 padding: 24px;
             }
-            
+
             .content {
                 padding: 40px 0;
             }
@@ -212,8 +212,8 @@
     {
         "@context": "https://schema.org",
         "@type": "Article",
-        "headline": "Complete Guide to WiFi QR Codes: Creation, Customization, and Best Practices",
-        "description": "Learn how to create and use WiFi QR codes effectively for your business. Complete guide with examples and best practices for restaurants, hotels, and offices.",
+        "headline": "{{ __('app.blog_schema_headline') }}",
+        "description": "{{ __('app.blog_schema_description') }}",
         "author": {
             "@type": "Organization",
             "name": "WiFi QR Generator"
@@ -233,7 +233,7 @@
             "@id": "http://wifiqr.local/blog"
         },
         "image": "http://wifiqr.local/images/og-image.svg",
-        "articleSection": "Technology",
+        "articleSection": "{{ __('app.blog_schema_section') }}",
         "keywords": ["WiFi QR Code", "QR Code Generator", "WiFi Access", "Business WiFi", "Restaurant WiFi", "Hotel WiFi"]
     }
     </script>
@@ -242,106 +242,116 @@
     <div class="container">
         <!-- Header -->
         <header class="header">
-            <h1>WiFi QR Code Guide</h1>
-            <p>Complete tutorial on creating and using WiFi QR codes for your business</p>
+            <!-- Language Selector -->
+            <div style="position: absolute; top: 20px; right: 20px;">
+                <select id="language-select" style="padding: 8px 12px; border: 1px solid #d2d2d7; border-radius: 8px; background: white; font-size: 14px;">
+                    @foreach($supportedLanguages as $code => $info)
+                        <option value="{{ $code }}" {{ $currentLocale === $code ? 'selected' : '' }}>
+                            {{ $info['name'] }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <h1>{{ __('app.blog_h1') }}</h1>
+            <p>{{ __('app.blog_subtitle') }}</p>
             <div class="nav">
-                <a href="/">← Back to Generator</a>
+                <a href="/">{{ __('app.nav_back_to_generator') }}</a>
             </div>
         </header>
 
         <!-- Main Content -->
         <main class="content">
             <article class="article">
-                <h2>Complete Guide to WiFi QR Codes</h2>
-                
-                <p>WiFi QR codes have revolutionized how businesses share internet access with customers and guests. Instead of sharing complex passwords or writing them on boards, a simple QR code scan provides instant WiFi connection.</p>
+                <h2>{{ __('app.blog_h1') }}</h2>
 
-                <h3>What are WiFi QR Codes?</h3>
-                <p>WiFi QR codes are special QR codes that contain your network credentials (SSID, password, and security type) in a standardized format. When scanned with a smartphone camera, the device automatically connects to the WiFi network without manual password entry.</p>
+                <p>{{ __('app.blog_intro') }}</p>
+
+                <h3>{{ __('app.blog_what_are_title') }}</h3>
+                <p>{{ __('app.blog_what_are_content') }}</p>
 
                 <div class="highlight">
-                    <h4>💡 Pro Tip</h4>
-                    <p>Modern smartphones (iPhone iOS 11+, Android 10+) can scan WiFi QR codes directly with their built-in camera app - no additional apps needed!</p>
+                    <h4>{{ __('app.blog_pro_tip') }}</h4>
+                    <p>{{ __('app.blog_pro_tip_content') }}</p>
                 </div>
 
-                <h3>How to Create WiFi QR Codes</h3>
+                <h3>{{ __('app.blog_how_create_title') }}</h3>
                 <ol>
-                    <li><strong>Enter Network Details:</strong> Input your WiFi network name (SSID) and password</li>
-                    <li><strong>Choose Security Type:</strong> Select WPA/WPA2 for password-protected networks or "Open" for public networks</li>
-                    <li><strong>Customize Design:</strong> Add your logo, change colors, and adjust the size</li>
-                    <li><strong>Generate & Download:</strong> Create your QR code and download in PNG, PDF, or card format</li>
+                    <li><strong>{{ __('app.blog_step1') }}</strong></li>
+                    <li><strong>{{ __('app.blog_step2') }}</strong></li>
+                    <li><strong>{{ __('app.blog_step3') }}</strong></li>
+                    <li><strong>{{ __('app.blog_step4') }}</strong></li>
                 </ol>
 
-                <h3>Best Practices for Different Industries</h3>
+                <h3>{{ __('app.blog_best_practices_title') }}</h3>
 
-                <h4>🍽️ Restaurants & Cafes</h4>
+                <h4>{{ __('app.blog_restaurants_title') }}</h4>
                 <ul>
-                    <li>Place QR codes on tables, menus, or table tents</li>
-                    <li>Use your restaurant's branding colors and logo</li>
-                    <li>Include a friendly message like "Scan for Free WiFi"</li>
-                    <li>Consider laminating printed codes for durability</li>
+                    <li>{{ __('app.blog_restaurants_tip1') }}</li>
+                    <li>{{ __('app.blog_restaurants_tip2') }}</li>
+                    <li>{{ __('app.blog_restaurants_tip3') }}</li>
+                    <li>{{ __('app.blog_restaurants_tip4') }}</li>
                 </ul>
 
-                <h4>🏨 Hotels & Accommodations</h4>
+                <h4>{{ __('app.blog_hotels_title') }}</h4>
                 <ul>
-                    <li>Display QR codes in guest rooms, lobbies, and common areas</li>
-                    <li>Include QR codes in welcome packets or check-in materials</li>
-                    <li>Use professional, branded designs that match your hotel's aesthetic</li>
-                    <li>Consider different networks for guests vs. business centers</li>
+                    <li>{{ __('app.blog_hotels_tip1') }}</li>
+                    <li>{{ __('app.blog_hotels_tip2') }}</li>
+                    <li>{{ __('app.blog_hotels_tip3') }}</li>
+                    <li>{{ __('app.blog_hotels_tip4') }}</li>
                 </ul>
 
-                <h4>🏢 Offices & Coworking Spaces</h4>
+                <h4>{{ __('app.blog_offices_title') }}</h4>
                 <ul>
-                    <li>Create separate QR codes for guest and employee networks</li>
-                    <li>Place codes in reception areas and meeting rooms</li>
-                    <li>Use corporate branding for professional appearance</li>
-                    <li>Consider time-limited access for enhanced security</li>
+                    <li>{{ __('app.blog_offices_tip1') }}</li>
+                    <li>{{ __('app.blog_offices_tip2') }}</li>
+                    <li>{{ __('app.blog_offices_tip3') }}</li>
+                    <li>{{ __('app.blog_offices_tip4') }}</li>
                 </ul>
 
-                <h3>Security Considerations</h3>
-                <p>While WiFi QR codes are convenient, consider these security aspects:</p>
+                <h3>{{ __('app.blog_security_title') }}</h3>
                 <ul>
-                    <li>Use guest networks separate from your main business network</li>
-                    <li>Regularly update WiFi passwords and regenerate QR codes</li>
-                    <li>Monitor network usage and set bandwidth limits if needed</li>
-                    <li>Consider using captive portals for additional control</li>
+                    <li>{{ __('app.blog_security_tip1') }}</li>
+                    <li>{{ __('app.blog_security_tip2') }}</li>
+                    <li>{{ __('app.blog_security_tip3') }}</li>
+                    <li>{{ __('app.blog_security_tip4') }}</li>
                 </ul>
 
                 <div class="highlight">
-                    <h4>🔒 Security Tip</h4>
-                    <p>Our QR code generator processes everything in your browser - your WiFi passwords never leave your device, ensuring complete privacy and security.</p>
+                    <h4>{{ __('app.blog_security_tip_title') }}</h4>
+                    <p>{{ __('app.blog_security_tip_content') }}</p>
                 </div>
 
-                <h3>Technical Details</h3>
-                <p>WiFi QR codes use a standardized format:</p>
-                <div class="code">WIFI:T:WPA;S:NetworkName;P:Password;;</div>
-                <p>Where:</p>
+                <h3>{{ __('app.blog_technical_title') }}</h3>
+                <p>{{ __('app.blog_technical_intro') }}</p>
+                <div class="code">{{ __('app.blog_technical_format') }}</div>
+                <p>{{ __('app.blog_technical_where') }}</p>
                 <ul>
-                    <li><strong>T:</strong> Security type (WPA, WEP, or nopass for open networks)</li>
-                    <li><strong>S:</strong> Network name (SSID)</li>
-                    <li><strong>P:</strong> Password (empty for open networks)</li>
+                    <li><strong>{{ __('app.blog_technical_t') }}</strong></li>
+                    <li><strong>{{ __('app.blog_technical_s') }}</strong></li>
+                    <li><strong>{{ __('app.blog_technical_p') }}</strong></li>
                 </ul>
 
-                <h3>Troubleshooting Common Issues</h3>
+                <h3>{{ __('app.blog_troubleshooting_title') }}</h3>
                 <ul>
-                    <li><strong>QR code won't scan:</strong> Ensure good lighting and steady hands</li>
-                    <li><strong>Connection fails:</strong> Verify the password and network name are correct</li>
-                    <li><strong>Older devices:</strong> Download a QR scanner app from the app store</li>
-                    <li><strong>Special characters:</strong> Some characters in passwords may cause issues</li>
+                    <li><strong>{{ __('app.blog_trouble_scan') }}</strong></li>
+                    <li><strong>{{ __('app.blog_trouble_connection') }}</strong></li>
+                    <li><strong>{{ __('app.blog_trouble_older') }}</strong></li>
+                    <li><strong>{{ __('app.blog_trouble_special') }}</strong></li>
                 </ul>
 
-                <h3>Measuring Success</h3>
-                <p>Track the effectiveness of your WiFi QR codes by:</p>
+                <h3>{{ __('app.blog_measuring_title') }}</h3>
+                <p>{{ __('app.blog_measuring_intro') }}</p>
                 <ul>
-                    <li>Monitoring WiFi connection analytics</li>
-                    <li>Surveying customers about their experience</li>
-                    <li>Observing reduced requests for WiFi passwords</li>
-                    <li>Tracking customer dwell time and engagement</li>
+                    <li>{{ __('app.blog_measuring_analytics') }}</li>
+                    <li>{{ __('app.blog_measuring_surveys') }}</li>
+                    <li>{{ __('app.blog_measuring_requests') }}</li>
+                    <li>{{ __('app.blog_measuring_engagement') }}</li>
                 </ul>
 
                 <div class="highlight">
-                    <h4>🚀 Ready to Get Started?</h4>
-                    <p><a href="/" style="color: #007aff; text-decoration: none; font-weight: 600;">Create your free WiFi QR code now →</a></p>
+                    <h4>{{ __('app.blog_cta_title') }}</h4>
+                    <p><a href="/" style="color: #007aff; text-decoration: none; font-weight: 600;">{{ __('app.blog_cta_content') }}</a></p>
                 </div>
             </article>
         </main>
@@ -349,10 +359,47 @@
         <!-- Footer -->
         <footer class="footer">
             <div class="container">
-                <p>© 2024 WiFi QR Generator. Free, secure, and easy-to-use WiFi QR code generator.</p>
-                <p><a href="/">Create QR Code</a> | <a href="/blog">Guide</a> | Privacy-focused and completely free</p>
+                <p>{{ __('app.blog_footer_text1') }}</p>
+                <p>{{ __('app.blog_footer_text2') }}</p>
             </div>
         </footer>
     </div>
+
+    <script>
+        // Language switching functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const languageSelect = document.getElementById('language-select');
+
+            if (languageSelect) {
+                languageSelect.addEventListener('change', function() {
+                    const selectedLocale = this.value;
+
+                    // Send AJAX request to change language
+                    fetch('/set-language', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                        },
+                        body: JSON.stringify({
+                            locale: selectedLocale
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Reload the page to apply new language
+                            window.location.reload();
+                        } else {
+                            console.error('Failed to change language:', data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Language change error:', error);
+                    });
+                });
+            }
+        });
+    </script>
 </body>
 </html>
