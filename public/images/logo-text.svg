@@ -1,0 +1,47 @@
+<svg width="280" height="60" viewBox="0 0 280 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Center the entire logo content -->
+  <g transform="translate(20, 0)">
+    <!-- Logo Icon -->
+    <circle cx="30" cy="30" r="28" fill="white" stroke="#1d1d1f" stroke-width="2"/>
+
+    <!-- QR Code Pattern -->
+    <g transform="translate(18, 18)">
+      <!-- Corner squares -->
+      <rect x="0" y="0" width="8" height="8" fill="#1d1d1f" rx="1"/>
+      <rect x="1.5" y="1.5" width="5" height="5" fill="white" rx="0.5"/>
+      <rect x="3" y="3" width="2" height="2" fill="#1d1d1f" rx="0.3"/>
+
+      <rect x="16" y="0" width="8" height="8" fill="#1d1d1f" rx="1"/>
+      <rect x="17.5" y="1.5" width="5" height="5" fill="white" rx="0.5"/>
+      <rect x="19" y="3" width="2" height="2" fill="#1d1d1f" rx="0.3"/>
+
+      <rect x="0" y="16" width="8" height="8" fill="#1d1d1f" rx="1"/>
+      <rect x="1.5" y="17.5" width="5" height="5" fill="white" rx="0.5"/>
+      <rect x="3" y="19" width="2" height="2" fill="#1d1d1f" rx="0.3"/>
+
+      <!-- Data pattern -->
+      <rect x="10" y="2" width="1.5" height="1.5" fill="#1d1d1f" rx="0.3"/>
+      <rect x="13" y="2" width="1.5" height="1.5" fill="#1d1d1f" rx="0.3"/>
+
+      <rect x="2" y="10" width="1.5" height="1.5" fill="#1d1d1f" rx="0.3"/>
+      <rect x="10" y="10" width="1.5" height="1.5" fill="#1d1d1f" rx="0.3"/>
+      <rect x="17" y="10" width="1.5" height="1.5" fill="#1d1d1f" rx="0.3"/>
+      <rect x="20" y="10" width="1.5" height="1.5" fill="#1d1d1f" rx="0.3"/>
+
+      <rect x="10" y="17" width="1.5" height="1.5" fill="#1d1d1f" rx="0.3"/>
+      <rect x="17" y="17" width="1.5" height="1.5" fill="#1d1d1f" rx="0.3"/>
+      <rect x="20" y="17" width="1.5" height="1.5" fill="#1d1d1f" rx="0.3"/>
+    </g>
+
+    <!-- WiFi Signal -->
+    <g transform="translate(42, 42)">
+      <path d="M0 8 C0 6, 2 4, 4 4 C6 4, 8 6, 8 8" stroke="#1d1d1f" stroke-width="1.2" fill="none"/>
+      <path d="M1.5 8 C1.5 6.8, 2.8 5.5, 4 5.5 C5.2 5.5, 6.5 6.8, 6.5 8" stroke="#1d1d1f" stroke-width="1.2" fill="none"/>
+      <circle cx="4" cy="8" r="1" fill="#1d1d1f"/>
+    </g>
+
+    <!-- Text - Centered relative to the icon -->
+    <text x="75" y="25" font-family="SF Pro Display, -apple-system, BlinkMacSystemFont, sans-serif" font-size="20" font-weight="700" fill="#1d1d1f">WiFi QR</text>
+    <text x="75" y="45" font-family="SF Pro Display, -apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="400" fill="#86868b">Generator</text>
+  </g>
+</svg>

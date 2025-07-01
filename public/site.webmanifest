@@ -1,0 +1,76 @@
+{
+    "name": "WiFi QR Generator",
+    "short_name": "WiFi QR",
+    "description": "Create beautiful QR codes for instant WiFi connection with customizable designs and logo support",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#667eea",
+    "orientation": "portrait-primary",
+    "scope": "/",
+    "lang": "en",
+    "categories": ["utilities", "productivity", "tools"],
+    "icons": [
+        {
+            "src": "/images/favicon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/images/logo.svg",
+            "sizes": "120x120",
+            "type": "image/svg+xml",
+            "purpose": "any"
+        },
+        {
+            "src": "/images/favicon-16x16.png",
+            "sizes": "16x16",
+            "type": "image/png"
+        },
+        {
+            "src": "/images/favicon-32x32.png",
+            "sizes": "32x32",
+            "type": "image/png"
+        },
+        {
+            "src": "/images/apple-touch-icon.png",
+            "sizes": "180x180",
+            "type": "image/png"
+        },
+        {
+            "src": "/images/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/images/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/images/og-image.svg",
+            "sizes": "1200x630",
+            "type": "image/svg+xml",
+            "form_factor": "wide",
+            "label": "WiFi QR Generator - Desktop view"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Create WiFi QR",
+            "short_name": "New QR",
+            "description": "Create a new WiFi QR code",
+            "url": "/",
+            "icons": [
+                {
+                    "src": "/images/logo.svg",
+                    "sizes": "120x120",
+                    "type": "image/svg+xml"
+                }
+            ]
+        }
+    ]
+}

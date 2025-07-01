@@ -1,0 +1,68 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="60" cy="60" r="58" fill="white" stroke="#1d1d1f" stroke-width="4"/>
+
+  <!-- QR Code Pattern -->
+  <g transform="translate(20, 20)">
+    <!-- Corner squares -->
+    <rect x="0" y="0" width="24" height="24" fill="#1d1d1f" rx="2"/>
+    <rect x="4" y="4" width="16" height="16" fill="white" rx="1"/>
+    <rect x="8" y="8" width="8" height="8" fill="#1d1d1f" rx="1"/>
+
+    <rect x="56" y="0" width="24" height="24" fill="#1d1d1f" rx="2"/>
+    <rect x="60" y="4" width="16" height="16" fill="white" rx="1"/>
+    <rect x="64" y="8" width="8" height="8" fill="#1d1d1f" rx="1"/>
+
+    <rect x="0" y="56" width="24" height="24" fill="#1d1d1f" rx="2"/>
+    <rect x="4" y="60" width="16" height="16" fill="white" rx="1"/>
+    <rect x="8" y="64" width="8" height="8" fill="#1d1d1f" rx="1"/>
+
+    <!-- Data pattern -->
+    <rect x="28" y="4" width="4" height="4" fill="#1d1d1f" rx="1"/>
+    <rect x="36" y="4" width="4" height="4" fill="#1d1d1f" rx="1"/>
+    <rect x="44" y="4" width="4" height="4" fill="#1d1d1f" rx="1"/>
+    <rect x="52" y="4" width="4" height="4" fill="#1d1d1f" rx="1"/>
+
+    <rect x="4" y="28" width="4" height="4" fill="#1d1d1f" rx="1"/>
+    <rect x="28" y="28" width="4" height="4" fill="#1d1d1f" rx="1"/>
+    <rect x="36" y="28" width="4" height="4" fill="#1d1d1f" rx="1"/>
+    <rect x="44" y="28" width="4" height="4" fill="#1d1d1f" rx="1"/>
+    <rect x="60" y="28" width="4" height="4" fill="#1d1d1f" rx="1"/>
+    <rect x="68" y="28" width="4" height="4" fill="#1d1d1f" rx="1"/>
+    <rect x="76" y="28" width="4" height="4" fill="#1d1d1f" rx="1"/>
+
+    <rect x="28" y="36" width="4" height="4" fill="#1d1d1f" rx="1"/>
+    <rect x="44" y="36" width="4" height="4" fill="#1d1d1f" rx="1"/>
+    <rect x="52" y="36" width="4" height="4" fill="#1d1d1f" rx="1"/>
+    <rect x="68" y="36" width="4" height="4" fill="#1d1d1f" rx="1"/>
+    <rect x="76" y="36" width="4" height="4" fill="#1d1d1f" rx="1"/>
+
+    <rect x="28" y="44" width="4" height="4" fill="#1d1d1f" rx="1"/>
+    <rect x="36" y="44" width="4" height="4" fill="#1d1d1f" rx="1"/>
+    <rect x="52" y="44" width="4" height="4" fill="#1d1d1f" rx="1"/>
+    <rect x="68" y="44" width="4" height="4" fill="#1d1d1f" rx="1"/>
+
+    <rect x="4" y="52" width="4" height="4" fill="#1d1d1f" rx="1"/>
+    <rect x="28" y="52" width="4" height="4" fill="#1d1d1f" rx="1"/>
+    <rect x="36" y="52" width="4" height="4" fill="#1d1d1f" rx="1"/>
+    <rect x="44" y="52" width="4" height="4" fill="#1d1d1f" rx="1"/>
+
+    <rect x="28" y="68" width="4" height="4" fill="#1d1d1f" rx="1"/>
+    <rect x="44" y="68" width="4" height="4" fill="#1d1d1f" rx="1"/>
+    <rect x="52" y="68" width="4" height="4" fill="#1d1d1f" rx="1"/>
+    <rect x="68" y="68" width="4" height="4" fill="#1d1d1f" rx="1"/>
+    <rect x="76" y="68" width="4" height="4" fill="#1d1d1f" rx="1"/>
+
+    <rect x="28" y="76" width="4" height="4" fill="#1d1d1f" rx="1"/>
+    <rect x="36" y="76" width="4" height="4" fill="#1d1d1f" rx="1"/>
+    <rect x="52" y="76" width="4" height="4" fill="#1d1d1f" rx="1"/>
+  </g>
+
+  <!-- WiFi Signal Icon -->
+  <g transform="translate(85, 85)">
+    <path d="M0 20 C0 15, 5 10, 10 10 C15 10, 20 15, 20 20" stroke="#1d1d1f" stroke-width="2.5" fill="none"/>
+    <path d="M3 20 C3 17, 6 14, 10 14 C14 14, 17 17, 17 20" stroke="#1d1d1f" stroke-width="2.5" fill="none"/>
+    <path d="M6 20 C6 18.5, 7.5 17, 10 17 C12.5 17, 14 18.5, 14 20" stroke="#1d1d1f" stroke-width="2.5" fill="none"/>
+    <circle cx="10" cy="20" r="2.5" fill="#1d1d1f"/>
+  </g>
+</svg>

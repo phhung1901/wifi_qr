@@ -1,2 +1,52 @@
+# WiFi QR Generator - Free Online Tool
+# Create beautiful WiFi QR codes with custom logos and colors
+# Visit: http://wifiqr.local
+
 User-agent: *
-Disallow:
+Allow: /
+
+# Sitemap location
+Sitemap: http://wifiqr.local/sitemap.xml
+
+# Allow all important content
+Allow: /
+Allow: /wifi-qr
+Allow: /images/
+Allow: /css/
+Allow: /js/
+Allow: /favicon.ico
+Allow: /site.webmanifest
+
+# Disallow sensitive areas and backend files
+Disallow: /storage/
+Disallow: /vendor/
+Disallow: /.env
+Disallow: /config/
+Disallow: /bootstrap/cache/
+Disallow: /database/
+Disallow: /tests/
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /composer.json
+Disallow: /composer.lock
+Disallow: /package.json
+Disallow: /package-lock.json
+Disallow: /artisan
+Disallow: /phpunit.xml
+
+# Allow specific bots with faster crawl rates
+User-agent: Googlebot
+Crawl-delay: 0.5
+
+User-agent: Bingbot
+Crawl-delay: 1
+
+User-agent: Slurp
+Crawl-delay: 1
+
+# Default crawl delay for other bots
+User-agent: *
+Crawl-delay: 2
+
+# Host directive (helps with canonicalization)
+Host: wifiqr.local

@@ -3,8 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WiFi QR Generator</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <!-- SEO Meta Tags -->
+    <title>{{ $title ?? 'Free WiFi QR Code Generator - Create Custom QR Codes with Logo | WiFi QR Generator' }}</title>
+    <meta name="description" content="{{ $description ?? 'Create beautiful WiFi QR codes instantly! Free generator with custom logos, colors, and real-time preview. No signup required. Download PNG/PDF formats for restaurants, hotels, offices.' }}">
+    <meta name="keywords" content="{{ $keywords ?? 'wifi qr code generator, free wifi qr code, qr code for wifi, wifi password qr code, custom wifi qr, wifi qr generator, qr code wifi password, wifi qr code maker, generate wifi qr code, wifi qr code with logo, instant wifi connection, wifi sharing qr, restaurant wifi qr, hotel wifi qr, office wifi qr' }}">
+    <meta name="author" content="WiFi QR Generator">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <link rel="canonical" href="http://wifiqr.local">
+
+    <!-- Additional SEO Meta Tags -->
+    <meta name="geo.region" content="US">
+    <meta name="geo.placename" content="United States">
+    <meta name="language" content="en">
+    <meta name="distribution" content="global">
+    <meta name="rating" content="general">
+    <meta name="revisit-after" content="7 days">
+    <meta name="classification" content="Tools, Utilities, QR Code, WiFi">
+    <meta name="category" content="Technology">
+    <meta name="coverage" content="Worldwide">
+    <meta name="target" content="all">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=no">
+
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "WiFi QR Code Generator",
+        "alternateName": "Free WiFi QR Generator",
+        "description": "Create beautiful WiFi QR codes instantly with custom logos, colors, and real-time preview. Free online tool for restaurants, hotels, and offices.",
+        "url": "http://wifiqr.local",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "permissions": "No permissions required",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "featureList": [
+            "Custom WiFi QR code generation",
+            "Logo integration",
+            "Real-time preview",
+            "Multiple download formats",
+            "No registration required",
+            "Mobile responsive design"
+        ],
+        "screenshot": "http://wifiqr.local/images/og-image.svg",
+        "softwareVersion": "1.0",
+        "datePublished": "2024-12-19",
+        "dateModified": "2024-12-19",
+        "author": {
+            "@type": "Organization",
+            "name": "WiFi QR Generator"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "WiFi QR Generator",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "http://wifiqr.local/images/logo.svg"
+            }
+        }
+    }
+    </script>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://wifiqr.local">
+    <meta property="og:title" content="Free WiFi QR Code Generator - Create Custom QR Codes with Logo">
+    <meta property="og:description" content="Create beautiful WiFi QR codes instantly! Free generator with custom logos, colors, and real-time preview. Perfect for restaurants, hotels, and offices. No signup required.">
+    <meta property="og:image" content="http://wifiqr.local/images/og-image.svg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="WiFi QR Code Generator - Free online tool">
+    <meta property="og:site_name" content="WiFi QR Generator">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:author" content="WiFi QR Generator">
+    <meta property="article:section" content="Technology">
+    <meta property="article:tag" content="WiFi, QR Code, Generator, Free, Custom, Logo">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="http://wifiqr.local">
+    <meta property="twitter:title" content="Free WiFi QR Code Generator - Create Custom QR Codes with Logo">
+    <meta property="twitter:description" content="Create beautiful WiFi QR codes instantly! Free generator with custom logos, colors, and real-time preview. Perfect for restaurants, hotels, and offices.">
+    <meta property="twitter:image" content="http://wifiqr.local/images/og-image.svg">
+    <meta property="twitter:image:alt" content="WiFi QR Code Generator - Free online tool">
+    <meta property="twitter:site" content="@wifiqrgenerator">
+    <meta property="twitter:creator" content="@wifiqrgenerator">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#667eea">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,6 +142,21 @@
             padding: 88px 0 108px;
             text-align: center;
             background: #fbfbfd;
+        }
+
+        .logo-container {
+            margin-bottom: 24px;
+        }
+
+        .header-logo {
+            height: 60px;
+            width: auto;
+            max-width: 280px;
+            transition: all 0.3s ease;
+        }
+
+        .header-logo:hover {
+            transform: scale(1.05);
         }
 
         .header h1 {
@@ -626,23 +742,28 @@
 <body>
     <div class="container">
         <!-- Header -->
-        <header class="header">
-            <h1>WiFi QR Generator</h1>
-            <p>Create beautiful QR codes for your WiFi network. Customizable designs. Instant sharing.</p>
+        <header class="header" role="banner">
+            <div class="logo-container">
+                <img src="/images/logo-text.svg" alt="Free WiFi QR Code Generator - Create Custom QR Codes with Logo" class="header-logo">
+            </div>
+            <h1>Free WiFi QR Code Generator</h1>
+            <p>Create beautiful, customizable WiFi QR codes with logos instantly. Perfect for restaurants, hotels, offices, and homes. No signup required - completely free!</p>
         </header>
 
         <!-- Main Content -->
-        <main class="main">
+        <main class="main" role="main">
             <!-- Main Content Grid -->
             <div class="row">
                 <!-- Left Column: Form -->
                 <div class="col-lg-6">
                     <!-- WiFi Form -->
-                    <section class="form-section">
-                        <form id="wifi-form">
+                    <section class="form-section" aria-labelledby="wifi-form-title">
+                        <h2 id="wifi-form-title" style="font-size: 24px; font-weight: 600; margin-bottom: 24px; color: #1d1d1f;">Enter WiFi Details</h2>
+                        <form id="wifi-form" role="form" aria-label="WiFi QR Code Generator Form">
                             <div class="form-group">
                                 <label for="ssid" class="form-label">Network Name (SSID)</label>
-                                <input type="text" id="ssid" class="form-input" placeholder="Enter your WiFi network name" required>
+                                <input type="text" id="ssid" class="form-input" placeholder="Enter your WiFi network name" required aria-describedby="ssid-help">
+                                <small id="ssid-help" style="color: #86868b; font-size: 13px;">The name of your WiFi network that appears in device lists</small>
                             </div>
 
                             <div class="form-group">
@@ -796,6 +917,102 @@
                 </div>
             </section>
         </main>
+
+        <!-- SEO Content Section -->
+        <section class="seo-content" style="background: #f5f5f7; padding: 80px 0; margin-top: 80px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h2 style="font-size: 32px; font-weight: 600; margin-bottom: 24px; color: #1d1d1f;">Why Use Our WiFi QR Code Generator?</h2>
+                        <div style="color: #86868b; font-size: 17px; line-height: 1.6;">
+                            <p style="margin-bottom: 16px;">Our free WiFi QR code generator is the perfect solution for businesses and individuals who want to share WiFi access effortlessly. Whether you're running a restaurant, hotel, office, or just want to share your home WiFi with guests, our tool makes it simple.</p>
+
+                            <h3 style="font-size: 24px; font-weight: 600; margin: 32px 0 16px; color: #1d1d1f;">Key Features:</h3>
+                            <ul style="margin-left: 20px; margin-bottom: 24px;">
+                                <li style="margin-bottom: 8px;"><strong>Completely Free:</strong> No registration, no hidden fees, no watermarks</li>
+                                <li style="margin-bottom: 8px;"><strong>Custom Logos:</strong> Add your brand logo to QR codes for professional appearance</li>
+                                <li style="margin-bottom: 8px;"><strong>Real-time Preview:</strong> See changes instantly as you customize</li>
+                                <li style="margin-bottom: 8px;"><strong>Multiple Formats:</strong> Download as PNG, PDF, or printable cards</li>
+                                <li style="margin-bottom: 8px;"><strong>Mobile Optimized:</strong> Works perfectly on all devices</li>
+                                <li style="margin-bottom: 8px;"><strong>Secure:</strong> All processing happens in your browser - no data stored</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <h3 style="font-size: 24px; font-weight: 600; margin-bottom: 24px; color: #1d1d1f;">Perfect For:</h3>
+                        <div style="color: #86868b; font-size: 17px; line-height: 1.6;">
+                            <div style="background: white; padding: 24px; border-radius: 12px; margin-bottom: 16px; border: 1px solid #f0f0f0;">
+                                <h4 style="color: #1d1d1f; font-weight: 600; margin-bottom: 8px;">🍽️ Restaurants & Cafes</h4>
+                                <p style="margin: 0;">Place QR codes on tables for instant guest WiFi access</p>
+                            </div>
+                            <div style="background: white; padding: 24px; border-radius: 12px; margin-bottom: 16px; border: 1px solid #f0f0f0;">
+                                <h4 style="color: #1d1d1f; font-weight: 600; margin-bottom: 8px;">🏨 Hotels & Accommodations</h4>
+                                <p style="margin: 0;">Provide seamless WiFi access in rooms and common areas</p>
+                            </div>
+                            <div style="background: white; padding: 24px; border-radius: 12px; margin-bottom: 16px; border: 1px solid #f0f0f0;">
+                                <h4 style="color: #1d1d1f; font-weight: 600; margin-bottom: 8px;">🏢 Offices & Coworking</h4>
+                                <p style="margin: 0;">Share guest WiFi with visitors and clients easily</p>
+                            </div>
+                            <div style="background: white; padding: 24px; border-radius: 12px; margin-bottom: 16px; border: 1px solid #f0f0f0;">
+                                <h4 style="color: #1d1d1f; font-weight: 600; margin-bottom: 8px;">🏠 Home Use</h4>
+                                <p style="margin: 0;">Share your home WiFi with friends and family</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section" style="padding: 80px 0;">
+            <div class="container">
+                <h2 style="font-size: 32px; font-weight: 600; margin-bottom: 48px; color: #1d1d1f; text-align: center;">Frequently Asked Questions</h2>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div style="margin-bottom: 32px;">
+                            <h3 style="font-size: 20px; font-weight: 600; margin-bottom: 12px; color: #1d1d1f;">How do WiFi QR codes work?</h3>
+                            <p style="color: #86868b; line-height: 1.6;">WiFi QR codes contain your network credentials in a special format. When scanned with a smartphone camera, the device automatically connects to the WiFi network without manually entering the password.</p>
+                        </div>
+                        <div style="margin-bottom: 32px;">
+                            <h3 style="font-size: 20px; font-weight: 600; margin-bottom: 12px; color: #1d1d1f;">Are the QR codes secure?</h3>
+                            <p style="color: #86868b; line-height: 1.6;">Yes! All QR code generation happens in your browser. We don't store your WiFi passwords or any personal information on our servers. Your data stays private and secure.</p>
+                        </div>
+                        <div style="margin-bottom: 32px;">
+                            <h3 style="font-size: 20px; font-weight: 600; margin-bottom: 12px; color: #1d1d1f;">Can I customize the QR code design?</h3>
+                            <p style="color: #86868b; line-height: 1.6;">Absolutely! You can change colors, add your logo, adjust the size, and even add rounded corners. Our real-time preview shows changes instantly.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div style="margin-bottom: 32px;">
+                            <h3 style="font-size: 20px; font-weight: 600; margin-bottom: 12px; color: #1d1d1f;">What devices can scan WiFi QR codes?</h3>
+                            <p style="color: #86868b; line-height: 1.6;">Most modern smartphones (iPhone iOS 11+, Android 10+) can scan WiFi QR codes directly with their camera app. Older devices may need a QR code scanner app.</p>
+                        </div>
+                        <div style="margin-bottom: 32px;">
+                            <h3 style="font-size: 20px; font-weight: 600; margin-bottom: 12px; color: #1d1d1f;">Is this service really free?</h3>
+                            <p style="color: #86868b; line-height: 1.6;">Yes, completely free! No registration required, no hidden fees, no watermarks on your QR codes. Generate as many WiFi QR codes as you need.</p>
+                        </div>
+                        <div style="margin-bottom: 32px;">
+                            <h3 style="font-size: 20px; font-weight: 600; margin-bottom: 12px; color: #1d1d1f;">What formats can I download?</h3>
+                            <p style="color: #86868b; line-height: 1.6;">You can download your QR codes as high-quality PNG images, PDF files, or printable cards with your branding. All formats are optimized for both digital and print use.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer style="background: #1d1d1f; color: #f5f5f7; padding: 48px 0; text-align: center;" role="contentinfo">
+            <div class="container">
+                <div style="margin-bottom: 24px;">
+                    <img src="/images/logo-text.svg" alt="WiFi QR Generator" style="height: 40px; filter: invert(1);">
+                </div>
+                <p style="margin-bottom: 16px; font-size: 17px;">Free WiFi QR Code Generator - Create beautiful, customizable QR codes instantly</p>
+                <p style="color: #86868b; font-size: 15px; margin-bottom: 24px;">Perfect for restaurants, hotels, offices, and homes. No registration required.</p>
+                <div style="border-top: 1px solid #424245; padding-top: 24px; margin-top: 24px;">
+                    <p style="color: #86868b; font-size: 13px; margin: 0;">© 2024 WiFi QR Generator. All rights reserved. | Privacy-focused, secure, and completely free.</p>
+                </div>
+            </div>
+        </footer>
     </div>
 
     <!-- QR Code Libraries -->

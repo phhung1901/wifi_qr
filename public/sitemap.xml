@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+    <!-- Main Page -->
+    <url>
+        <loc>http://wifiqr.local/</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+        <image:image>
+            <image:loc>http://wifiqr.local/images/og-image.svg</image:loc>
+            <image:title>Free WiFi QR Code Generator - Create Custom QR Codes with Logo</image:title>
+            <image:caption>Generate beautiful, customizable WiFi QR codes with logo support and real-time preview. Perfect for restaurants, hotels, and offices.</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>http://wifiqr.local/images/logo.svg</image:loc>
+            <image:title>WiFi QR Generator Logo</image:title>
+            <image:caption>Official logo of WiFi QR Generator - Free online tool</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>http://wifiqr.local/images/logo-text.svg</image:loc>
+            <image:title>WiFi QR Generator Text Logo</image:title>
+            <image:caption>WiFi QR Generator brand logo with text</image:caption>
+        </image:image>
+    </url>
+
+    <!-- WiFi QR Generator Page -->
+    <url>
+        <loc>http://wifiqr.local/wifi-qr</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- SEO-friendly keyword pages -->
+    <url>
+        <loc>http://wifiqr.local/free-wifi-qr-code-generator</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>http://wifiqr.local/qr-code-for-wifi</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>http://wifiqr.local/wifi-qr-generator</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>http://wifiqr.local/custom-wifi-qr-code</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>http://wifiqr.local/wifi-qr-code-with-logo</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Industry-specific pages -->
+    <url>
+        <loc>http://wifiqr.local/restaurant-wifi-qr</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>http://wifiqr.local/hotel-wifi-qr</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>http://wifiqr.local/office-wifi-qr</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Content/Blog pages -->
+    <url>
+        <loc>http://wifiqr.local/blog</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>http://wifiqr.local/guide</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>http://wifiqr.local/how-to-create-wifi-qr-code</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <!-- Static Assets -->
+    <url>
+        <loc>http://wifiqr.local/robots.txt</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.1</priority>
+    </url>
+
+    <url>
+        <loc>http://wifiqr.local/site.webmanifest</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.3</priority>
+    </url>
+</urlset>
