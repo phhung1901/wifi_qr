@@ -7,6 +7,11 @@ return [
     'header_title' => 'Kostenloser WiFi QR-Code Generator',
     'header_subtitle' => 'Erstelle sofort schöne, anpassbare WiFi QR-Codes mit Logos. Perfekt für Restaurants, Hotels, Büros und Zuhause. Keine Registrierung erforderlich - völlig kostenlos!',
 
+    // Statistiken
+    'stats_downloads' => 'Wir haben bereits über 2.526.971.554 QR-Codes generiert',
+    'stats_label' => 'Generierte QR-Codes',
+    'stats_subtitle' => 'Live-Zähler • In Echtzeit aktualisiert',
+
     // Form
     'wifi_details_title' => 'WiFi-Details Eingeben',
     'network_name_label' => 'Netzwerkname (SSID)',

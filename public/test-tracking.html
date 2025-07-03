@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Tracking</title>
+</head>
+<body>
+    <h1>Test Download Tracking</h1>
+    <button onclick="testTracking()">Test Tracking</button>
+    <div id="result"></div>
+
+    <script>
+        async function testTracking() {
+            console.log('Testing tracking...');
+            
+            try {
+                const response = await fetch('/api/track-download', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        type: 'png',
+                        ssid: 'TestPage_' + Date.now(),
+                        has_logo: false,
+                        has_custom_colors: false
+                    })
+                });
+                
+                const result = await response.json();
+                console.log('Success:', result);
+                
+                document.getElementById('result').innerHTML = 
+                    '<p style="color: green;">✅ Success! Download ID: ' + result.download_id + '</p>' +
+                    '<p>Check: <a href="/admin/dashboard" target="_blank">Dashboard</a></p>';
+                    
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('result').innerHTML = 
+                    '<p style="color: red;">❌ Error: ' + error.message + '</p>';
+            }
+        }
+    </script>
+</body>
+</html>

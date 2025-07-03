@@ -4,18 +4,30 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\LanguageDetectionService;
+use App\Services\StatisticsService;
+use App\Services\DownloadTrackingService;
 
 class QrCodeController extends Controller
 {
     protected $languageService;
+    protected $statisticsService;
+    protected $downloadTrackingService;
 
-    public function __construct(LanguageDetectionService $languageService)
-    {
+    public function __construct(
+        LanguageDetectionService $languageService,
+        StatisticsService $statisticsService,
+        DownloadTrackingService $downloadTrackingService
+    ) {
         $this->languageService = $languageService;
+        $this->statisticsService = $statisticsService;
+        $this->downloadTrackingService = $downloadTrackingService;
     }
 
     public function index()
     {
+        // Simulate background activity
+        $this->statisticsService->simulateActivity();
+
         return view('wifi-qr', [
             'pageType' => 'general',
             'title' => __('app.site_title'),
@@ -23,6 +35,7 @@ class QrCodeController extends Controller
             'keywords' => 'wifi qr code generator, free wifi qr code, qr code for wifi, wifi password qr code, custom wifi qr',
             'currentLocale' => $this->languageService->getCurrentLocale(),
             'supportedLanguages' => $this->languageService->getSupportedLanguages(),
+            'currentStats' => $this->statisticsService->getLiveCount(),
         ]);
     }
 
@@ -88,5 +101,55 @@ class QrCodeController extends Controller
             'success' => false,
             'message' => 'Invalid language'
         ], 400);
+    }
+
+    /**
+     * Get current statistics for real-time updates
+     */
+    public function getStats()
+    {
+        return response()->json([
+            'count' => $this->statisticsService->getLiveCount(),
+            'formatted' => $this->statisticsService->getFormattedCount(),
+            'timestamp' => time()
+        ]);
+    }
+
+    /**
+     * Increment QR generation count (called when user generates QR)
+     */
+    public function incrementStats()
+    {
+        $this->statisticsService->incrementQrGenerated();
+
+        return response()->json([
+            'success' => true,
+            'count' => $this->statisticsService->getLiveCount(),
+            'formatted' => $this->statisticsService->getFormattedCount()
+        ]);
+    }
+
+    /**
+     * Track QR code download
+     */
+    public function trackDownload(Request $request)
+    {
+        $options = [
+            'type' => $request->input('type', 'png'),
+            'ssid' => $request->input('ssid'),
+            'has_logo' => $request->boolean('has_logo'),
+            'has_custom_colors' => $request->boolean('has_custom_colors')
+        ];
+
+        $download = $this->downloadTrackingService->trackDownload($request, $options);
+
+        // Also increment the fake counter for public display
+        $this->statisticsService->incrementQrGenerated();
+
+        return response()->json([
+            'success' => true,
+            'download_id' => $download->id,
+            'message' => 'Download tracked successfully'
+        ]);
     }
 }

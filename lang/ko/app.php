@@ -7,6 +7,11 @@ return [
     'header_title' => '무료 WiFi QR 코드 생성기',
     'header_subtitle' => '로고가 있는 아름답고 맞춤 설정 가능한 WiFi QR 코드를 즉시 생성하세요. 레스토랑, 호텔, 사무실 및 가정에 완벽합니다. 가입 불필요 - 완전 무료!',
 
+    // 통계
+    'stats_downloads' => '이미 2,526,971,554개 이상의 QR 코드를 생성했습니다',
+    'stats_label' => '생성된 QR 코드',
+    'stats_subtitle' => '실시간 카운터 • 실시간 업데이트',
+
     // Form
     'wifi_details_title' => 'WiFi 세부정보 입력',
     'network_name_label' => '네트워크 이름 (SSID)',

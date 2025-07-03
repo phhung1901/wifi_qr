@@ -7,6 +7,11 @@ return [
     'header_title' => 'Tạo Mã QR WiFi',
     'header_subtitle' => 'Tạo mã QR WiFi đẹp mắt mà khách hàng thực sự muốn quét. Thêm logo của bạn, tùy chỉnh màu sắc, và giúp việc kết nối WiFi trở nên dễ dàng!',
 
+    // Thống kê
+    'stats_downloads' => 'Chúng tôi đã tạo ra hơn 2.526.971.554 mã QR',
+    'stats_label' => 'Mã QR Đã Tạo',
+    'stats_subtitle' => 'Bộ đếm trực tiếp • Cập nhật theo thời gian thực',
+
     // Form
     'wifi_details_title' => 'Thông Tin WiFi',
     'network_name_label' => 'Tên WiFi',

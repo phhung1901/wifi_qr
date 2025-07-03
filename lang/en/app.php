@@ -7,6 +7,11 @@ return [
     'header_title' => 'WiFi QR Generator',
     'header_subtitle' => 'Create beautiful WiFi QR codes that your customers will actually want to scan. Add your logo, customize colors, and make connecting to your WiFi effortless!',
 
+    // Statistics
+    'stats_downloads' => 'We\'ve already generated over 2,526,971,554 QR codes',
+    'stats_label' => 'QR Codes Generated',
+    'stats_subtitle' => 'Live counter • Updated in real-time',
+
     // Form
     'wifi_details_title' => 'WiFi Network Details',
     'network_name_label' => 'WiFi Network Name',

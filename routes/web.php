@@ -107,3 +107,18 @@ Route::prefix('id')->group(function () {
 Route::get('/blog', [App\Http\Controllers\QrCodeController::class, 'blog'])->name('blog');
 Route::get('/guide', [App\Http\Controllers\QrCodeController::class, 'blog'])->name('guide');
 Route::get('/how-to-create-wifi-qr-code', [App\Http\Controllers\QrCodeController::class, 'blog'])->name('how-to');
+
+// Language switching
+Route::post('/change-language', [App\Http\Controllers\QrCodeController::class, 'changeLanguage'])->name('change-language');
+
+// Statistics API
+Route::get('/api/stats', [App\Http\Controllers\QrCodeController::class, 'getStats'])->name('api.stats');
+Route::post('/api/stats/increment', [App\Http\Controllers\QrCodeController::class, 'incrementStats'])->name('api.stats.increment');
+Route::post('/api/track-download', [App\Http\Controllers\QrCodeController::class, 'trackDownload'])->name('api.track.download');
+
+// Admin Routes
+Route::prefix('admin')->group(function () {
+    Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/stats-range', [App\Http\Controllers\Admin\DashboardController::class, 'getStatsForRange'])->name('admin.stats.range');
+    Route::get('/export-csv', [App\Http\Controllers\Admin\DashboardController::class, 'exportCsv'])->name('admin.export.csv');
+});

@@ -7,6 +7,11 @@ return [
     'header_title' => 'WiFi二维码生成器',
     'header_subtitle' => '制作客户真正愿意扫描的精美WiFi二维码。添加您的Logo，自定义颜色，让WiFi连接变得轻松简单！',
 
+    // 统计数据
+    'stats_downloads' => '我们已经生成了超过 2,526,971,554 个二维码',
+    'stats_label' => '已生成二维码',
+    'stats_subtitle' => '实时计数器 • 实时更新',
+
     // Form
     'wifi_details_title' => 'WiFi网络信息',
     'network_name_label' => 'WiFi名称',

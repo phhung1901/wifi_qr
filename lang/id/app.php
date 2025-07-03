@@ -7,6 +7,11 @@ return [
     'header_title' => 'Generator QR Code WiFi Gratis',
     'header_subtitle' => 'Buat QR code WiFi yang indah dan dapat disesuaikan dengan logo secara instan. Sempurna untuk restoran, hotel, kantor, dan rumah. Tanpa registrasi - sepenuhnya gratis!',
 
+    // Statistik
+    'stats_downloads' => 'Kami telah menghasilkan lebih dari 2.526.971.554 kode QR',
+    'stats_label' => 'Kode QR Dihasilkan',
+    'stats_subtitle' => 'Penghitung langsung • Diperbarui secara real-time',
+
     // Form
     'wifi_details_title' => 'Masukkan Detail WiFi',
     'network_name_label' => 'Nama Jaringan (SSID)',

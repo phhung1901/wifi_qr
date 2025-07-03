@@ -750,6 +750,42 @@
             text-align: center;
             font-weight: 500;
         }
+
+        /* Statistics Section Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        @keyframes countUp {
+            from { transform: scale(1.02); }
+            to { transform: scale(1); }
+        }
+
+        .stats-counter-animate {
+            animation: countUp 0.3s ease-out;
+        }
+
+        /* Smooth number transitions */
+        #stats-counter {
+            transition: all 0.2s ease-out;
+        }
+
+        /* Responsive stats */
+        @media (max-width: 768px) {
+            #stats-counter {
+                font-size: 36px !important;
+            }
+            .stats-section {
+                padding: 30px 15px !important;
+                margin: 0 15px 30px 15px !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -774,6 +810,33 @@
             <h1>{{ __('app.header_title') }}</h1>
             <p>{{ __('app.header_subtitle') }}</p>
         </header>
+
+        <!-- Statistics Section -->
+        <section class="stats-section" style="text-align: center; padding: 40px 20px; margin-bottom: 40px; background: linear-gradient(135deg, #1d1d1f 0%, #2d2d30 100%); border-radius: 20px; margin: 0 20px 40px 20px; position: relative; overflow: hidden;">
+            <!-- Background Animation -->
+            <div class="stats-bg-animation" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.1;">
+                <div style="position: absolute; width: 100px; height: 100px; background: radial-gradient(circle, #007aff 0%, transparent 70%); border-radius: 50%; animation: float 6s ease-in-out infinite; top: 20%; left: 10%;"></div>
+                <div style="position: absolute; width: 60px; height: 60px; background: radial-gradient(circle, #34c759 0%, transparent 70%); border-radius: 50%; animation: float 8s ease-in-out infinite reverse; top: 60%; right: 15%;"></div>
+                <div style="position: absolute; width: 80px; height: 80px; background: radial-gradient(circle, #ff9500 0%, transparent 70%); border-radius: 50%; animation: float 7s ease-in-out infinite; bottom: 20%; left: 20%;"></div>
+            </div>
+
+            <div style="max-width: 700px; margin: 0 auto; position: relative; z-index: 2;">
+                <div style="margin-bottom: 16px;">
+                    <span style="font-size: 14px; color: #8e8e93; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">{{ __('app.stats_label') }}</span>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <span id="stats-counter" style="font-size: 48px; color: #ffffff; font-weight: 700; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; text-shadow: 0 2px 10px rgba(0,0,0,0.3);" data-target="{{ $currentStats ?? 1000000 }}">
+                        {{ number_format($currentStats ?? 1000000) }}
+                    </span>
+                </div>
+
+                <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <div class="pulse-indicator" style="width: 8px; height: 8px; background: #34c759; border-radius: 50%; animation: pulse 2s infinite;"></div>
+                    <span style="font-size: 16px; color: #a1a1a6; font-weight: 500;">{{ __('app.stats_subtitle') }}</span>
+                </div>
+            </div>
+        </section>
 
         <!-- Main Content -->
         <main class="main" role="main">
@@ -1091,10 +1154,8 @@
                 // Wait a bit for libraries to load
                 setTimeout(() => {
                     if (typeof QRCode !== 'undefined') {
-                        console.log('QRCode library loaded successfully');
                         resolve();
                     } else {
-                        console.warn('QRCode library not available, using alternative');
                         loadManualQRGenerator();
                         resolve();
                     }
@@ -1104,8 +1165,6 @@
 
         // Manual QR code generation fallback
         function loadManualQRGenerator() {
-            console.log('Loading manual QR generator...');
-
             // Show info message to user
             showInfoMessage('qrServiceInfo');
 
@@ -1228,7 +1287,6 @@
             // Font family selector
             document.getElementById('font-family').addEventListener('change', function() {
                 // Font changes only affect card downloads, not QR preview
-                console.log('{{ __("app.js_font_changed") }}', this.value);
             });
 
             // Logo upload
@@ -1236,9 +1294,15 @@
             logoFile.addEventListener('change', handleLogoUpload);
 
             // Download buttons
-            document.getElementById('download-png').addEventListener('click', () => downloadQR('png'));
-            document.getElementById('download-pdf').addEventListener('click', () => downloadQR('pdf'));
-            document.getElementById('download-card').addEventListener('click', () => downloadCard());
+            document.getElementById('download-png').addEventListener('click', () => {
+                downloadQR('png');
+            });
+            document.getElementById('download-pdf').addEventListener('click', () => {
+                downloadQR('pdf');
+            });
+            document.getElementById('download-card').addEventListener('click', () => {
+                downloadCard();
+            });
         }
 
         // Handle WiFi input changes for real-time QR generation
@@ -1252,10 +1316,7 @@
                 // Validate password if not open network
                 if (!noPasswordCheckbox.checked && password) {
                     const isPasswordValid = validatePassword(password);
-                    if (!isPasswordValid) {
-                        // Still generate QR but show warning
-                        console.warn('Password may not meet WiFi standards');
-                    }
+                    // Password validation happens silently
                 }
 
                 // Create WiFi QR string
@@ -1902,32 +1963,49 @@
                 const ssid = ssidInput.value.trim() || 'wifi';
                 const filename = `wifi-qr-${ssid}`;
 
+                // Track download before starting (don't await to not block download)
+                trackDownload(format, ssid).catch(err => {
+                    // Tracking failed silently
+                });
+
                 if (format === 'png') {
                     // Generate high-quality version for download
                     generateHighQualityQR(512).then(highQualityCanvas => {
-                        const link = document.createElement('a');
-                        link.download = `${filename}.png`;
-                        link.href = highQualityCanvas.toDataURL('image/png');
-                        link.click();
-                        showSuccessMessage('pngDownloaded');
+                        try {
+                            const link = document.createElement('a');
+                            link.download = `${filename}.png`;
+                            link.href = highQualityCanvas.toDataURL('image/png');
+                            link.click();
+                            showSuccessMessage('pngDownloaded');
+                        } catch (error) {
+                            showErrorMessage('Failed to download PNG. Please try again.');
+                        }
+                    }).catch(error => {
+                        showErrorMessage('Failed to generate QR code.');
                     });
                 } else if (format === 'pdf') {
                     // Generate high-quality version for PDF
                     generateHighQualityQR(400).then(highQualityCanvas => {
-                        const { jsPDF } = window.jspdf;
-                        const pdf = new jsPDF();
+                        try {
+                            const { jsPDF } = window.jspdf;
+                            const pdf = new jsPDF();
 
-                        const imgData = highQualityCanvas.toDataURL('image/png');
-                        const size = parseInt(qrSizeInput.value);
+                            const imgData = highQualityCanvas.toDataURL('image/png');
+                            const size = parseInt(qrSizeInput.value);
 
-                        // Scale for PDF (convert px to mm, 1px ≈ 0.264583mm)
-                        const pdfSize = Math.min(size * 0.264583, 150); // Max 150mm
-                        const x = (pdf.internal.pageSize.getWidth() - pdfSize) / 2;
-                        const y = 50;
+                            // Scale for PDF (convert px to mm, 1px ≈ 0.264583mm)
+                            const pdfSize = Math.min(size * 0.264583, 150); // Max 150mm
+                            const x = (pdf.internal.pageSize.getWidth() - pdfSize) / 2;
+                            const y = 50;
 
-                        pdf.addImage(imgData, 'PNG', x, y, pdfSize, pdfSize);
-                        pdf.save(`${filename}.pdf`);
-                        showSuccessMessage('pdfDownloaded');
+                            pdf.addImage(imgData, 'PNG', x, y, pdfSize, pdfSize);
+                            pdf.save(`${filename}.pdf`);
+                            showSuccessMessage('pdfDownloaded');
+                        } catch (error) {
+                            showErrorMessage('Failed to download PDF. Please try again.');
+                        }
+                    }).catch(error => {
+                        showErrorMessage('Failed to generate QR code.');
                     });
                 }
 
@@ -1937,17 +2015,63 @@
             }
         }
 
+        // Track download function
+        async function trackDownload(type, ssid) {
+            try {
+                // Safe variable access with fallbacks
+                let hasLogo = false;
+                let hasCustomColors = false;
+
+                try {
+                    // Check the actual file input, not the container div
+                    const logoFileInput = document.getElementById('logo-file');
+                    hasLogo = logoFileInput && logoFileInput.files && logoFileInput.files.length > 0;
+                } catch (e) {
+                    // Silent fallback
+                }
+
+                try {
+                    hasCustomColors = fgColorInput && fgColorInput.value !== '#000000';
+                } catch (e) {
+                    // Silent fallback
+                }
+
+                const response = await fetch('/api/track-download', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                        // Removed CSRF token since it's excluded in middleware
+                    },
+                    body: JSON.stringify({
+                        type: type,
+                        ssid: ssid,
+                        has_logo: hasLogo,
+                        has_custom_colors: hasCustomColors
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const result = await response.json();
+                // Tracking completed silently
+
+            } catch (error) {
+                // Tracking failed silently, don't interrupt user experience
+            }
+        }
+
         // Function to load fonts before generating card
         async function loadFont(fontFamily) {
             try {
                 // Check if font is available
                 if (document.fonts && document.fonts.load) {
                     await document.fonts.load(`16px "${fontFamily}"`);
-                    console.log(`Font loaded: ${fontFamily}`);
                     return true;
                 }
             } catch (error) {
-                console.warn(`Failed to load font: ${fontFamily}`, error);
+                // Font loading failed silently
             }
             return false;
         }
@@ -1958,11 +2082,15 @@
                 return;
             }
 
+            // Track download before starting (don't await to not block download)
+            const ssid = ssidInput.value.trim() || 'wifi';
+            trackDownload('card', ssid).catch(err => {
+                // Tracking failed silently
+            });
+
             // Get selected font and try to load it
             const fontSelector = document.getElementById('font-family');
             const selectedFont = fontSelector ? fontSelector.value : 'SF Pro Display';
-
-            console.log('Attempting to download card with font:', selectedFont);
 
             // Try to load the font first
             await loadFont(selectedFont);
@@ -1989,7 +2117,6 @@
                 const availableHeight = cardCanvas.height - 80; // Reserve space for bottom content
 
                 // Get selected font family (already loaded above)
-                console.log('Applying font to card elements:', selectedFont);
 
                 // Add brand name at top if provided (with adaptive font size)
                 const brandName = brandNameInput.value.trim();
@@ -2010,8 +2137,6 @@
                     let fontApplied = false;
                     for (const fontString of fontFormats) {
                         ctx.font = fontString;
-                        console.log('Trying brand font:', fontString, '-> Applied:', ctx.font);
-
                         // Test if font was actually applied by measuring text
                         const testWidth = ctx.measureText('Test').width;
                         if (testWidth > 0) {
@@ -2053,7 +2178,6 @@
 
                     for (const fontString of fontFormats) {
                         ctx.font = fontString;
-                        console.log('Trying description font:', fontString, '-> Applied:', ctx.font);
                         if (ctx.measureText('Test').width > 0) break;
                     }
 
@@ -2134,7 +2258,6 @@
 
                 for (const fontString of networkFontFormats) {
                     ctx.font = fontString;
-                    console.log('Trying network font:', fontString, '-> Applied:', ctx.font);
                     if (ctx.measureText('Test').width > 0) break;
                 }
 
@@ -2165,7 +2288,6 @@
 
                         for (const fontString of passwordFontFormats) {
                             ctx.font = fontString;
-                            console.log('Trying password font:', fontString, '-> Applied:', ctx.font);
                             if (ctx.measureText('Test').width > 0) break;
                         }
 
@@ -2190,11 +2312,9 @@
                 showSuccessMessage('cardDownloaded');
 
                 } catch (error) {
-                    console.error('Card download error:', error);
                     showErrorMessage('Failed to download WiFi card. Please try again.');
                 }
             }).catch(error => {
-                console.error('High-quality QR generation failed:', error);
                 showErrorMessage('Failed to generate high-quality QR for card.');
             });
         }
@@ -2276,6 +2396,170 @@
                 messageDiv.remove();
             }, 3000);
         }
+
+        // Statistics Counter Animation
+        class StatsCounter {
+            constructor() {
+                this.counter = document.getElementById('stats-counter');
+                this.currentValue = parseInt(this.counter.dataset.target) || 1000000;
+                this.displayValue = this.currentValue;
+                this.targetValue = this.currentValue;
+                this.isAnimating = false;
+                this.lastUpdateTime = Date.now();
+                this.pendingUpdates = [];
+                this.lastServerValue = this.currentValue;
+
+                this.init();
+            }
+
+            init() {
+                // Fetch initial server value immediately
+                this.fetchLatestStats();
+
+                // Update display immediately
+                this.updateDisplay(this.currentValue, false);
+
+                // Fetch latest stats every 5 seconds (more frequent)
+                setInterval(() => {
+                    this.fetchLatestStats();
+                }, 5000);
+
+                // Process pending updates every 2-4 seconds
+                this.startUpdateProcessor();
+            }
+
+            animateToTarget() {
+                if (this.isAnimating || this.displayValue === this.targetValue) return;
+
+                this.isAnimating = true;
+                const startValue = this.displayValue;
+                const endValue = this.targetValue;
+                const duration = 1500; // Reduced to 1.5 seconds
+                const startTime = Date.now();
+
+                const animate = () => {
+                    const elapsed = Date.now() - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+
+                    // Smoother easing function
+                    const easeOutCubic = 1 - Math.pow(1 - progress, 3);
+
+                    const currentValue = Math.floor(startValue + (endValue - startValue) * easeOutCubic);
+                    this.updateDisplay(currentValue, false);
+
+                    if (progress < 1) {
+                        requestAnimationFrame(animate);
+                    } else {
+                        this.displayValue = endValue;
+                        this.isAnimating = false;
+
+                        // Process next pending update if any
+                        this.processNextUpdate();
+                    }
+                };
+
+                requestAnimationFrame(animate);
+            }
+
+            updateDisplay(value, animate = true) {
+                this.counter.textContent = this.formatNumber(value);
+                this.displayValue = value;
+
+                // Only add animation class occasionally to reduce flicker
+                if (animate && Math.random() < 0.3) {
+                    this.counter.classList.add('stats-counter-animate');
+                    setTimeout(() => {
+                        this.counter.classList.remove('stats-counter-animate');
+                    }, 300);
+                }
+            }
+
+            formatNumber(num) {
+                return new Intl.NumberFormat().format(num);
+            }
+
+            async fetchLatestStats() {
+                try {
+                    const response = await fetch('/api/stats');
+                    const data = await response.json();
+
+                    // Always update to server value to ensure consistency
+                    if (data.count !== this.lastServerValue) {
+                        this.lastServerValue = data.count;
+                        this.currentValue = data.count;
+                        this.queueUpdate(data.count);
+
+                        // Add visual feedback that update happened
+                        this.showUpdateIndicator();
+                    }
+                } catch (error) {
+                    console.log('Stats update failed:', error);
+                }
+            }
+
+            showUpdateIndicator() {
+                // Briefly flash the pulse indicator
+                const indicator = document.querySelector('.stats-section .pulse-indicator');
+                if (indicator) {
+                    indicator.style.animation = 'none';
+                    setTimeout(() => {
+                        indicator.style.animation = 'pulse 2s infinite';
+                    }, 10);
+                }
+            }
+
+            queueUpdate(newValue) {
+                // Add to pending updates queue
+                this.pendingUpdates.push(newValue);
+            }
+
+            processNextUpdate() {
+                if (this.pendingUpdates.length > 0 && !this.isAnimating) {
+                    // Take the latest value from queue
+                    this.targetValue = this.pendingUpdates.pop();
+                    this.pendingUpdates = []; // Clear queue to avoid backlog
+                    this.animateToTarget();
+                }
+            }
+
+            startUpdateProcessor() {
+                const process = () => {
+                    // Fetch fresh data from server instead of local increment
+                    // This ensures all language versions show the same number
+                    this.fetchLatestStats();
+
+                    // Process any pending updates
+                    this.processNextUpdate();
+
+                    // Schedule next update in 2-4 seconds (shorter intervals)
+                    const nextUpdate = Math.random() * 2000 + 2000;
+                    setTimeout(process, nextUpdate);
+                };
+
+                // Start first update after 2 seconds
+                setTimeout(process, 2000);
+            }
+        }
+
+        // Initialize stats counter when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            new StatsCounter();
+        });
+
+        // Increment stats when QR is generated
+        function incrementQrStats() {
+            fetch('/api/stats/increment', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
+                }
+            }).catch(error => {
+                console.log('Stats increment failed:', error);
+            });
+        }
+
+        // QR generation stats are now handled by download tracking
     </script>
 </body>
 </html>

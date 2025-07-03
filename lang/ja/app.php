@@ -7,6 +7,11 @@ return [
     'header_title' => '無料WiFi QRコード生成器',
     'header_subtitle' => 'ロゴ付きの美しくカスタマイズ可能なWiFi QRコードを瞬時に作成。レストラン、ホテル、オフィス、家庭に最適。登録不要 - 完全無料！',
 
+    // 統計
+    'stats_downloads' => 'すでに2,526,971,554個以上のQRコードを生成しました',
+    'stats_label' => '生成されたQRコード',
+    'stats_subtitle' => 'ライブカウンター • リアルタイム更新',
+
     // Form
     'wifi_details_title' => 'WiFi詳細を入力',
     'network_name_label' => 'ネットワーク名 (SSID)',
