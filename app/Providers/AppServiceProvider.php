@@ -23,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // Set the language path to the root lang directory (Laravel 9+ structure)
+        $this->app->useLangPath(base_path('lang'));
     }
 }
