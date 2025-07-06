@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # WiFi QR Local Domain Setup Script
-# This script sets up wifiqr.local domain for local development
+# This script sets up wifiqr.net domain for local development
 
-echo "🚀 Setting up wifiqr.local domain..."
+echo "🚀 Setting up wifiqr.net domain..."
 
 # Colors for output
 RED='\033[0;31m'
@@ -46,7 +46,7 @@ fi
 # Check if PHP-FPM is installed
 if ! systemctl is-active --quiet php8.2-fpm; then
     print_warning "PHP 8.2-FPM is not running. Checking for other PHP versions..."
-    
+
     # Check for other PHP versions
     for version in 8.3 8.1 8.0 7.4; do
         if systemctl is-active --quiet php${version}-fpm; then
@@ -59,9 +59,9 @@ if ! systemctl is-active --quiet php8.2-fpm; then
 fi
 
 # Step 1: Add domain to /etc/hosts
-print_status "Adding wifiqr.local to /etc/hosts..."
-if ! grep -q "wifiqr.local" /etc/hosts; then
-    echo "127.0.0.1    wifiqr.local www.wifiqr.local" | sudo tee -a /etc/hosts
+print_status "Adding wifiqr.net to /etc/hosts..."
+if ! grep -q "wifiqr.net" /etc/hosts; then
+    echo "127.0.0.1    wifiqr.net www.wifiqr.net" | sudo tee -a /etc/hosts
     print_success "Domain added to /etc/hosts"
 else
     print_warning "Domain already exists in /etc/hosts"
@@ -69,11 +69,11 @@ fi
 
 # Step 2: Copy Nginx configuration
 print_status "Setting up Nginx configuration..."
-sudo cp nginx-wifiqr.conf /etc/nginx/sites-available/wifiqr.local
+sudo cp nginx-wifiqr.conf /etc/nginx/sites-available/wifiqr.net
 
 # Step 3: Enable the site
 print_status "Enabling Nginx site..."
-sudo ln -sf /etc/nginx/sites-available/wifiqr.local /etc/nginx/sites-enabled/
+sudo ln -sf /etc/nginx/sites-available/wifiqr.net /etc/nginx/sites-enabled/
 
 # Step 4: Test Nginx configuration
 print_status "Testing Nginx configuration..."
@@ -122,14 +122,14 @@ php artisan view:clear
 print_success "Setup completed successfully!"
 echo ""
 echo -e "${GREEN}🎉 Your WiFi QR Generator is now available at:${NC}"
-echo -e "${BLUE}   http://wifiqr.local${NC}"
-echo -e "${BLUE}   http://www.wifiqr.local${NC}"
+echo -e "${BLUE}   http://wifiqr.net${NC}"
+echo -e "${BLUE}   http://www.wifiqr.net${NC}"
 echo ""
 echo -e "${YELLOW}📝 Next steps:${NC}"
-echo "1. Open your browser and visit http://wifiqr.local"
+echo "1. Open your browser and visit http://wifiqr.net"
 echo "2. Test the WiFi QR generator functionality"
 echo "3. If you encounter any issues, check the logs:"
-echo "   - Nginx error log: sudo tail -f /var/log/nginx/wifiqr.local_error.log"
-echo "   - Nginx access log: sudo tail -f /var/log/nginx/wifiqr.local_access.log"
+echo "   - Nginx error log: sudo tail -f /var/log/nginx/wifiqr.net_error.log"
+echo "   - Nginx access log: sudo tail -f /var/log/nginx/wifiqr.net_access.log"
 echo ""
 echo -e "${GREEN}✨ Enjoy your local WiFi QR Generator!${NC}"

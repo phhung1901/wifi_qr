@@ -11,20 +11,20 @@
     <meta name="keywords" content="{{ $keywords ?? 'wifi qr code generator, free wifi qr code, qr code for wifi, wifi password qr code, custom wifi qr, wifi qr generator, qr code wifi password, wifi qr code maker, generate wifi qr code, wifi qr code with logo, instant wifi connection, wifi sharing qr, restaurant wifi qr, hotel wifi qr, office wifi qr' }}">
     <meta name="author" content="{{ __('app.meta_author') }}">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-    <link rel="canonical" href="http://wifiqr.local">
+    <link rel="canonical" href="http://wifiqr.net">
 
     <!-- Multilingual Hreflang Tags -->
-    <link rel="alternate" hreflang="en" href="http://wifiqr.local/" />
-    <link rel="alternate" hreflang="es" href="http://wifiqr.local/es/" />
-    <link rel="alternate" hreflang="fr" href="http://wifiqr.local/fr/" />
-    <link rel="alternate" hreflang="de" href="http://wifiqr.local/de/" />
-    <link rel="alternate" hreflang="zh" href="http://wifiqr.local/zh/" />
-    <link rel="alternate" hreflang="ja" href="http://wifiqr.local/ja/" />
-    <link rel="alternate" hreflang="ko" href="http://wifiqr.local/ko/" />
-    <link rel="alternate" hreflang="vi" href="http://wifiqr.local/vi/" />
-    <link rel="alternate" hreflang="hi" href="http://wifiqr.local/hi/" />
-    <link rel="alternate" hreflang="id" href="http://wifiqr.local/id/" />
-    <link rel="alternate" hreflang="x-default" href="http://wifiqr.local/" />
+    <link rel="alternate" hreflang="en" href="http://wifiqr.net/" />
+    <link rel="alternate" hreflang="es" href="http://wifiqr.net/es/" />
+    <link rel="alternate" hreflang="fr" href="http://wifiqr.net/fr/" />
+    <link rel="alternate" hreflang="de" href="http://wifiqr.net/de/" />
+    <link rel="alternate" hreflang="zh" href="http://wifiqr.net/zh/" />
+    <link rel="alternate" hreflang="ja" href="http://wifiqr.net/ja/" />
+    <link rel="alternate" hreflang="ko" href="http://wifiqr.net/ko/" />
+    <link rel="alternate" hreflang="vi" href="http://wifiqr.net/vi/" />
+    <link rel="alternate" hreflang="hi" href="http://wifiqr.net/hi/" />
+    <link rel="alternate" hreflang="id" href="http://wifiqr.net/id/" />
+    <link rel="alternate" hreflang="x-default" href="http://wifiqr.net/" />
 
     <!-- Additional SEO Meta Tags -->
     <meta name="geo.region" content="{{ __('app.meta_geo_region') }}">
@@ -51,7 +51,7 @@
         "name": "{{ __('app.schema_app_name') }}",
         "alternateName": "{{ __('app.schema_app_alt_name') }}",
         "description": "{{ __('app.schema_app_description') }}",
-        "url": "http://wifiqr.local",
+        "url": "http://wifiqr.net",
         "applicationCategory": "{{ __('app.schema_app_category') }}",
         "operatingSystem": "{{ __('app.schema_operating_system') }}",
         "permissions": "{{ __('app.schema_permissions') }}",
@@ -68,7 +68,7 @@
             "{{ __('app.schema_feature_5') }}",
             "{{ __('app.schema_feature_6') }}"
         ],
-        "screenshot": "http://wifiqr.local/images/og-image.svg",
+        "screenshot": "http://wifiqr.net/images/og-image.svg",
         "softwareVersion": "1.0",
         "datePublished": "2024-12-19",
         "dateModified": "2024-12-19",
@@ -81,7 +81,7 @@
             "name": "{{ __('app.schema_app_name') }}",
             "logo": {
                 "@type": "ImageObject",
-                "url": "http://wifiqr.local/images/logo.svg"
+                "url": "http://wifiqr.net/images/logo.svg"
             }
         }
     }
@@ -89,10 +89,10 @@
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="{{ __('app.og_type') }}">
-    <meta property="og:url" content="http://wifiqr.local">
+    <meta property="og:url" content="http://wifiqr.net">
     <meta property="og:title" content="{{ $title ?? __('app.site_title') }}">
     <meta property="og:description" content="{{ $description ?? __('app.site_description') }}">
-    <meta property="og:image" content="http://wifiqr.local/images/og-image.svg">
+    <meta property="og:image" content="http://wifiqr.net/images/og-image.svg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="{{ __('app.og_image_alt') }}">
@@ -104,10 +104,10 @@
 
     <!-- Twitter -->
     <meta property="twitter:card" content="{{ __('app.twitter_card') }}">
-    <meta property="twitter:url" content="http://wifiqr.local">
+    <meta property="twitter:url" content="http://wifiqr.net">
     <meta property="twitter:title" content="{{ $title ?? __('app.site_title') }}">
     <meta property="twitter:description" content="{{ $description ?? __('app.site_description') }}">
-    <meta property="twitter:image" content="http://wifiqr.local/images/og-image.svg">
+    <meta property="twitter:image" content="http://wifiqr.net/images/og-image.svg">
     <meta property="twitter:image:alt" content="{{ __('app.twitter_image_alt') }}">
     <meta property="twitter:site" content="{{ __('app.twitter_site') }}">
     <meta property="twitter:creator" content="{{ __('app.twitter_creator') }}">

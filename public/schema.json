@@ -3,19 +3,19 @@
   "@graph": [
     {
       "@type": "WebSite",
-      "@id": "http://wifiqr.local/#website",
-      "url": "http://wifiqr.local/",
+      "@id": "http://wifiqr.net/#website",
+      "url": "http://wifiqr.net/",
       "name": "WiFi QR Generator",
       "description": "Free WiFi QR Code Generator - Create beautiful, customizable WiFi QR codes with logos instantly",
       "publisher": {
-        "@id": "http://wifiqr.local/#organization"
+        "@id": "http://wifiqr.net/#organization"
       },
       "potentialAction": [
         {
           "@type": "SearchAction",
           "target": {
             "@type": "EntryPoint",
-            "urlTemplate": "http://wifiqr.local/?s={search_term_string}"
+            "urlTemplate": "http://wifiqr.net/?s={search_term_string}"
           },
           "query-input": "required name=search_term_string"
         }
@@ -24,21 +24,21 @@
     },
     {
       "@type": "Organization",
-      "@id": "http://wifiqr.local/#organization",
+      "@id": "http://wifiqr.net/#organization",
       "name": "WiFi QR Generator",
-      "url": "http://wifiqr.local/",
+      "url": "http://wifiqr.net/",
       "logo": {
         "@type": "ImageObject",
         "inLanguage": "en-US",
-        "@id": "http://wifiqr.local/#/schema/logo/image/",
-        "url": "http://wifiqr.local/images/logo.svg",
-        "contentUrl": "http://wifiqr.local/images/logo.svg",
+        "@id": "http://wifiqr.net/#/schema/logo/image/",
+        "url": "http://wifiqr.net/images/logo.svg",
+        "contentUrl": "http://wifiqr.net/images/logo.svg",
         "width": 120,
         "height": 120,
         "caption": "WiFi QR Generator"
       },
       "image": {
-        "@id": "http://wifiqr.local/#/schema/logo/image/"
+        "@id": "http://wifiqr.net/#/schema/logo/image/"
       },
       "sameAs": [],
       "contactPoint": {
@@ -49,8 +49,8 @@
     },
     {
       "@type": "WebApplication",
-      "@id": "http://wifiqr.local/#webapplication",
-      "url": "http://wifiqr.local/",
+      "@id": "http://wifiqr.net/#webapplication",
+      "url": "http://wifiqr.net/",
       "name": "WiFi QR Code Generator",
       "description": "Create beautiful WiFi QR codes instantly with custom logos, colors, and real-time preview. Free online tool for restaurants, hotels, and offices.",
       "applicationCategory": "UtilitiesApplication",
@@ -82,23 +82,23 @@
         "@type": "Audience",
         "audienceType": ["Business owners", "Restaurant managers", "Hotel staff", "Office administrators", "Event organizers", "Home users", "IT professionals", "Marketing professionals"]
       },
-      "screenshot": "http://wifiqr.local/images/og-image.svg",
+      "screenshot": "http://wifiqr.net/images/og-image.svg",
       "softwareVersion": "1.0",
       "datePublished": "2024-12-19",
       "dateModified": "2024-12-19",
       "author": {
-        "@id": "http://wifiqr.local/#organization"
+        "@id": "http://wifiqr.net/#organization"
       },
       "publisher": {
-        "@id": "http://wifiqr.local/#organization"
+        "@id": "http://wifiqr.net/#organization"
       },
       "inLanguage": "en-US",
       "isAccessibleForFree": true,
-      "usageInfo": "https://wifiqr.local/blog"
+      "usageInfo": "https://wifiqr.net/blog"
     },
     {
       "@type": "SoftwareApplication",
-      "@id": "http://wifiqr.local/#softwareapplication",
+      "@id": "http://wifiqr.net/#softwareapplication",
       "name": "Free WiFi QR Code Generator",
       "operatingSystem": "Web Browser",
       "applicationCategory": "BusinessApplication",
@@ -117,7 +117,7 @@
     },
     {
       "@type": "FAQPage",
-      "@id": "http://wifiqr.local/#faqpage",
+      "@id": "http://wifiqr.net/#faqpage",
       "mainEntity": [
         {
           "@type": "Question",
@@ -163,40 +163,40 @@
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "http://wifiqr.local/#breadcrumblist",
+      "@id": "http://wifiqr.net/#breadcrumblist",
       "itemListElement": [
         {
           "@type": "ListItem",
           "position": 1,
           "name": "Home",
-          "item": "http://wifiqr.local/"
+          "item": "http://wifiqr.net/"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "WiFi QR Generator",
-          "item": "http://wifiqr.local/wifi-qr"
+          "item": "http://wifiqr.net/wifi-qr"
         },
         {
           "@type": "ListItem",
           "position": 3,
           "name": "Guide",
-          "item": "http://wifiqr.local/blog"
+          "item": "http://wifiqr.net/blog"
         }
       ]
     },
     {
       "@type": "Service",
-      "@id": "http://wifiqr.local/#service",
+      "@id": "http://wifiqr.net/#service",
       "name": "WiFi QR Code Generation Service",
       "description": "Professional WiFi QR code generation service for businesses",
       "provider": {
-        "@id": "http://wifiqr.local/#organization"
+        "@id": "http://wifiqr.net/#organization"
       },
       "areaServed": "Worldwide",
       "availableChannel": {
         "@type": "ServiceChannel",
-        "serviceUrl": "http://wifiqr.local/",
+        "serviceUrl": "http://wifiqr.net/",
         "serviceSmsNumber": null,
         "servicePhone": null
       },

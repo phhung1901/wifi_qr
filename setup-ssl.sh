@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# SSL Certificate Setup for wifiqr.local
+# SSL Certificate Setup for wifiqr.net
 # This script creates a self-signed SSL certificate for local development
 
-echo "🔒 Setting up SSL certificate for wifiqr.local..."
+echo "🔒 Setting up SSL certificate for wifiqr.net..."
 
 # Colors for output
 RED='\033[0;31m'
@@ -41,11 +41,11 @@ sudo mkdir -p /etc/ssl/certs
 
 # Generate private key
 print_status "Generating private key..."
-sudo openssl genrsa -out /etc/ssl/private/wifiqr.local.key 2048
+sudo openssl genrsa -out /etc/ssl/private/wifiqr.net.key 2048
 
 # Create certificate signing request configuration
 print_status "Creating certificate configuration..."
-cat > /tmp/wifiqr.local.conf << EOF
+cat > /tmp/wifiqr.net.conf << EOF
 [req]
 default_bits = 2048
 prompt = no
@@ -59,7 +59,7 @@ ST=Ho Chi Minh
 L=Ho Chi Minh City
 O=WiFi QR Generator
 OU=Development
-CN=wifiqr.local
+CN=wifiqr.net
 
 [v3_req]
 basicConstraints = CA:FALSE
@@ -67,26 +67,26 @@ keyUsage = nonRepudiation, digitalSignature, keyEncipherment
 subjectAltName = @alt_names
 
 [alt_names]
-DNS.1 = wifiqr.local
-DNS.2 = www.wifiqr.local
+DNS.1 = wifiqr.net
+DNS.2 = www.wifiqr.net
 DNS.3 = localhost
 IP.1 = 127.0.0.1
 EOF
 
 # Generate certificate
 print_status "Generating SSL certificate..."
-sudo openssl req -new -x509 -key /etc/ssl/private/wifiqr.local.key \
-    -out /etc/ssl/certs/wifiqr.local.crt \
+sudo openssl req -new -x509 -key /etc/ssl/private/wifiqr.net.key \
+    -out /etc/ssl/certs/wifiqr.net.crt \
     -days 365 \
-    -config /tmp/wifiqr.local.conf \
+    -config /tmp/wifiqr.net.conf \
     -extensions v3_req
 
 # Set proper permissions
-sudo chmod 600 /etc/ssl/private/wifiqr.local.key
-sudo chmod 644 /etc/ssl/certs/wifiqr.local.crt
+sudo chmod 600 /etc/ssl/private/wifiqr.net.key
+sudo chmod 644 /etc/ssl/certs/wifiqr.net.crt
 
 # Clean up
-rm /tmp/wifiqr.local.conf
+rm /tmp/wifiqr.net.conf
 
 print_success "SSL certificate generated successfully!"
 
@@ -98,20 +98,20 @@ cat > nginx-wifiqr-ssl.conf << 'EOF'
 # HTTP to HTTPS redirect
 server {
     listen 80;
-    server_name wifiqr.local www.wifiqr.local;
+    server_name wifiqr.net www.wifiqr.net;
     return 301 https://$server_name$request_uri;
 }
 
 # HTTPS server
 server {
     listen 443 ssl http2;
-    server_name wifiqr.local www.wifiqr.local;
+    server_name wifiqr.net www.wifiqr.net;
     root /var/www/phamhung/wifi_qr/public;
     index index.php index.html index.htm;
 
     # SSL certificates
-    ssl_certificate /etc/ssl/certs/wifiqr.local.crt;
-    ssl_certificate_key /etc/ssl/private/wifiqr.local.key;
+    ssl_certificate /etc/ssl/certs/wifiqr.net.crt;
+    ssl_certificate_key /etc/ssl/private/wifiqr.net.key;
 
     # SSL configuration
     ssl_protocols TLSv1.2 TLSv1.3;
@@ -171,8 +171,8 @@ server {
     }
 
     # Error and access logs
-    error_log /var/log/nginx/wifiqr.local_error.log;
-    access_log /var/log/nginx/wifiqr.local_access.log;
+    error_log /var/log/nginx/wifiqr.net_error.log;
+    access_log /var/log/nginx/wifiqr.net_access.log;
 }
 EOF
 
@@ -182,12 +182,12 @@ echo -e "${GREEN}🔒 SSL certificate setup completed!${NC}"
 echo ""
 echo -e "${YELLOW}📝 To enable HTTPS:${NC}"
 echo "1. Copy the HTTPS configuration:"
-echo "   sudo cp nginx-wifiqr-ssl.conf /etc/nginx/sites-available/wifiqr.local"
+echo "   sudo cp nginx-wifiqr-ssl.conf /etc/nginx/sites-available/wifiqr.net"
 echo ""
 echo "2. Test and reload Nginx:"
 echo "   sudo nginx -t && sudo systemctl reload nginx"
 echo ""
-echo "3. Visit: https://wifiqr.local"
+echo "3. Visit: https://wifiqr.net"
 echo ""
 echo -e "${YELLOW}⚠️  Note:${NC} Your browser will show a security warning because this is a self-signed certificate."
-echo "Click 'Advanced' and 'Proceed to wifiqr.local' to continue."
+echo "Click 'Advanced' and 'Proceed to wifiqr.net' to continue."

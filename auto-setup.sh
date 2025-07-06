@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Auto setup with sudo password
-echo "🚀 Auto setting up wifiqr.local domain..."
+echo "🚀 Auto setting up wifiqr.net domain..."
 
 # Function to run sudo commands with password
 run_sudo() {
@@ -15,30 +15,30 @@ YELLOW='\033[1;33m'
 NC='\033[0m'
 
 echo -e "${BLUE}Step 1: Adding domain to /etc/hosts...${NC}"
-if ! grep -q "wifiqr.local" /etc/hosts; then
-    echo "127.0.0.1    wifiqr.local www.wifiqr.local" | run_sudo tee -a /etc/hosts
+if ! grep -q "wifiqr.net" /etc/hosts; then
+    echo "127.0.0.1    wifiqr.net www.wifiqr.net" | run_sudo tee -a /etc/hosts
     echo -e "${GREEN}✅ Domain added to /etc/hosts${NC}"
 else
     echo -e "${YELLOW}⚠️  Domain already exists in /etc/hosts${NC}"
 fi
 
 echo -e "${BLUE}Step 2: Setting up Nginx configuration...${NC}"
-run_sudo cp nginx-wifiqr.conf /etc/nginx/sites-available/wifiqr.local
+run_sudo cp nginx-wifiqr.conf /etc/nginx/sites-available/wifiqr.net
 
 echo -e "${BLUE}Step 3: Enabling Nginx site...${NC}"
-run_sudo ln -sf /etc/nginx/sites-available/wifiqr.local /etc/nginx/sites-enabled/
+run_sudo ln -sf /etc/nginx/sites-available/wifiqr.net /etc/nginx/sites-enabled/
 
 echo -e "${BLUE}Step 4: Checking PHP version and updating config...${NC}"
 # Check for PHP versions and update config accordingly
 if systemctl is-active --quiet php8.0-fpm; then
     echo "Found PHP 8.0-FPM, updating config..."
-    run_sudo sed -i 's/php8.2-fpm/php8.0-fpm/g' /etc/nginx/sites-available/wifiqr.local
+    run_sudo sed -i 's/php8.2-fpm/php8.0-fpm/g' /etc/nginx/sites-available/wifiqr.net
 elif systemctl is-active --quiet php8.1-fpm; then
     echo "Found PHP 8.1-FPM, updating config..."
-    run_sudo sed -i 's/php8.2-fpm/php8.1-fpm/g' /etc/nginx/sites-available/wifiqr.local
+    run_sudo sed -i 's/php8.2-fpm/php8.1-fpm/g' /etc/nginx/sites-available/wifiqr.net
 elif systemctl is-active --quiet php7.4-fpm; then
     echo "Found PHP 7.4-FPM, updating config..."
-    run_sudo sed -i 's/php8.2-fpm/php7.4-fpm/g' /etc/nginx/sites-available/wifiqr.local
+    run_sudo sed -i 's/php8.2-fpm/php7.4-fpm/g' /etc/nginx/sites-available/wifiqr.net
 fi
 
 echo -e "${BLUE}Step 5: Setting proper permissions...${NC}"
@@ -85,10 +85,10 @@ echo ""
 echo -e "${GREEN}🎉 Setup completed successfully!${NC}"
 echo ""
 echo -e "${GREEN}Your WiFi QR Generator is now available at:${NC}"
-echo -e "${BLUE}   http://wifiqr.local${NC}"
-echo -e "${BLUE}   http://www.wifiqr.local${NC}"
+echo -e "${BLUE}   http://wifiqr.net${NC}"
+echo -e "${BLUE}   http://www.wifiqr.net${NC}"
 echo ""
 echo -e "${YELLOW}📝 If you encounter any issues, check the logs:${NC}"
-echo "   sudo tail -f /var/log/nginx/wifiqr.local_error.log"
+echo "   sudo tail -f /var/log/nginx/wifiqr.net_error.log"
 echo ""
 echo -e "${GREEN}✨ Enjoy your local WiFi QR Generator!${NC}"

@@ -11,21 +11,21 @@
     <meta name="keywords" content="{{ __('app.blog_keywords') }}">
     <meta name="author" content="{{ __('app.meta_author') }}">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="http://wifiqr.local/blog">
+    <link rel="canonical" href="http://wifiqr.net/blog">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="article">
-    <meta property="og:url" content="http://wifiqr.local/blog">
+    <meta property="og:url" content="http://wifiqr.net/blog">
     <meta property="og:title" content="{{ __('app.blog_og_title') }}">
     <meta property="og:description" content="{{ __('app.blog_og_description') }}">
-    <meta property="og:image" content="http://wifiqr.local/images/og-image.svg">
+    <meta property="og:image" content="http://wifiqr.net/images/og-image.svg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="http://wifiqr.local/blog">
+    <meta property="twitter:url" content="http://wifiqr.net/blog">
     <meta property="twitter:title" content="{{ __('app.blog_twitter_title') }}">
     <meta property="twitter:description" content="{{ __('app.blog_twitter_description') }}">
-    <meta property="twitter:image" content="http://wifiqr.local/images/og-image.svg">
+    <meta property="twitter:image" content="http://wifiqr.net/images/og-image.svg">
 
     <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
@@ -223,16 +223,16 @@
             "name": "WiFi QR Generator",
             "logo": {
                 "@type": "ImageObject",
-                "url": "http://wifiqr.local/images/logo.svg"
+                "url": "http://wifiqr.net/images/logo.svg"
             }
         },
         "datePublished": "2024-12-19",
         "dateModified": "2024-12-19",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "http://wifiqr.local/blog"
+            "@id": "http://wifiqr.net/blog"
         },
-        "image": "http://wifiqr.local/images/og-image.svg",
+        "image": "http://wifiqr.net/images/og-image.svg",
         "articleSection": "{{ __('app.blog_schema_section') }}",
         "keywords": ["WiFi QR Code", "QR Code Generator", "WiFi Access", "Business WiFi", "Restaurant WiFi", "Hotel WiFi"]
     }

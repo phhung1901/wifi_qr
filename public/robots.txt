@@ -1,14 +1,14 @@
 # WiFi QR Generator - Free Online Tool
 # Create beautiful WiFi QR codes with custom logos and colors
 # The world's most customizable WiFi QR code generator
-# Visit: http://wifiqr.local
+# Visit: http://wifiqr.net
 
 User-agent: *
 Allow: /
 
 # Sitemap locations
-Sitemap: http://wifiqr.local/sitemap.xml
-Sitemap: http://wifiqr.local/sitemap-images.xml
+Sitemap: http://wifiqr.net/sitemap.xml
+Sitemap: http://wifiqr.net/sitemap-images.xml
 
 # Allow all important content and SEO pages
 Allow: /
@@ -101,7 +101,7 @@ User-agent: *
 Crawl-delay: 2
 
 # Host directive (helps with canonicalization)
-Host: wifiqr.local
+Host: wifiqr.net
 
 # Additional SEO directives
 # Request-rate: 1/10s (1 request every 10 seconds)
