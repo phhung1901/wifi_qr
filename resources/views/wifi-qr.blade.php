@@ -13,6 +13,8 @@
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     <link rel="canonical" href="http://wifiqr.net">
 
+    <meta name="google-site-verification" content="HGTv3wF8o3sh382rYuRxm-JV5phN_3G3xJRdAwuUNgs" />
+
     <!-- Multilingual Hreflang Tags -->
     <link rel="alternate" hreflang="en" href="http://wifiqr.net/" />
     <link rel="alternate" hreflang="es" href="http://wifiqr.net/es/" />

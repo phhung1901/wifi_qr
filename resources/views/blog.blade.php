@@ -13,6 +13,8 @@
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="http://wifiqr.net/blog">
 
+    <meta name="google-site-verification" content="HGTv3wF8o3sh382rYuRxm-JV5phN_3G3xJRdAwuUNgs" />
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="http://wifiqr.net/blog">
