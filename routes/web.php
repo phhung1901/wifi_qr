@@ -116,6 +116,19 @@ Route::get('/api/stats', [App\Http\Controllers\QrCodeController::class, 'getStat
 Route::post('/api/stats/increment', [App\Http\Controllers\QrCodeController::class, 'incrementStats'])->name('api.stats.increment');
 Route::post('/api/track-download', [App\Http\Controllers\QrCodeController::class, 'trackDownload'])->name('api.track.download');
 
+// SEO and Sitemap routes
+Route::get('/sitemap.xml', function() {
+    return response()->file(public_path('sitemap.xml'), ['Content-Type' => 'application/xml']);
+})->name('sitemap');
+
+Route::get('/sitemap-images.xml', function() {
+    return response()->file(public_path('sitemap-images.xml'), ['Content-Type' => 'application/xml']);
+})->name('sitemap.images');
+
+Route::get('/sitemap-index.xml', function() {
+    return response()->file(public_path('sitemap-index.xml'), ['Content-Type' => 'application/xml']);
+})->name('sitemap.index');
+
 // Admin Routes
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('admin.dashboard');

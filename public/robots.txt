@@ -7,6 +7,7 @@ User-agent: *
 Allow: /
 
 # Sitemap locations
+Sitemap: http://wifiqr.net/sitemap-index.xml
 Sitemap: http://wifiqr.net/sitemap.xml
 Sitemap: http://wifiqr.net/sitemap-images.xml
 
@@ -44,7 +45,9 @@ Allow: /vi/
 Allow: /hi/
 Allow: /id/
 
-# Disallow sensitive areas and backend files
+# Disallow admin and sensitive areas
+Disallow: /admin/
+Disallow: /admin/*
 Disallow: /storage/
 Disallow: /vendor/
 Disallow: /.env
@@ -61,29 +64,45 @@ Disallow: /package-lock.json
 Disallow: /artisan
 Disallow: /phpunit.xml
 
+# Disallow API endpoints that shouldn't be indexed
+Disallow: /api/
+Disallow: /api/*
+
 # Allow specific bots with optimized crawl rates for better indexing
 User-agent: Googlebot
 Crawl-delay: 0.2
+Disallow: /admin/
+Disallow: /api/
 Allow: /
 
 User-agent: Bingbot
 Crawl-delay: 0.5
+Disallow: /admin/
+Disallow: /api/
 Allow: /
 
 User-agent: Slurp
 Crawl-delay: 0.5
+Disallow: /admin/
+Disallow: /api/
 Allow: /
 
 User-agent: DuckDuckBot
 Crawl-delay: 1
+Disallow: /admin/
+Disallow: /api/
 Allow: /
 
 User-agent: Baiduspider
 Crawl-delay: 1
+Disallow: /admin/
+Disallow: /api/
 Allow: /
 
 User-agent: YandexBot
 Crawl-delay: 1
+Disallow: /admin/
+Disallow: /api/
 Allow: /
 
 # Social media bots

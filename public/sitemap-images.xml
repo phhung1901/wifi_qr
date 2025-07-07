@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+    <url>
+        <loc>http://wifiqr.net/</loc>
+        <image:image>
+            <image:loc>http://wifiqr.net/images/og-image.svg</image:loc>
+            <image:title>Free WiFi QR Code Generator</image:title>
+            <image:caption>Generate beautiful, customizable WiFi QR codes</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>http://wifiqr.net/images/logo.svg</image:loc>
+            <image:title>WiFi QR Generator Logo</image:title>
+            <image:caption>Official logo of WiFi QR Generator</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>http://wifiqr.net/favicon.ico</image:loc>
+            <image:title>WiFi QR Generator Favicon</image:title>
+            <image:caption>Website favicon</image:caption>
+        </image:image>
+    </url>
+    <url>
+        <loc>http://wifiqr.net/restaurant-wifi-qr</loc>
+        <image:image>
+            <image:loc>http://wifiqr.net/images/restaurant-wifi-qr.svg</image:loc>
+            <image:title>Restaurant WiFi QR Code</image:title>
+            <image:caption>Professional WiFi QR codes for restaurants</image:caption>
+        </image:image>
+    </url>
+    <url>
+        <loc>http://wifiqr.net/hotel-wifi-qr</loc>
+        <image:image>
+            <image:loc>http://wifiqr.net/images/hotel-wifi-qr.svg</image:loc>
+            <image:title>Hotel WiFi QR Code</image:title>
+            <image:caption>Elegant WiFi QR codes for hotels</image:caption>
+        </image:image>
+    </url>
+</urlset>

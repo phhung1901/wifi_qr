@@ -15,7 +15,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        // Generate sitemaps daily at 2 AM
+        $schedule->command('sitemap:generate --domain=http://wifiqr.net')
+                 ->dailyAt('02:00')
+                 ->timezone('Asia/Ho_Chi_Minh');
     }
 
     /**

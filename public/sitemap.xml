@@ -1,436 +1,184 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
-    <!-- Main Page - Primary Landing -->
     <url>
         <loc>http://wifiqr.net/</loc>
-        <lastmod>2025-01-01</lastmod>
+        <lastmod>2025-07-07</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
-        <!-- Multilingual alternatives -->
-        <xhtml:link rel="alternate" hreflang="en" href="http://wifiqr.net/" />
-        <xhtml:link rel="alternate" hreflang="es" href="http://wifiqr.net/es/" />
-        <xhtml:link rel="alternate" hreflang="fr" href="http://wifiqr.net/fr/" />
-        <xhtml:link rel="alternate" hreflang="de" href="http://wifiqr.net/de/" />
-        <xhtml:link rel="alternate" hreflang="zh" href="http://wifiqr.net/zh/" />
-        <xhtml:link rel="alternate" hreflang="ja" href="http://wifiqr.net/ja/" />
-        <xhtml:link rel="alternate" hreflang="ko" href="http://wifiqr.net/ko/" />
-        <xhtml:link rel="alternate" hreflang="vi" href="http://wifiqr.net/vi/" />
-        <xhtml:link rel="alternate" hreflang="hi" href="http://wifiqr.net/hi/" />
-        <xhtml:link rel="alternate" hreflang="id" href="http://wifiqr.net/id/" />
-        <xhtml:link rel="alternate" hreflang="x-default" href="http://wifiqr.net/" />
-        <image:image>
-            <image:loc>http://wifiqr.net/images/og-image.svg</image:loc>
-            <image:title>Free WiFi QR Code Generator - Create Custom QR Codes with Logo</image:title>
-            <image:caption>Generate beautiful, customizable WiFi QR codes with logo support and real-time preview. Perfect for restaurants, hotels, and offices.</image:caption>
-        </image:image>
-        <image:image>
-            <image:loc>http://wifiqr.net/images/logo.svg</image:loc>
-            <image:title>WiFi QR Generator Logo</image:title>
-            <image:caption>Official logo of WiFi QR Generator - Free online tool</image:caption>
-        </image:image>
-        <image:image>
-            <image:loc>http://wifiqr.net/images/logo-text.svg</image:loc>
-            <image:title>WiFi QR Generator Text Logo</image:title>
-            <image:caption>WiFi QR Generator brand logo with text</image:caption>
-        </image:image>
     </url>
-
-    <!-- WiFi QR Generator Page -->
     <url>
         <loc>http://wifiqr.net/wifi-qr</loc>
-        <lastmod>2024-12-19</lastmod>
+        <lastmod>2025-07-07</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
-
-    <!-- High-Value Keyword Landing Pages -->
     <url>
         <loc>http://wifiqr.net/free-wifi-qr-code-generator</loc>
-        <lastmod>2025-01-01</lastmod>
+        <lastmod>2025-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
-        <xhtml:link rel="alternate" hreflang="en" href="http://wifiqr.net/free-wifi-qr-code-generator" />
-        <xhtml:link rel="alternate" hreflang="es" href="http://wifiqr.net/es/generador-codigo-qr-wifi-gratis" />
-        <xhtml:link rel="alternate" hreflang="fr" href="http://wifiqr.net/fr/generateur-code-qr-wifi-gratuit" />
-        <xhtml:link rel="alternate" hreflang="de" href="http://wifiqr.net/de/kostenloser-wifi-qr-code-generator" />
     </url>
-
     <url>
         <loc>http://wifiqr.net/qr-code-for-wifi</loc>
-        <lastmod>2025-01-01</lastmod>
+        <lastmod>2025-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
-        <xhtml:link rel="alternate" hreflang="en" href="http://wifiqr.net/qr-code-for-wifi" />
-        <xhtml:link rel="alternate" hreflang="es" href="http://wifiqr.net/es/codigo-qr-para-wifi" />
-        <xhtml:link rel="alternate" hreflang="fr" href="http://wifiqr.net/fr/code-qr-pour-wifi" />
-        <xhtml:link rel="alternate" hreflang="de" href="http://wifiqr.net/de/qr-code-fuer-wifi" />
     </url>
-
     <url>
         <loc>http://wifiqr.net/wifi-qr-generator</loc>
-        <lastmod>2025-01-01</lastmod>
+        <lastmod>2025-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
-        <xhtml:link rel="alternate" hreflang="en" href="http://wifiqr.net/wifi-qr-generator" />
-        <xhtml:link rel="alternate" hreflang="es" href="http://wifiqr.net/es/generador-qr-wifi" />
-        <xhtml:link rel="alternate" hreflang="fr" href="http://wifiqr.net/fr/generateur-qr-wifi" />
-        <xhtml:link rel="alternate" hreflang="de" href="http://wifiqr.net/de/wifi-qr-generator" />
     </url>
-
     <url>
         <loc>http://wifiqr.net/custom-wifi-qr-code</loc>
-        <lastmod>2025-01-01</lastmod>
+        <lastmod>2025-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <xhtml:link rel="alternate" hreflang="en" href="http://wifiqr.net/custom-wifi-qr-code" />
-        <xhtml:link rel="alternate" hreflang="es" href="http://wifiqr.net/es/codigo-qr-wifi-personalizado" />
-        <xhtml:link rel="alternate" hreflang="fr" href="http://wifiqr.net/fr/code-qr-wifi-personnalise" />
-        <xhtml:link rel="alternate" hreflang="de" href="http://wifiqr.net/de/benutzerdefinierter-wifi-qr-code" />
     </url>
-
     <url>
         <loc>http://wifiqr.net/wifi-qr-code-with-logo</loc>
-        <lastmod>2025-01-01</lastmod>
+        <lastmod>2025-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <xhtml:link rel="alternate" hreflang="en" href="http://wifiqr.net/wifi-qr-code-with-logo" />
-        <xhtml:link rel="alternate" hreflang="es" href="http://wifiqr.net/es/codigo-qr-wifi-con-logo" />
-        <xhtml:link rel="alternate" hreflang="fr" href="http://wifiqr.net/fr/code-qr-wifi-avec-logo" />
-        <xhtml:link rel="alternate" hreflang="de" href="http://wifiqr.net/de/wifi-qr-code-mit-logo" />
     </url>
-
-    <!-- Additional High-Value Keywords -->
     <url>
         <loc>http://wifiqr.net/wifi-password-qr-code</loc>
-        <lastmod>2025-01-01</lastmod>
+        <lastmod>2025-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
-
     <url>
         <loc>http://wifiqr.net/wifi-qr-code-maker</loc>
-        <lastmod>2025-01-01</lastmod>
+        <lastmod>2025-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
-
     <url>
         <loc>http://wifiqr.net/generate-wifi-qr-code</loc>
-        <lastmod>2025-01-01</lastmod>
+        <lastmod>2025-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
-
-    <!-- Industry-specific pages -->
-    <url>
-        <loc>http://wifiqr.net/restaurant-wifi-qr</loc>
-        <lastmod>2024-12-19</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.7</priority>
-    </url>
-
-    <url>
-        <loc>http://wifiqr.net/hotel-wifi-qr</loc>
-        <lastmod>2024-12-19</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.7</priority>
-    </url>
-
-    <url>
-        <loc>http://wifiqr.net/office-wifi-qr</loc>
-        <lastmod>2024-12-19</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.7</priority>
-    </url>
-
-    <!-- Additional Industry-Specific Pages -->
-    <url>
-        <loc>http://wifiqr.net/cafe-wifi-qr-code</loc>
-        <lastmod>2025-01-01</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.7</priority>
-    </url>
-
-    <url>
-        <loc>http://wifiqr.net/event-wifi-qr-code</loc>
-        <lastmod>2025-01-01</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.7</priority>
-    </url>
-
-    <url>
-        <loc>http://wifiqr.net/retail-wifi-qr-code</loc>
-        <lastmod>2025-01-01</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.7</priority>
-    </url>
-
-    <url>
-        <loc>http://wifiqr.net/business-wifi-qr-code</loc>
-        <lastmod>2025-01-01</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.7</priority>
-    </url>
-
     <url>
         <loc>http://wifiqr.net/instant-wifi-connection</loc>
-        <lastmod>2025-01-01</lastmod>
+        <lastmod>2025-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
-
-    <!-- Content/Blog pages -->
+    <url>
+        <loc>http://wifiqr.net/business-wifi-qr-code</loc>
+        <lastmod>2025-07-07</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>http://wifiqr.net/restaurant-wifi-qr</loc>
+        <lastmod>2025-07-07</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>http://wifiqr.net/hotel-wifi-qr</loc>
+        <lastmod>2025-07-07</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>http://wifiqr.net/office-wifi-qr</loc>
+        <lastmod>2025-07-07</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>http://wifiqr.net/cafe-wifi-qr-code</loc>
+        <lastmod>2025-07-07</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>http://wifiqr.net/event-wifi-qr-code</loc>
+        <lastmod>2025-07-07</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>http://wifiqr.net/retail-wifi-qr-code</loc>
+        <lastmod>2025-07-07</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
     <url>
         <loc>http://wifiqr.net/blog</loc>
-        <lastmod>2025-01-01</lastmod>
+        <lastmod>2025-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
     </url>
-
     <url>
         <loc>http://wifiqr.net/guide</loc>
-        <lastmod>2025-01-01</lastmod>
+        <lastmod>2025-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
     </url>
-
     <url>
         <loc>http://wifiqr.net/how-to-create-wifi-qr-code</loc>
-        <lastmod>2025-01-01</lastmod>
+        <lastmod>2025-07-07</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
     </url>
-
-    <!-- Multilingual Pages - Spanish -->
     <url>
         <loc>http://wifiqr.net/es/</loc>
-        <lastmod>2025-01-01</lastmod>
+        <lastmod>2025-07-07</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
-        <xhtml:link rel="alternate" hreflang="es" href="http://wifiqr.net/es/" />
-        <xhtml:link rel="alternate" hreflang="en" href="http://wifiqr.net/" />
     </url>
-
-    <url>
-        <loc>http://wifiqr.net/es/generador-codigo-qr-wifi-gratis</loc>
-        <lastmod>2025-01-01</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <url>
-        <loc>http://wifiqr.net/es/codigo-qr-para-wifi</loc>
-        <lastmod>2025-01-01</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Multilingual Pages - French -->
     <url>
         <loc>http://wifiqr.net/fr/</loc>
-        <lastmod>2025-01-01</lastmod>
+        <lastmod>2025-07-07</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
-        <xhtml:link rel="alternate" hreflang="fr" href="http://wifiqr.net/fr/" />
-        <xhtml:link rel="alternate" hreflang="en" href="http://wifiqr.net/" />
     </url>
-
-    <url>
-        <loc>http://wifiqr.net/fr/generateur-code-qr-wifi-gratuit</loc>
-        <lastmod>2025-01-01</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <url>
-        <loc>http://wifiqr.net/fr/code-qr-pour-wifi</loc>
-        <lastmod>2025-01-01</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Multilingual Pages - German -->
     <url>
         <loc>http://wifiqr.net/de/</loc>
-        <lastmod>2025-01-01</lastmod>
+        <lastmod>2025-07-07</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
-        <xhtml:link rel="alternate" hreflang="de" href="http://wifiqr.net/de/" />
-        <xhtml:link rel="alternate" hreflang="en" href="http://wifiqr.net/" />
     </url>
-
-    <url>
-        <loc>http://wifiqr.net/de/kostenloser-wifi-qr-code-generator</loc>
-        <lastmod>2025-01-01</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <url>
-        <loc>http://wifiqr.net/de/qr-code-fuer-wifi</loc>
-        <lastmod>2025-01-01</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Multilingual Pages - Chinese -->
     <url>
         <loc>http://wifiqr.net/zh/</loc>
-        <lastmod>2025-01-01</lastmod>
+        <lastmod>2025-07-07</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
-        <xhtml:link rel="alternate" hreflang="zh" href="http://wifiqr.net/zh/" />
-        <xhtml:link rel="alternate" hreflang="en" href="http://wifiqr.net/" />
     </url>
-
-    <url>
-        <loc>http://wifiqr.net/zh/免费wifi二维码生成器</loc>
-        <lastmod>2025-01-01</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <url>
-        <loc>http://wifiqr.net/zh/wifi二维码</loc>
-        <lastmod>2025-01-01</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Multilingual Pages - Japanese -->
     <url>
         <loc>http://wifiqr.net/ja/</loc>
-        <lastmod>2025-01-01</lastmod>
+        <lastmod>2025-07-07</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
-        <xhtml:link rel="alternate" hreflang="ja" href="http://wifiqr.net/ja/" />
-        <xhtml:link rel="alternate" hreflang="en" href="http://wifiqr.net/" />
     </url>
-
-    <url>
-        <loc>http://wifiqr.net/ja/無料wifi-qrコード生成器</loc>
-        <lastmod>2025-01-01</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <url>
-        <loc>http://wifiqr.net/ja/wifi-qrコード</loc>
-        <lastmod>2025-01-01</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Multilingual Pages - Korean -->
     <url>
         <loc>http://wifiqr.net/ko/</loc>
-        <lastmod>2025-01-01</lastmod>
+        <lastmod>2025-07-07</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
-        <xhtml:link rel="alternate" hreflang="ko" href="http://wifiqr.net/ko/" />
-        <xhtml:link rel="alternate" hreflang="en" href="http://wifiqr.net/" />
     </url>
-
-    <url>
-        <loc>http://wifiqr.net/ko/무료-wifi-qr코드-생성기</loc>
-        <lastmod>2025-01-01</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <url>
-        <loc>http://wifiqr.net/ko/wifi-qr코드</loc>
-        <lastmod>2025-01-01</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Multilingual Pages - Vietnamese -->
     <url>
         <loc>http://wifiqr.net/vi/</loc>
-        <lastmod>2025-01-01</lastmod>
+        <lastmod>2025-07-07</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
-        <xhtml:link rel="alternate" hreflang="vi" href="http://wifiqr.net/vi/" />
-        <xhtml:link rel="alternate" hreflang="en" href="http://wifiqr.net/" />
     </url>
-
-    <url>
-        <loc>http://wifiqr.net/vi/tao-ma-qr-wifi-mien-phi</loc>
-        <lastmod>2025-01-01</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <url>
-        <loc>http://wifiqr.net/vi/ma-qr-cho-wifi</loc>
-        <lastmod>2025-01-01</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Multilingual Pages - Hindi -->
     <url>
         <loc>http://wifiqr.net/hi/</loc>
-        <lastmod>2025-01-01</lastmod>
+        <lastmod>2025-07-07</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
-        <xhtml:link rel="alternate" hreflang="hi" href="http://wifiqr.net/hi/" />
-        <xhtml:link rel="alternate" hreflang="en" href="http://wifiqr.net/" />
     </url>
-
-    <url>
-        <loc>http://wifiqr.net/hi/मुफ्त-wifi-qr-कोड-जेनरेटर</loc>
-        <lastmod>2025-01-01</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <url>
-        <loc>http://wifiqr.net/hi/wifi-के-लिए-qr-कोड</loc>
-        <lastmod>2025-01-01</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Multilingual Pages - Indonesian -->
     <url>
         <loc>http://wifiqr.net/id/</loc>
-        <lastmod>2025-01-01</lastmod>
+        <lastmod>2025-07-07</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
-        <xhtml:link rel="alternate" hreflang="id" href="http://wifiqr.net/id/" />
-        <xhtml:link rel="alternate" hreflang="en" href="http://wifiqr.net/" />
-    </url>
-
-    <url>
-        <loc>http://wifiqr.net/id/generator-qr-code-wifi-gratis</loc>
-        <lastmod>2025-01-01</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <url>
-        <loc>http://wifiqr.net/id/qr-code-untuk-wifi</loc>
-        <lastmod>2025-01-01</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Static Assets -->
-    <url>
-        <loc>http://wifiqr.net/robots.txt</loc>
-        <lastmod>2024-12-19</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.1</priority>
-    </url>
-
-    <url>
-        <loc>http://wifiqr.net/site.webmanifest</loc>
-        <lastmod>2024-12-19</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.3</priority>
     </url>
 </urlset>
