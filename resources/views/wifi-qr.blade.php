@@ -14,6 +14,15 @@
     <link rel="canonical" href="http://wifiqr.net">
 
     <meta name="google-site-verification" content="HGTv3wF8o3sh382rYuRxm-JV5phN_3G3xJRdAwuUNgs" />
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WKCVX0QY3W"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-WKCVX0QY3W');
+    </script>
 
     <!-- Multilingual Hreflang Tags -->
     <link rel="alternate" hreflang="en" href="http://wifiqr.net/" />
