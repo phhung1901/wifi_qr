@@ -24,17 +24,26 @@ class DetectLanguage
      */
     public function handle(Request $request, Closure $next)
     {
-        // Check if user is manually setting language
-        if ($request->has('lang')) {
-            $requestedLang = $request->get('lang');
-            if ($this->languageService->setLanguage($requestedLang)) {
-                // Redirect to clean URL without lang parameter
-                return redirect($request->url());
+        // Check if language is set in URL prefix (e.g., /vi/blogs, /en/blogs)
+        $path = $request->path();
+        $segments = explode('/', $path);
+
+        if (count($segments) > 0 && $this->languageService->isValidLocale($segments[0])) {
+            // Set language from URL prefix
+            $this->languageService->setLanguage($segments[0]);
+        } else {
+            // Check if user is manually setting language
+            if ($request->has('lang')) {
+                $requestedLang = $request->get('lang');
+                if ($this->languageService->setLanguage($requestedLang)) {
+                    // Redirect to clean URL without lang parameter
+                    return redirect($request->url());
+                }
+            } else {
+                // Auto-detect and set language
+                $this->languageService->detectAndSetLanguage($request);
             }
         }
-
-        // Auto-detect and set language
-        $this->languageService->detectAndSetLanguage($request);
 
         return $next($request);
     }

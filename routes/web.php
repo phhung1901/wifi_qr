@@ -45,18 +45,24 @@ Route::get('/retail-wifi-qr-code', [App\Http\Controllers\QrCodeController::class
 // Multilingual SEO routes
 Route::prefix('es')->group(function () {
     Route::get('/', [App\Http\Controllers\QrCodeController::class, 'index'])->name('es.home');
+    Route::get('/blogs', [App\Http\Controllers\BlogController::class, 'indexView'])->name('es.blogs');
+    Route::get('/blog/{slug}', [App\Http\Controllers\BlogController::class, 'showView'])->name('es.blog.show');
     Route::get('/generador-codigo-qr-wifi-gratis', [App\Http\Controllers\QrCodeController::class, 'freeWifiQr'])->name('es.free-wifi-qr');
     Route::get('/codigo-qr-para-wifi', [App\Http\Controllers\QrCodeController::class, 'qrForWifi'])->name('es.qr-wifi');
 });
 
 Route::prefix('fr')->group(function () {
     Route::get('/', [App\Http\Controllers\QrCodeController::class, 'index'])->name('fr.home');
+    Route::get('/blogs', [App\Http\Controllers\BlogController::class, 'indexView'])->name('fr.blogs');
+    Route::get('/blog/{slug}', [App\Http\Controllers\BlogController::class, 'showView'])->name('fr.blog.show');
     Route::get('/generateur-code-qr-wifi-gratuit', [App\Http\Controllers\QrCodeController::class, 'freeWifiQr'])->name('fr.free-wifi-qr');
     Route::get('/code-qr-pour-wifi', [App\Http\Controllers\QrCodeController::class, 'qrForWifi'])->name('fr.qr-wifi');
 });
 
 Route::prefix('de')->group(function () {
     Route::get('/', [App\Http\Controllers\QrCodeController::class, 'index'])->name('de.home');
+    Route::get('/blogs', [App\Http\Controllers\BlogController::class, 'indexView'])->name('de.blogs');
+    Route::get('/blog/{slug}', [App\Http\Controllers\BlogController::class, 'showView'])->name('de.blog.show');
     Route::get('/kostenloser-wifi-qr-code-generator', [App\Http\Controllers\QrCodeController::class, 'freeWifiQr'])->name('de.free-wifi-qr');
     Route::get('/qr-code-fuer-wifi', [App\Http\Controllers\QrCodeController::class, 'qrForWifi'])->name('de.qr-wifi');
 });
@@ -64,6 +70,8 @@ Route::prefix('de')->group(function () {
 // Chinese routes
 Route::prefix('zh')->group(function () {
     Route::get('/', [App\Http\Controllers\QrCodeController::class, 'index'])->name('zh.home');
+    Route::get('/blogs', [App\Http\Controllers\BlogController::class, 'indexView'])->name('zh.blogs');
+    Route::get('/blog/{slug}', [App\Http\Controllers\BlogController::class, 'showView'])->name('zh.blog.show');
     Route::get('/免费wifi二维码生成器', [App\Http\Controllers\QrCodeController::class, 'freeWifiQr'])->name('zh.free-wifi-qr');
     Route::get('/wifi二维码', [App\Http\Controllers\QrCodeController::class, 'qrForWifi'])->name('zh.qr-wifi');
 });
@@ -71,6 +79,8 @@ Route::prefix('zh')->group(function () {
 // Japanese routes
 Route::prefix('ja')->group(function () {
     Route::get('/', [App\Http\Controllers\QrCodeController::class, 'index'])->name('ja.home');
+    Route::get('/blogs', [App\Http\Controllers\BlogController::class, 'indexView'])->name('ja.blogs');
+    Route::get('/blog/{slug}', [App\Http\Controllers\BlogController::class, 'showView'])->name('ja.blog.show');
     Route::get('/無料wifi-qrコード生成器', [App\Http\Controllers\QrCodeController::class, 'freeWifiQr'])->name('ja.free-wifi-qr');
     Route::get('/wifi-qrコード', [App\Http\Controllers\QrCodeController::class, 'qrForWifi'])->name('ja.qr-wifi');
 });
@@ -78,6 +88,8 @@ Route::prefix('ja')->group(function () {
 // Korean routes
 Route::prefix('ko')->group(function () {
     Route::get('/', [App\Http\Controllers\QrCodeController::class, 'index'])->name('ko.home');
+    Route::get('/blogs', [App\Http\Controllers\BlogController::class, 'indexView'])->name('ko.blogs');
+    Route::get('/blog/{slug}', [App\Http\Controllers\BlogController::class, 'showView'])->name('ko.blog.show');
     Route::get('/무료-wifi-qr코드-생성기', [App\Http\Controllers\QrCodeController::class, 'freeWifiQr'])->name('ko.free-wifi-qr');
     Route::get('/wifi-qr코드', [App\Http\Controllers\QrCodeController::class, 'qrForWifi'])->name('ko.qr-wifi');
 });
@@ -85,6 +97,8 @@ Route::prefix('ko')->group(function () {
 // Vietnamese routes
 Route::prefix('vi')->group(function () {
     Route::get('/', [App\Http\Controllers\QrCodeController::class, 'index'])->name('vi.home');
+    Route::get('/blogs', [App\Http\Controllers\BlogController::class, 'indexView'])->name('vi.blogs');
+    Route::get('/blog/{slug}', [App\Http\Controllers\BlogController::class, 'showView'])->name('vi.blog.show');
     Route::get('/tao-ma-qr-wifi-mien-phi', [App\Http\Controllers\QrCodeController::class, 'freeWifiQr'])->name('vi.free-wifi-qr');
     Route::get('/ma-qr-cho-wifi', [App\Http\Controllers\QrCodeController::class, 'qrForWifi'])->name('vi.qr-wifi');
 });
@@ -92,6 +106,8 @@ Route::prefix('vi')->group(function () {
 // Hindi routes
 Route::prefix('hi')->group(function () {
     Route::get('/', [App\Http\Controllers\QrCodeController::class, 'index'])->name('hi.home');
+    Route::get('/blogs', [App\Http\Controllers\BlogController::class, 'indexView'])->name('hi.blogs');
+    Route::get('/blog/{slug}', [App\Http\Controllers\BlogController::class, 'showView'])->name('hi.blog.show');
     Route::get('/मुफ्त-wifi-qr-कोड-जेनरेटर', [App\Http\Controllers\QrCodeController::class, 'freeWifiQr'])->name('hi.free-wifi-qr');
     Route::get('/wifi-के-लिए-qr-कोड', [App\Http\Controllers\QrCodeController::class, 'qrForWifi'])->name('hi.qr-wifi');
 });
@@ -99,12 +115,16 @@ Route::prefix('hi')->group(function () {
 // Indonesian routes
 Route::prefix('id')->group(function () {
     Route::get('/', [App\Http\Controllers\QrCodeController::class, 'index'])->name('id.home');
+    Route::get('/blogs', [App\Http\Controllers\BlogController::class, 'indexView'])->name('id.blogs');
+    Route::get('/blog/{slug}', [App\Http\Controllers\BlogController::class, 'showView'])->name('id.blog.show');
     Route::get('/generator-qr-code-wifi-gratis', [App\Http\Controllers\QrCodeController::class, 'freeWifiQr'])->name('id.free-wifi-qr');
     Route::get('/qr-code-untuk-wifi', [App\Http\Controllers\QrCodeController::class, 'qrForWifi'])->name('id.qr-wifi');
 });
 
 // Content/Blog pages for SEO
 Route::get('/blog', [App\Http\Controllers\QrCodeController::class, 'blog'])->name('blog');
+Route::get('/blogs', [App\Http\Controllers\BlogController::class, 'indexView'])->name('blogs');
+Route::get('/blog/{slug}', [App\Http\Controllers\BlogController::class, 'showView'])->name('blog.show');
 Route::get('/guide', [App\Http\Controllers\QrCodeController::class, 'blog'])->name('guide');
 Route::get('/how-to-create-wifi-qr-code', [App\Http\Controllers\QrCodeController::class, 'blog'])->name('how-to');
 

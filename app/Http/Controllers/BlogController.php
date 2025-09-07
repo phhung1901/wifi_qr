@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Services\BlogService;
+use App\Services\LanguageDetectionService;
 use App\Models\Language;
 use App\Models\Category;
 use App\Models\Tag;
@@ -13,14 +14,16 @@ use Illuminate\Http\JsonResponse;
 class BlogController extends Controller
 {
     protected $blogService;
+    protected $languageService;
 
-    public function __construct(BlogService $blogService)
+    public function __construct(BlogService $blogService, LanguageDetectionService $languageService)
     {
         $this->blogService = $blogService;
+        $this->languageService = $languageService;
     }
 
     /**
-     * Get blogs list
+     * Get blogs list (API)
      */
     public function index(Request $request): JsonResponse
     {
@@ -34,6 +37,43 @@ class BlogController extends Controller
             'success' => true,
             'data' => $blogs,
             'language' => $languageCode
+        ]);
+    }
+
+    /**
+     * Show blogs page (Web View)
+     */
+    public function indexView(Request $request)
+    {
+        $currentLocale = $this->languageService->getCurrentLocale();
+        $categoryId = $request->get('category_id');
+        $perPage = 12; // Show 12 blogs per page for better grid layout
+
+        // Get blogs for current language
+        $blogs = $this->blogService->getPublishedBlogs($currentLocale, $perPage, $categoryId);
+
+        // Get featured blogs
+        $featuredBlogs = $this->blogService->getFeaturedBlogs($currentLocale, 3);
+
+        // Get categories for filter
+        $categories = Category::with(['translations' => function ($query) use ($currentLocale) {
+            $query->where('language_code', $currentLocale);
+        }])->get();
+
+        // Get blog statistics
+        $stats = $this->blogService->getBlogStatistics($currentLocale);
+
+        return view('blogs', [
+            'title' => __('app.blogs_title'),
+            'description' => __('app.blogs_description'),
+            'keywords' => __('app.blogs_keywords'),
+            'currentLocale' => $currentLocale,
+            'supportedLanguages' => $this->languageService->getSupportedLanguages(),
+            'blogs' => $blogs,
+            'featuredBlogs' => $featuredBlogs,
+            'categories' => $categories,
+            'stats' => $stats,
+            'selectedCategory' => $categoryId
         ]);
     }
 
@@ -55,7 +95,7 @@ class BlogController extends Controller
     }
 
     /**
-     * Get single blog by slug
+     * Get single blog by slug (API)
      */
     public function show(Request $request, $slug): JsonResponse
     {
@@ -94,6 +134,40 @@ class BlogController extends Controller
                 })
             ],
             'language' => $languageCode
+        ]);
+    }
+
+    /**
+     * Show single blog page (Web View)
+     */
+    public function showView(Request $request, $slug)
+    {
+        $currentLocale = $this->languageService->getCurrentLocale();
+
+        $blog = $this->blogService->getBlogBySlug($slug, $currentLocale);
+
+        if (!$blog) {
+            abort(404, 'Blog not found');
+        }
+
+        // Increment view count
+        $blog->incrementViewCount();
+
+        // Get related blogs
+        $relatedBlogs = $this->blogService->getRelatedBlogs($blog);
+
+        // Get other language versions
+        $otherLanguageVersions = $blog->getOtherLanguageVersions();
+
+        return view('blog-detail', [
+            'title' => $blog->effective_seo_title,
+            'description' => $blog->effective_seo_description,
+            'keywords' => $blog->seo_keywords,
+            'currentLocale' => $currentLocale,
+            'supportedLanguages' => $this->languageService->getSupportedLanguages(),
+            'blog' => $blog,
+            'relatedBlogs' => $relatedBlogs,
+            'otherLanguageVersions' => $otherLanguageVersions
         ]);
     }
 
